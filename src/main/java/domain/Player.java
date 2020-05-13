@@ -4,7 +4,7 @@ package domain;
 import utils.StringUtils;
 
 public class Player {
-    private static final int NAME_LENGTH = 3;
+    public static final int NAME_LENGTH = 3;
     private final String name;
 
     private Player(String name) {

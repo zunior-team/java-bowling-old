@@ -5,9 +5,8 @@ import player.Player;
 
 public class BowlingGame {
 
-    public static final Monitor MONITOR = new Monitor();
-
     public static void play() {
-        Player player = Player.create(MONITOR.enterPlayerName());
+        final Player player = Player.create(Monitor.enterPlayerName());
+        Monitor.printBowlingStatusByPlayer(player);
     }
 }

@@ -1,4 +1,5 @@
 package frame;
 
-public class BowlingFrame {
+public interface BowlingFrame {
+
 }

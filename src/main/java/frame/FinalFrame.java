@@ -1,4 +1,12 @@
 package frame;
 
-public class FinalFrame {
+import score.Score;
+import score.ScoreType;
+
+public class FinalFrame implements BowlingFrame{
+
+    private ScoreType scoreType = ScoreType.WAITING;
+    private Score score;
+
+
 }

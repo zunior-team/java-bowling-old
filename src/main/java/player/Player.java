@@ -1,6 +1,8 @@
 package player;
 
+import board.BowlingBoard;
 import exception.PlayerCreateException;
+import frame.BowlingFrames;
 
 import java.util.Objects;
 
@@ -9,11 +11,13 @@ import static player.PlayerConstant.MINIMUM_NAME_LENGTH;
 
 public class Player {
 
-    private String name;
+    private final String name;
+    private final BowlingFrames bowlingFrames;
 
     private Player(final String name){
         verifyPlayerName(name);
         this.name = name;
+        this.bowlingFrames = BowlingFrames.create();
     }
 
     public static Player create(final String name){
@@ -27,5 +31,9 @@ public class Player {
                 || name.length() > MAXIMUM_NAME_LENGTH){
             throw new PlayerCreateException("플레이어의 이름은 세자리를 초과하거나 공백이 될 수 없습니다.");
         }
+    }
+
+    public BowlingBoard getBowlingBoard(){
+        return bowlingFrames.getBowlingStatusByName(name);
     }
 }

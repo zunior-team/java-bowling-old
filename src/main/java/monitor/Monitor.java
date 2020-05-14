@@ -1,9 +1,11 @@
 package monitor;
 
-public class Monitor {
+import player.Player;
 
-    private static final String WHITE_SPACE = "\\s";
-    private static final String EMPTY = "";
+import static monitor.MonitorConstant.EMPTY;
+import static monitor.MonitorConstant.WHITE_SPACE;
+
+public class Monitor {
 
     public static String enterPlayerName(){
         return InputView.askPlayerName()
@@ -11,4 +13,7 @@ public class Monitor {
                 .trim();
     }
 
+    public static void printBowlingStatusByPlayer(final Player player){
+//        new BowlingStatusDto(player);
+    }
 }

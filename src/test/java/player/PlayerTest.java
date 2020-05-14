@@ -24,7 +24,7 @@ class PlayerTest {
         assertThat(player).isNotNull();
     }
 
-    @DisplayName("이름이 널 일시 생성되지 못한다.")
+    @DisplayName("이름이 널일 시, 생성되지 못한다.")
     @ParameterizedTest
     @NullSource
     void create_NullString_ExceptionThrown(final String name){

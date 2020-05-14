@@ -7,6 +7,6 @@ public class BowlingGame {
 
     public static void play() {
         final Player player = Player.create(Monitor.enterPlayerName());
-        Monitor.printBowlingStatusByPlayer(player);
+        Monitor.printBowlingStatusByPlayer(player.getBowlingBoard());
     }
 }

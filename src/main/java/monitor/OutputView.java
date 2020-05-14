@@ -1,6 +1,10 @@
 package monitor;
 
+import java.util.List;
+
 public class OutputView {
 
-    private static final String BAR = "|";
+    public static void printStatus(final List<String> lines){
+        lines.forEach(System.out::println);
+    }
 }

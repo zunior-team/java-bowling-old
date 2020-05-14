@@ -1,6 +1,6 @@
-package exception;
+package exception.player;
 
-import exception.bowling.BowlingException;
+import exception.master.BowlingException;
 
 public class PlayerCreateException extends BowlingException {
 

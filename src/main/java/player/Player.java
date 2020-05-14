@@ -1,7 +1,7 @@
 package player;
 
 import board.BowlingBoard;
-import exception.PlayerCreateException;
+import exception.player.PlayerCreateException;
 import frame.BowlingFrames;
 
 import java.util.Objects;

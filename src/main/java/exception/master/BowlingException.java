@@ -1,4 +1,4 @@
-package exception.bowling;
+package exception.master;
 
 public class BowlingException extends RuntimeException{
 

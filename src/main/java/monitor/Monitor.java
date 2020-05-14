@@ -1,9 +1,11 @@
 package monitor;
 
-import player.Player;
+import board.BowlingBoard;
 
-import static monitor.MonitorConstant.EMPTY;
-import static monitor.MonitorConstant.WHITE_SPACE;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static monitor.MonitorConstant.*;
 
 public class Monitor {
 
@@ -13,7 +15,11 @@ public class Monitor {
                 .trim();
     }
 
-    public static void printBowlingStatusByPlayer(final Player player){
-//        new BowlingStatusDto(player);
+    public static void printBowlingStatusByPlayer(final BowlingBoard bowlingBoard){
+        final List<String> lines = bowlingBoard.getBowingStatus()
+                .stream()
+                .map(line -> String.join(BAR, line))
+                .collect(Collectors.toList());
+        OutputView.printStatus(lines);
     }
 }

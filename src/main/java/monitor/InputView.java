@@ -9,7 +9,7 @@ public class InputView {
     private InputView(){}
 
     public static String askPlayerName(){
-        System.out.println("플레이어 이름은 (3 english letters) ? :");
+        System.out.print("플레이어 이름은 (3 english letters) ? : ");
         return SCANNER.nextLine();
     }
 }

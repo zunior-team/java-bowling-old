@@ -18,7 +18,8 @@ public class Monitor {
     public static void printBowlingStatusByPlayer(final BowlingBoard bowlingBoard){
         final List<String> lines = bowlingBoard.getBowingStatus()
                 .stream()
-                .map(line -> String.join(BAR, line))
+                .map(line -> BAR + String.join(BAR, line) + BAR)
+                .map(String::trim)
                 .collect(Collectors.toList());
         OutputView.printStatus(lines);
     }

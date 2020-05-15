@@ -1,19 +1,21 @@
 package frame;
 
 import board.BowlingBoard;
+import frame.impl.FinalFrame;
+import frame.impl.NormalFrame;
 import overturn.OverturnScore;
+import trial.TrialResultType;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class BowlingFrames {
+import static frame.BowlingFramesConstant.FIRST_NUMBER_OF_FRAME;
+import static frame.BowlingFramesConstant.LAST_NUMBER_OF_FRAME;
 
-    private static final int FIRST_NUMBER_OF_FRAME = 1;
-    private static final int LAST_NUMBER_OF_FRAME = 10;
-    private final AtomicInteger currentFrame = new AtomicInteger(FIRST_NUMBER_OF_FRAME);
+public class BowlingFrames {
+    private final FrameNumber frameNumber = new FrameNumber(FIRST_NUMBER_OF_FRAME);
     private final List<BowlingFrame> bowlingFrames;
 
     private BowlingFrames(final List<BowlingFrame> bowlingFrames){
@@ -35,8 +37,14 @@ public class BowlingFrames {
         return new BowlingBoard(name, bowlingFrames);
     }
 
-    public void overturn(final OverturnScore overturnScore){
-        final BowlingFrame bowlingFrame = bowlingFrames.get(currentFrame.get());
-        bowlingFrame.decreasePins(overturnScore);
+    public TrialResultType overturn(final OverturnScore overturnScore){
+        final BowlingFrame bowlingFrame = frameNumber.getCurrentBowlingFrame(bowlingFrames);
+        final TrialResultType currentResultType = bowlingFrame.decreasePins(overturnScore);
+
+        if(currentResultType.isProgress()){
+            frameNumber.increaseFrameNumber();
+        }
+
+        return currentResultType;
     }
 }

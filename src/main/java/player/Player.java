@@ -4,6 +4,7 @@ import board.BowlingBoard;
 import exception.player.PlayerCreateException;
 import frame.BowlingFrames;
 import overturn.OverturnScore;
+import trial.TrialResultType;
 
 import java.util.Objects;
 
@@ -41,7 +42,7 @@ public class Player {
     }
 
     public int playBowlingForRound(final OverturnScore overturnScore){
-        bowlingFrames.overturn(overturnScore);
-        return 0;
+        final TrialResultType resultType = bowlingFrames.overturn(overturnScore);
+
     }
 }

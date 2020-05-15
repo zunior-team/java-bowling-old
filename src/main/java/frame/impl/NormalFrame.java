@@ -1,21 +1,25 @@
-package frame;
+package frame.impl;
 
 import bowling.BowlingPins;
 import exception.overturnscore.OverturnMissCountPinsException;
+import frame.BowlingFrame;
 import overturn.OverturnScore;
+import trial.TrialResultType;
+import trial.TrialStatus;
 
-public class NormalFrame implements BowlingFrame{
+public class NormalFrame implements BowlingFrame {
 
     private final BowlingPins bowlingPins;
-    private final Trial trial;
+    private TrialStatus status = TrialStatus.FIRST;
 
     public NormalFrame(){
         bowlingPins = new BowlingPins();
-        trial = new Trial();
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
-    public void decreasePins(final OverturnScore overturnScore){
+    public TrialResultType decreasePins(final OverturnScore overturnScore){
+
         final int overturnPins = overturnScore.getOverturnPins();
         final int alivePins = bowlingPins.getAlivePinsCount();
 
@@ -23,6 +27,9 @@ public class NormalFrame implements BowlingFrame{
             throw new OverturnMissCountPinsException(alivePins, overturnPins);
         }
 
+        bowlingPins.decreaseAlivePins(overturnPins);
+        final int remainPins = alivePins - overturnPins;
 
+        return TrialStatus.getTrialResultType(status, remainPins);
     }
 }

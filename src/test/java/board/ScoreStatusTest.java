@@ -1,8 +1,8 @@
 package board;
 
 import frame.BowlingFrame;
-import frame.FinalFrame;
-import frame.NormalFrame;
+import frame.impl.FinalFrame;
+import frame.impl.NormalFrame;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

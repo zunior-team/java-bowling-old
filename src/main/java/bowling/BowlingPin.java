@@ -9,4 +9,8 @@ public class BowlingPin {
     public boolean isAlive(){
         return !isOverTurn;
     }
+
+    public void overturn(){
+        this.isOverTurn = true;
+    }
 }

@@ -13,11 +13,13 @@ public class Player {
 
     private final String name;
     private final BowlingFrames bowlingFrames;
+    private final BowlingBoard bowlingBoard;
 
     private Player(final String name){
         verifyPlayerName(name);
         this.name = name;
         this.bowlingFrames = BowlingFrames.create();
+        this.bowlingBoard = bowlingFrames.getBowlingStatusByName(name);
     }
 
     public static Player create(final String name){
@@ -34,6 +36,6 @@ public class Player {
     }
 
     public BowlingBoard getBowlingBoard(){
-        return bowlingFrames.getBowlingStatusByName(name);
+        return this.bowlingBoard;
     }
 }

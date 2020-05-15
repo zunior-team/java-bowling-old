@@ -10,7 +10,7 @@ class FrameStatusTest {
 
     @Test
     @DisplayName("new 예약어를 통해 생성된다.")
-    public void constructor_UseNewKeyword_Success(){
+    public void constructor_UseNewKeyword_CreateSuccess(){
         // when
         final FrameStatus frameStatus = new FrameStatus();
 

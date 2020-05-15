@@ -1,6 +1,7 @@
 package monitor;
 
 import board.BowlingBoard;
+import overturn.OverturnScore;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +14,10 @@ public class Monitor {
         return InputView.askPlayerName()
                 .replaceAll(WHITE_SPACE, EMPTY)
                 .trim();
+    }
+
+    public static OverturnScore enterOverturnPinsForRound(final int round){
+        return new OverturnScore(InputView.askPinsCountForRound(round));
     }
 
     public static void printBowlingStatusByPlayer(final BowlingBoard bowlingBoard){

@@ -3,6 +3,7 @@ package player;
 import board.BowlingBoard;
 import exception.player.PlayerCreateException;
 import frame.BowlingFrames;
+import overturn.OverturnScore;
 
 import java.util.Objects;
 
@@ -37,5 +38,10 @@ public class Player {
 
     public BowlingBoard getBowlingBoard(){
         return this.bowlingBoard;
+    }
+
+    public int playBowlingForRound(final OverturnScore overturnScore){
+        bowlingFrames.overturn(overturnScore);
+        return 0;
     }
 }

@@ -1,6 +1,6 @@
 package monitor;
 
-public class MonitorConstant {
+final class MonitorConstant {
 
     static final String WHITE_SPACE = "\\s";
     static final String EMPTY = "";

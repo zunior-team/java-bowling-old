@@ -12,4 +12,9 @@ public class InputView {
         System.out.print("플레이어 이름은 (3 english letters) ? : ");
         return SCANNER.nextLine();
     }
+
+    public static int askPinsCountForRound(final int round){
+        System.out.print(round + " 프레임 투구 : ");
+        return SCANNER.nextInt();
+    }
 }

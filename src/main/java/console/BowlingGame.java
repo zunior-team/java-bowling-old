@@ -3,15 +3,19 @@ package console;
 import monitor.Monitor;
 import player.Player;
 
-public class BowlingGame {
+import java.util.stream.IntStream;
 
-    private static final int FIRST_ROUND_NUMBER = 1;
-    private static final int LAST_ROUND_NUMBER = 10;
+import static console.BowlingGameConstant.*;
+
+public class BowlingGame {
 
     public static void play() {
         final Player player = Player.create(Monitor.enterPlayerName());
         Monitor.printBowlingStatusByPlayer(player.getBowlingBoard());
 
-
+        int sum = IntStream.rangeClosed(FIRST_ROUND_NUMBER, LAST_ROUND_NUMBER)
+                .mapToObj(Monitor::enterOverturnPinsForRound)
+                .map(player::playBowlingForRound)
+                .reduce(ZERO_SCORE, Integer::sum);
     }
 }

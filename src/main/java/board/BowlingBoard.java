@@ -1,9 +1,13 @@
 package board;
 
 import frame.BowlingFrame;
+import frame.FrameNumber;
+import overturn.OverturnScore;
+import trial.TrialResultType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class BowlingBoard {
 
@@ -20,5 +24,9 @@ public class BowlingBoard {
         status.add(frameStatus.getFrameStatus());
         status.add(scoreStatus.getScoreStatus());
         return status;
+    }
+
+    public void fillScoreStatus(final OverturnScore overturnScore, final Map<FrameNumber, TrialResultType> results){
+        scoreStatus.fillScoreByRound(overturnScore, results);
     }
 }

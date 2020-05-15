@@ -7,7 +7,9 @@ import overturn.OverturnScore;
 import trial.TrialResultType;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -37,14 +39,14 @@ public class BowlingFrames {
         return new BowlingBoard(name, bowlingFrames);
     }
 
-    public TrialResultType overturn(final OverturnScore overturnScore){
+    public Map<FrameNumber, TrialResultType> overturn(final OverturnScore overturnScore){
         final BowlingFrame bowlingFrame = frameNumber.getCurrentBowlingFrame(bowlingFrames);
-        final TrialResultType currentResultType = bowlingFrame.decreasePins(overturnScore);
+        final TrialResultType resultType = bowlingFrame.decreasePins(overturnScore);
 
-        if(currentResultType.isProgress()){
-            frameNumber.increaseFrameNumber();
-        }
+        @SuppressWarnings("unchecked")
+        final Map<FrameNumber, TrialResultType> results = Collections.unmodifiableMap(new HashMap(){{put(frameNumber.newInstance(), resultType);}});
+        frameNumber.increaseByTrialType(resultType);
 
-        return currentResultType;
+        return results;
     }
 }

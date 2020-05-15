@@ -2,12 +2,11 @@ package board;
 
 import exception.board.ScoreStatusCreateException;
 import frame.BowlingFrame;
-import org.apache.commons.lang3.StringUtils;
+import frame.FrameNumber;
+import overturn.OverturnScore;
+import trial.TrialResultType;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -16,19 +15,16 @@ import static player.PlayerConstant.MINIMUM_NAME_LENGTH;
 
 public class ScoreStatus {
 
-    private static final String NAME_FORMAT = "%4s";
-    private static final String SCORE_EMPTY_FORMAT = "%2s";
-
-    private List<String> scoreStatus = new ArrayList<>();
+    private List<ScoreSnapshot> scoreStatus = new ArrayList<>();
 
     public ScoreStatus(final String name, final List<BowlingFrame> bowlingFrames){
         verifyPlayerName(name);
         verifyBowlingFrames(bowlingFrames);
-        scoreStatus.add(String.format(NAME_FORMAT, name));
-        scoreStatus.addAll(
-                IntStream.rangeClosed(1, bowlingFrames.size())
-                        .mapToObj(round -> String.format(SCORE_EMPTY_FORMAT, StringUtils.EMPTY))
-                        .collect(Collectors.toList()));
+
+        scoreStatus.add(ScoreSnapshot.createSnapShotByName(name));
+        scoreStatus.addAll(IntStream.rangeClosed(1, bowlingFrames.size())
+                .mapToObj(ScoreSnapshot::createSnapShotEmpty)
+                .collect(Collectors.toList()));
     }
 
     private void verifyPlayerName(final String name){
@@ -49,6 +45,15 @@ public class ScoreStatus {
     }
 
     public List<String> getScoreStatus() {
-        return Collections.unmodifiableList(scoreStatus);
+        return Collections.unmodifiableList(scoreStatus.stream()
+                .flatMap(ScoreSnapshot::toStream)
+                .collect(Collectors.toList()));
+    }
+
+    public void fillScoreByRound(final OverturnScore overturnScore, final Map<FrameNumber, TrialResultType> results){
+        results.keySet().forEach(frameNumber -> {
+            scoreStatus.get(frameNumber.get())
+                    .fillScoreByResult(results.get(frameNumber));
+        });
     }
 }

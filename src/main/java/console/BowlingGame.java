@@ -13,9 +13,9 @@ public class BowlingGame {
         final Player player = Player.create(Monitor.enterPlayerName());
         Monitor.printBowlingStatusByPlayer(player.getBowlingBoard());
 
-        int sum = IntStream.rangeClosed(FIRST_ROUND_NUMBER, LAST_ROUND_NUMBER)
+        IntStream.rangeClosed(FIRST_ROUND_NUMBER, LAST_ROUND_NUMBER)
                 .mapToObj(Monitor::enterOverturnPinsForRound)
                 .map(player::playBowlingForRound)
-                .reduce(ZERO_SCORE, Integer::sum);
+                .forEach(System.out::println);
     }
 }

@@ -9,6 +9,7 @@ import overturn.OverturnScore;
 import player.Player;
 import trial.TrialResultType;
 
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,12 +31,15 @@ class BowlingFramesTest {
     @ParameterizedTest(name = "{0} 개의 볼링을 넘어트린다.")
     @MethodSource("provideOverturnScore")
     void overturnTest(final int number, final TrialResultType expectedResultType) {
+        // given
+        final int round = 1;
+
         // when
         final BowlingFrames bowlingFrames = BowlingFrames.create();
-        final TrialResultType resultType = bowlingFrames.overturn(new OverturnScore(number));
+        final Map<FrameNumber, TrialResultType> results = bowlingFrames.overturn(new OverturnScore(number));
 
         // then
-        assertThat(resultType).isSameAs(expectedResultType);
+        assertThat(results.get(new FrameNumber(1))).isSameAs(expectedResultType);
     }
 
     private static Stream<Arguments> provideOverturnScore(){

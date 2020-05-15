@@ -9,6 +9,7 @@ import trial.TrialStatus;
 
 public class NormalFrame implements BowlingFrame {
 
+    private static final TrialResultType GUTTER = TrialResultType.GUTTER;
     private final BowlingPins bowlingPins;
     private TrialStatus status = TrialStatus.FIRST;
 
@@ -19,9 +20,12 @@ public class NormalFrame implements BowlingFrame {
     @SuppressWarnings("Duplicates")
     @Override
     public TrialResultType decreasePins(final OverturnScore overturnScore){
-
         final int overturnPins = overturnScore.getOverturnPins();
         final int alivePins = bowlingPins.getAlivePinsCount();
+
+        if(overturnPins == 0){
+            return GUTTER;
+        }
 
         if(overturnPins > alivePins){
             throw new OverturnMissCountPinsException(alivePins, overturnPins);

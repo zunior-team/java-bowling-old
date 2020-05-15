@@ -49,7 +49,7 @@ class PlayerTest {
     @MethodSource("provideOverturnScore")
     void playBowlingForRound_success(final Player player, final OverturnScore overturnScore, final TrialResultType expectedResultType){
         // when
-        int sumScore = player.playBowlingForRound(overturnScore);
+        player.playBowlingForRound(overturnScore);
     }
 
     private static Stream<Arguments> provideOverturnScore(){

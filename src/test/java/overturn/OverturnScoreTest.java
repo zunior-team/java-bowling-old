@@ -22,7 +22,7 @@ class OverturnScoreTest {
         assertThat(overturnScore).isNotNull();
     }
 
-    @DisplayName("잘못된 점수를 받아 생성되지 못한다.")
+    @DisplayName("잘못된 볼링개수를 받아서 생성되지 못한다.")
     @ParameterizedTest
     @ValueSource(ints = {-1, 11})
     public void create_InValidScore_ExceptionThrown(final int overturnPins) {

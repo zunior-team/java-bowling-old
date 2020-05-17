@@ -21,6 +21,10 @@ public enum TrialResultType {
 
     public boolean isMiss() {return MISS == this;};
 
+    public boolean isGutter() {
+        return GUTTER == this;
+    }
+
     public String getExpression(){
         return expression;
     }

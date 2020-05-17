@@ -42,7 +42,7 @@ public class BowlingFrames {
 
     public Map<FrameNumber, TrialResultType> overturn(final OverturnScore overturnScore){
         final BowlingFrame bowlingFrame = frameNumber.getCurrentBowlingFrame(bowlingFrames);
-        final TrialResult trialResult = bowlingFrame.decreasePins(overturnScore);
+        final TrialResult trialResult = bowlingFrame.decreasePinsAndGetResult(overturnScore);
 
         @SuppressWarnings("unchecked")
         final Map<FrameNumber, TrialResultType> results = Collections.unmodifiableMap(

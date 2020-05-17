@@ -19,7 +19,7 @@ public class NormalFrame implements BowlingFrame {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public TrialResult decreasePins(final OverturnScore overturnScore){
+    public TrialResult decreasePinsAndGetResult(final OverturnScore overturnScore){
         if(overturnScore.isOverturnZero()) {
             final TrialResult trialResult = new TrialResult(TrialResultType.GUTTER, status);
             this.status = trialResult.nextStatusAndGet();

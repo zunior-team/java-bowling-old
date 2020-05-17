@@ -19,7 +19,7 @@ public class FinalFrame implements BowlingFrame {
 
     @SuppressWarnings("Duplicates")
     @Override
-    public TrialResult decreasePins(OverturnScore overturnScore) {
+    public TrialResult decreasePinsAndGetResult(OverturnScore overturnScore) {
 //        final int overturnPins = overturnScore.getOverturnPins();
 //        final int alivePins = bowlingPins.getAlivePinsCount();
 //

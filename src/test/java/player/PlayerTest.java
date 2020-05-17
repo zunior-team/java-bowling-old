@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import overturn.OverturnScore;
+import trial.TrialResult;
 import trial.TrialResultType;
 
 import java.util.stream.Stream;
@@ -49,12 +50,15 @@ class PlayerTest {
     @MethodSource("provideOverturnScore")
     void playBowlingForRound_success(final Player player, final OverturnScore overturnScore, final TrialResultType expectedResultType){
         // when
-        player.playBowlingForRound(overturnScore);
+        final TrialResultType resultType = player.playBowlingForRound(overturnScore);
+
+        // then
+        assertThat(resultType).isEqualTo(expectedResultType);
     }
 
     private static Stream<Arguments> provideOverturnScore(){
         return Stream.of(
-            Arguments.of(Player.create("SON"), new OverturnScore(0), TrialResultType.PROGRESS),
+            Arguments.of(Player.create("SON"), new OverturnScore(0), TrialResultType.GUTTER),
             Arguments.of(Player.create("SON"), new OverturnScore(1), TrialResultType.PROGRESS),
             Arguments.of(Player.create("SON"), new OverturnScore(2), TrialResultType.PROGRESS),
             Arguments.of(Player.create("SON"), new OverturnScore(3), TrialResultType.PROGRESS),

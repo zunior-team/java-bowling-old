@@ -5,5 +5,5 @@ import trial.TrialResult;
 
 public interface BowlingFrame {
 
-    TrialResult decreasePins(OverturnScore overturnScore);
+    TrialResult decreasePinsAndGetResult(OverturnScore overturnScore);
 }

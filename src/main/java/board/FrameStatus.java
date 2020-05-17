@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class FrameStatus {
 
     private static final String NAME_STRING = "NAME";
-    private static final String FRAME_NUMBER_FORMAT = "%02d";
+    private static final String FRAME_NUMBER_FORMAT = "%03d";
 
     private static final List<String> FRAME_STATUS = new ArrayList<>();
 

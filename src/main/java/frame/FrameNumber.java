@@ -7,28 +7,28 @@ import java.util.Objects;
 
 public final class FrameNumber {
 
-    private int currentNumber;
+    private int frameIndex;
 
     FrameNumber(final int number){
-        this.currentNumber = number;
+        this.frameIndex = number; //
     }
 
     void increaseByTrialType(final TrialResultType currentResultType){
-        currentNumber = (currentResultType.isProgress())
-                ? currentNumber
-                : currentNumber + 1;
+        frameIndex = (currentResultType.isProgress())
+                ? frameIndex
+                : frameIndex + 1;
     }
 
     BowlingFrame getCurrentBowlingFrame(final List<BowlingFrame> bowlingFrames){
-        return bowlingFrames.get(currentNumber);
+        return bowlingFrames.get(frameIndex);
     }
 
     FrameNumber newInstance(){
-        return new FrameNumber(currentNumber);
+        return new FrameNumber(frameIndex);
     }
 
     public int get() {
-        return this.currentNumber;
+        return this.frameIndex;
     }
 
     @Override
@@ -36,11 +36,11 @@ public final class FrameNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FrameNumber that = (FrameNumber) o;
-        return currentNumber == that.currentNumber;
+        return frameIndex == that.frameIndex;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(currentNumber);
+        return Objects.hash(frameIndex);
     }
 }

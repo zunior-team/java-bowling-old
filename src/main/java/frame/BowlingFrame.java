@@ -1,10 +1,9 @@
 package frame;
 
 import overturn.OverturnScore;
-import trial.TrialResultType;
+import trial.TrialResult;
 
 public interface BowlingFrame {
 
-    TrialResultType decreasePins(OverturnScore overturnScore);
-
+    TrialResult decreasePins(OverturnScore overturnScore);
 }

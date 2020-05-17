@@ -3,11 +3,9 @@ package player;
 import board.BowlingBoard;
 import exception.player.PlayerCreateException;
 import frame.BowlingFrames;
-import frame.FrameNumber;
 import overturn.OverturnScore;
 import trial.TrialResultType;
 
-import java.util.Map;
 import java.util.Objects;
 
 import static player.PlayerConstant.MAXIMUM_NAME_LENGTH;
@@ -43,8 +41,7 @@ public class Player {
         return this.bowlingBoard;
     }
 
-    public String playBowlingForRound(final OverturnScore overturnScore){
-        bowlingBoard.fillScoreStatus(overturnScore, bowlingFrames.overturn(overturnScore));
-        return "";
+    public TrialResultType playBowlingForRound(final OverturnScore overturnScore){
+        return bowlingBoard.fillScoreStatus(overturnScore, bowlingFrames.overturn(overturnScore));
     }
 }

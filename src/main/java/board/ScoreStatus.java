@@ -1,6 +1,7 @@
 package board;
 
 import exception.board.ScoreStatusCreateException;
+import exception.overturnscore.OverturnFillScoreException;
 import frame.BowlingFrame;
 import frame.FrameNumber;
 import overturn.OverturnScore;
@@ -50,10 +51,23 @@ public class ScoreStatus {
                 .collect(Collectors.toList()));
     }
 
-    public void fillScoreByRound(final OverturnScore overturnScore, final Map<FrameNumber, TrialResultType> results){
-        results.keySet().forEach(frameNumber -> {
-            scoreStatus.get(frameNumber.get())
-                    .fillScoreByResult(results.get(frameNumber));
-        });
+    public TrialResultType fillScoreByRound(final OverturnScore overturnScore, final Map<FrameNumber, TrialResultType> results){
+        return results.keySet()
+                .stream()
+                .map(frameNumber -> {
+                    final ScoreSnapshot snapshot = scoreStatus.get(frameNumber.get());
+                    final TrialResultType resultType = results.get(frameNumber);
+                    final String content = (!resultType.isMiss() && !resultType.isProgress())
+                            ? resultType.getExpression()
+                            : String.valueOf(overturnScore.getOverturnPins());
+
+                    snapshot.add(content)
+                            .addNextIfResultProgress(resultType)
+                            .removeEmptySnapshotIfExist();
+
+                    return resultType;
+                })
+                .findFirst()
+                .orElseThrow(() -> new OverturnFillScoreException("볼링핀을 넘어트린 시도결과가 존재하지 않기 때문에 점수현황판을 채울 수 없습니다."));
     }
 }

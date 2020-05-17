@@ -4,6 +4,7 @@ import board.BowlingBoard;
 import frame.impl.FinalFrame;
 import frame.impl.NormalFrame;
 import overturn.OverturnScore;
+import trial.TrialResult;
 import trial.TrialResultType;
 
 import java.util.Collections;
@@ -41,11 +42,14 @@ public class BowlingFrames {
 
     public Map<FrameNumber, TrialResultType> overturn(final OverturnScore overturnScore){
         final BowlingFrame bowlingFrame = frameNumber.getCurrentBowlingFrame(bowlingFrames);
-        final TrialResultType resultType = bowlingFrame.decreasePins(overturnScore);
+        final TrialResult trialResult = bowlingFrame.decreasePins(overturnScore);
 
         @SuppressWarnings("unchecked")
-        final Map<FrameNumber, TrialResultType> results = Collections.unmodifiableMap(new HashMap(){{put(frameNumber.newInstance(), resultType);}});
-        frameNumber.increaseByTrialType(resultType);
+        final Map<FrameNumber, TrialResultType> results = Collections.unmodifiableMap(
+                new HashMap(){{put(frameNumber.newInstance(), trialResult.getTrialResultType());}}
+                );
+
+        frameNumber.increaseByTrialType(trialResult.getTrialResultType());
 
         return results;
     }

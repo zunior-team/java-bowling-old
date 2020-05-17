@@ -18,4 +18,10 @@ public enum TrialResultType {
     public boolean isProgress(){
         return PROGRESS == this;
     }
+
+    public boolean isMiss() {return MISS == this;};
+
+    public String getExpression(){
+        return expression;
+    }
 }

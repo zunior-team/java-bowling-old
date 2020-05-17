@@ -20,6 +20,14 @@ public class Monitor {
         return new OverturnScore(InputView.askPinsCountForRound(round));
     }
 
+    public static OverturnScore enterSecondOverturnPinsForRound(final int round){
+        return new OverturnScore(InputView.askSecondPinsCountForRound(round));
+    }
+
+    public static OverturnScore enterLastOverturnPinsForRound(final int round) {
+        return new OverturnScore(InputView.askThirdPinsCountForRound(round));
+    }
+
     public static void printBowlingStatusByPlayer(final BowlingBoard bowlingBoard){
         final List<String> lines = bowlingBoard.getBowingStatus()
                 .stream()

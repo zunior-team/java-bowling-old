@@ -26,7 +26,7 @@ public class BowlingBoard {
         return status;
     }
 
-    public void fillScoreStatus(final OverturnScore overturnScore, final Map<FrameNumber, TrialResultType> results){
-        scoreStatus.fillScoreByRound(overturnScore, results);
+    public TrialResultType fillScoreStatus(final OverturnScore overturnScore, final Map<FrameNumber, TrialResultType> results){
+        return scoreStatus.fillScoreByRound(overturnScore, results);
     }
 }

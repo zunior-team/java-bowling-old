@@ -1,5 +1,6 @@
 package trial;
 
-public class Trial {
-    private TrialStatus status = TrialStatus.FIRST;
+@FunctionalInterface
+public interface Trial {
+    public void next(TrialStatus currentStatus);
 }

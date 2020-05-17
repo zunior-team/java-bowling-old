@@ -1,5 +1,8 @@
 package bowling;
 
+import exception.overturnscore.OverturnMissCountPinsException;
+import overturn.OverturnScore;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,17 +20,32 @@ public class BowlingPins {
                 .collect(Collectors.toList());
     }
 
-    public int getAlivePinsCount() {
+    public int getAlivePinsAfterDecreasePins(final OverturnScore overturnScore){
+        this.decreaseAlivePins(overturnScore.getOverturnPins());
+        return getAlivePinsCount();
+    }
+
+    private int getAlivePinsCount() {
         return bowlingPins.stream()
                 .filter(BowlingPin::isAlive)
                 .mapToInt(pin -> 1)
                 .sum();
     }
 
-    public void decreaseAlivePins(int decreasePinsCount) {
+    private void decreaseAlivePins(int decreasePinsCount) {
+        this.validatePinsCount(decreasePinsCount);
+
         bowlingPins.stream()
                 .filter(BowlingPin::isAlive)
                 .limit(decreasePinsCount)
                 .forEach(BowlingPin::overturn);
+    }
+
+    private void validatePinsCount(final int decreasePinsCount){
+        final int currentAlivePins = getAlivePinsCount();
+
+        if(decreasePinsCount > currentAlivePins) {
+            throw new OverturnMissCountPinsException(currentAlivePins, decreasePinsCount);
+        }
     }
 }

@@ -14,11 +14,10 @@ public class InputView {
     }
 
     public String inputPlayerName() {
-        printInputMessage();
         return scanner.nextLine();
     }
 
-    private void printInputMessage() {
-        System.out.println("플레이어 이름은(" + NAME_LENGTH + " english letters)?: ");
+    public int inputFallenPins() {
+        return Integer.parseInt(scanner.nextLine());
     }
 }

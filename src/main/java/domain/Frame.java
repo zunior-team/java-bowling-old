@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static java.util.stream.Collectors.joining;
@@ -22,7 +21,7 @@ public class Frame {
     }
 
     public boolean isDone() {
-        if (this.pins.allDown()) {
+        if (this.pins.isAllDown()) {
             return true;
         }
         return this.frameHistories.size() == MAX_THROW_COUNT_IN_FRAMES;

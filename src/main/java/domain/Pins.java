@@ -32,7 +32,7 @@ public class Pins {
         return this.countOfPins;
     }
 
-    public boolean allDown() {
+    public boolean isAllDown() {
         return this.countOfPins == ZERO;
     }
 }

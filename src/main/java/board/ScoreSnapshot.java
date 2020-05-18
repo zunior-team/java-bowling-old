@@ -42,21 +42,35 @@ final class ScoreSnapshot {
         return this;
     }
 
-    ScoreSnapshot joiningNextBarIfPossible(final TrialResultType resultType){
+    ScoreSnapshot addNextBarIfPossible(final TrialResultType resultType){
         if(resultType.isProgress()){
             snapshot.add(NEXT);
+            snapshot.add(String.format(SPACE_EMPTY_FORMAT, StringUtils.EMPTY));
         }
 
         return this;
     }
 
-    void removeEmptySnapshotIfExist(){
+    ScoreSnapshot removeLastEmptySnapshotIfExist(){
+        final int lastIndex = snapshot.size() - 1;
+        if(lastIndex >= 0 &&
+                String.format(SPACE_EMPTY_FORMAT, StringUtils.EMPTY).equals(snapshot.get(snapshot.size() - 1))){
+            snapshot.remove(lastIndex);
+        }
+
+        return this;
+    }
+
+    ScoreSnapshot removeFirstEmptySnapshotIfExist(){
         if(String.format(SCORE_EMPTY_FORMAT, StringUtils.EMPTY).equals(snapshot.get(0))){
             snapshot.remove(0);
         }
+
+        return this;
     }
 
     static class SnapshotConstant{
+        static final String SPACE_EMPTY_FORMAT = "%1s";
         static final String SCORE_EMPTY_FORMAT = "%3s";
         static final String NAME_FORMAT = "%4s";
         static final String NEXT = "|";

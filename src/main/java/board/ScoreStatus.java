@@ -23,7 +23,7 @@ public class ScoreStatus {
         verifyBowlingFrames(bowlingFrames);
 
         scoreStatus.add(ScoreSnapshot.createSnapShotByName(name));
-        scoreStatus.addAll(IntStream.rangeClosed(1, bowlingFrames.size())
+        scoreStatus.addAll(IntStream.rangeClosed(1, bowlingFrames.size() - 1)
                 .mapToObj(ScoreSnapshot::createSnapShotEmpty)
                 .collect(Collectors.toList()));
     }
@@ -59,9 +59,14 @@ public class ScoreStatus {
                     final TrialResultType resultType = results.get(frameNumber);
                     final String bowlingContent = resultType.getBowlingContentByType(overturnScore);
 
-                    snapshot.add(bowlingContent)
-                            .joiningNextBarIfPossible(resultType)
-                            .removeEmptySnapshotIfExist();
+                    snapshot.removeFirstEmptySnapshotIfExist()
+                            .removeLastEmptySnapshotIfExist()
+                            .add(bowlingContent)
+                            .addNextBarIfPossible(resultType);
+
+//                    snapshot.add(bowlingContent)
+//                            .addNextBarIfPossible(resultType)
+//                            .removeEmptySnapshotIfExist();
 
                     return resultType;
                 })

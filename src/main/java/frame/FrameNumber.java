@@ -10,7 +10,7 @@ public final class FrameNumber {
     private int frameIndex;
 
     FrameNumber(final int number){
-        this.frameIndex = number; //
+        this.frameIndex = number;
     }
 
     void increaseByTrialType(final TrialResultType currentResultType){

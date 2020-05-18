@@ -2,19 +2,19 @@ package trial;
 
 public class TrialResult {
     private final TrialResultType trialResultType;
-    private final TrialStatus trialStatus;
+    private final TrialOrder trialOrder;
 
-    public TrialResult(final TrialResultType trialResultType, final TrialStatus trialStatus){
+    public TrialResult(final TrialResultType trialResultType, final TrialOrder trialOrder){
         this.trialResultType = trialResultType;
-        this.trialStatus = trialStatus;
+        this.trialOrder = trialOrder;
     }
 
-    public TrialStatus nextStatusAndGet(){
-        return trialStatus.next();
+    public TrialOrder nextStatusAndGet(){
+        return trialOrder.next();
     }
 
-    public TrialStatus getCurrentStatus(){
-        return trialStatus;
+    public TrialOrder getCurrentStatus(){
+        return trialOrder;
     }
 
     public TrialResultType getTrialResultType(){

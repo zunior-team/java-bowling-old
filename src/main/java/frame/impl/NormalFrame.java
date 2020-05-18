@@ -1,17 +1,18 @@
 package frame.impl;
 
 import bowling.BowlingPins;
-import exception.overturnscore.OverturnMissCountPinsException;
 import frame.BowlingFrame;
 import overturn.OverturnScore;
+import trial.TrialOrder;
 import trial.TrialResult;
 import trial.TrialResultType;
-import trial.TrialStatus;
+
+import java.util.List;
 
 public class NormalFrame implements BowlingFrame {
 
     private final BowlingPins bowlingPins;
-    private TrialStatus status = TrialStatus.FIRST;
+    private TrialOrder trialOrder = TrialOrder.FIRST;
 
     public NormalFrame(){
         bowlingPins = new BowlingPins();
@@ -20,15 +21,20 @@ public class NormalFrame implements BowlingFrame {
     @SuppressWarnings("Duplicates")
     @Override
     public TrialResult decreasePinsAndGetResult(final OverturnScore overturnScore){
+
+        final List<TrialResultType> resultTypes = bowlingPins.getTrialResultTypesAfterOverturnPins(overturnScore, trialOrder);
+
         if(overturnScore.isOverturnZero()) {
-            final TrialResult trialResult = new TrialResult(TrialResultType.GUTTER, status);
-            this.status = trialResult.nextStatusAndGet();
+            final TrialResult trialResult = new TrialResult(TrialResultType.GUTTER, trialOrder);
+            this.trialOrder = trialResult.nextStatusAndGet();
             return trialResult;
         }
 
         final int alivePins = bowlingPins.getAlivePinsAfterDecreasePins(overturnScore);
-        final TrialResult trialResult = new TrialResult(TrialStatus.getTrialResultType(status, alivePins), status);
-        this.status = trialResult.nextStatusAndGet();
+
+
+        final TrialResult trialResult = new TrialResult(TrialOrder.getTrialResultType(trialOrder, alivePins), trialOrder);
+        this.trialOrder = trialResult.nextStatusAndGet();
 
         return trialResult;
     }

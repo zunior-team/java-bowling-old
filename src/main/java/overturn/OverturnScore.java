@@ -1,6 +1,5 @@
 package overturn;
 
-import exception.overturnscore.OverturnMissCountPinsException;
 import exception.overturnscore.OverturnScoreCreateException;
 
 import static overturn.OverturnScoreConstant.MAX_PIN_COUNT;

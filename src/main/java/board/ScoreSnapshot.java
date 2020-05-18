@@ -35,10 +35,11 @@ final class ScoreSnapshot {
         return this;
     }
 
-    public ScoreSnapshot addNextIfResultProgress(final TrialResultType resultType){
+    public ScoreSnapshot joiningNextBarIfPossible(final TrialResultType resultType){
         if(!resultType.isProgress()){
             return this;
         }
+        
         snapshot.add(NEXT);
         return this;
     }

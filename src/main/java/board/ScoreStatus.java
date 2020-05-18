@@ -62,7 +62,7 @@ public class ScoreStatus {
                             : String.valueOf(overturnScore.getOverturnPins());
 
                     snapshot.add(content)
-                            .addNextIfResultProgress(resultType)
+                            .joiningNextBarIfPossible(resultType)
                             .removeEmptySnapshotIfExist();
 
                     return resultType;

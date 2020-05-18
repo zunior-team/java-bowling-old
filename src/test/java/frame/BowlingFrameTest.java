@@ -24,6 +24,9 @@ class BowlingFrameTest {
 
         // when
         final TrialResult trialResult = bowlingFrame.decreasePinsAndGetResult(overturnScore);
+
+        // then
+
     }
 
     private static Stream<Arguments> provideOverturnScore(){

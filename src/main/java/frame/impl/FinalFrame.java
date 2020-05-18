@@ -1,17 +1,15 @@
 package frame.impl;
 
 import bowling.BowlingPins;
-import exception.overturnscore.OverturnMissCountPinsException;
 import frame.BowlingFrame;
 import overturn.OverturnScore;
+import trial.TrialOrder;
 import trial.TrialResult;
-import trial.TrialResultType;
-import trial.TrialStatus;
 
 public class FinalFrame implements BowlingFrame {
 
     private final BowlingPins bowlingPins;
-    private TrialStatus status = TrialStatus.FIRST;
+    private TrialOrder status = TrialOrder.FIRST;
 
     public FinalFrame(){
         bowlingPins = new BowlingPins();
@@ -30,7 +28,7 @@ public class FinalFrame implements BowlingFrame {
 //        bowlingPins.decreaseAlivePins(overturnPins);
 //        final int remainPins = alivePins - overturnPins;
 //
-//        return TrialStatus.getTrialResultType(status, remainPins);
+//        return TrialOrder.getTrialResultType(status, remainPins);
         return null;
     }
 }

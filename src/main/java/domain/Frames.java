@@ -47,4 +47,5 @@ public class Frames {
     public List<Frame> getFrames() {
         return Collections.unmodifiableList(new ArrayList<>(this.frames));
     }
+
 }

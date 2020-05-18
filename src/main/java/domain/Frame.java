@@ -3,9 +3,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.reducing;
-
 public class Frame {
     public static final int MAX_THROW_COUNT_IN_FRAMES = 2;
 
@@ -28,7 +25,7 @@ public class Frame {
     }
 
     public void throwBowlingBall(int fallenPins) {
-        if (this.frameHistories.size() > MAX_THROW_COUNT_IN_FRAMES) {
+        if (this.frameHistories.size() >= MAX_THROW_COUNT_IN_FRAMES) {
             throw new IllegalArgumentException("you can only throw " + MAX_THROW_COUNT_IN_FRAMES + " times in one frame");
         }
 

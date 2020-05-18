@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Frames {
+    public static final int MAX_FRAME_COUNT = 10;
     private List<Frame> frames = new ArrayList<>();
 
     private Frames() {
@@ -19,7 +20,7 @@ public class Frames {
         if (this.frames.isEmpty()) {
             return false;
         }
-        return frames.size() == 10 && frames.get(frames.size() - 1).isDone();
+        return frames.size() == MAX_FRAME_COUNT && frames.get(frames.size() - 1).isDone();
     }
 
     public int nextFrame() {

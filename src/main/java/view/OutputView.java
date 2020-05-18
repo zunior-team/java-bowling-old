@@ -33,10 +33,10 @@ public class OutputView {
         System.out.println(
                 String.format(
                         FORMAT,
-                        NAME, THREE_SPACE, THREE_SPACE,
-                        THREE_SPACE, THREE_SPACE, THREE_SPACE,
-                        THREE_SPACE, THREE_SPACE, THREE_SPACE,
-                        THREE_SPACE, THREE_SPACE
+                        NAME, " 1 ", " 2 ",
+                        " 3 ", " 4 ", " 5 ",
+                        " 6 ", " 7 ", " 8 ",
+                        " 9 ", " 10 "
                 )
         );
     }

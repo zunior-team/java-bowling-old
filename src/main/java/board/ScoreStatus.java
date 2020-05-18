@@ -57,11 +57,9 @@ public class ScoreStatus {
                 .map(frameNumber -> {
                     final ScoreSnapshot snapshot = scoreStatus.get(frameNumber.get());
                     final TrialResultType resultType = results.get(frameNumber);
-                    final String content = (!resultType.isMiss() && !resultType.isProgress())
-                            ? resultType.getExpression()
-                            : String.valueOf(overturnScore.getOverturnPins());
+                    final String bowlingContent = resultType.getBowlingContentByType(overturnScore);
 
-                    snapshot.add(content)
+                    snapshot.add(bowlingContent)
                             .joiningNextBarIfPossible(resultType)
                             .removeEmptySnapshotIfExist();
 

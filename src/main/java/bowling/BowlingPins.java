@@ -2,10 +2,6 @@ package bowling;
 
 import exception.overturnscore.OverturnMissCountPinsException;
 import overturn.OverturnScore;
-import trial.Trial;
-import trial.TrialOrder;
-import trial.TrialResult;
-import trial.TrialResultType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,13 +23,6 @@ public class BowlingPins {
     public int getAlivePinsAfterDecreasePins(final OverturnScore overturnScore){
         this.decreaseAlivePins(overturnScore.getOverturnPins());
         return getAlivePinsCount();
-    }
-
-    public List<TrialResultType> getTrialResultTypesAfterOverturnPins(final OverturnScore overturnScore, final TrialOrder trialOrder){
-        final int overturnPins = overturnScore.getOverturnPins();
-        this.decreaseAlivePins(overturnPins);
-
-        return TrialResultType.getResultByTrial(Trial.create(overturnPins, getAlivePinsCount(), trialOrder));
     }
 
     private int getAlivePinsCount() {

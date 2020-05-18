@@ -33,8 +33,6 @@ class FrameNumberTest {
     private static Stream<Arguments> provideTrialResultType(){
         return Stream.of(
             arguments(0, TrialResultType.PROGRESS, 0),
-            arguments(0, TrialResultType.GUTTER, 1),
-            arguments(0, TrialResultType.MISS, 1),
             arguments(0, TrialResultType.SPARE, 1),
             arguments(0, TrialResultType.STRIKE, 1)
         );

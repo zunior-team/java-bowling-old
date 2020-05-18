@@ -28,7 +28,7 @@ public class BowlingFrames {
     public static BowlingFrames create(){
         return new BowlingFrames(
                 Collections.unmodifiableList(
-                        IntStream.rangeClosed(1, LAST_NUMBER_OF_FRAME)
+                        IntStream.rangeClosed(1, LAST_NUMBER_OF_FRAME + 1)
                                 .mapToObj(i -> (i == LAST_NUMBER_OF_FRAME)
                                         ? new FinalFrame()
                                         : new NormalFrame())
@@ -42,7 +42,6 @@ public class BowlingFrames {
 
     public Map<FrameNumber, TrialResultType> overturn(final OverturnScore overturnScore){
         final BowlingFrame bowlingFrame = frameNumber.getCurrentBowlingFrame(bowlingFrames);
-        bowlingFrame.decreasePinsAndGetResult()
         final TrialResult trialResult = bowlingFrame.decreasePinsAndGetResult(overturnScore);
 
         @SuppressWarnings("unchecked")

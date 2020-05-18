@@ -1,6 +1,7 @@
 package board;
 
 import org.apache.commons.lang3.StringUtils;
+import trial.TrialResult;
 import trial.TrialResultType;
 
 import java.util.ArrayList;
@@ -30,21 +31,26 @@ final class ScoreSnapshot {
         return Stream.of(String.join(StringUtils.EMPTY, snapshot));
     }
 
-    public ScoreSnapshot add(final String element){
-        snapshot.add(element);
+    private String preprocessString(final String element){
+        return element.equals(TrialResultType.STRIKE.getExpression())
+                ? String.format(SCORE_EMPTY_FORMAT, element)
+                : element;
+    }
+
+    ScoreSnapshot add(final String element){
+        snapshot.add(preprocessString(element));
         return this;
     }
 
-    public ScoreSnapshot joiningNextBarIfPossible(final TrialResultType resultType){
-        if(!resultType.isProgress()){
-            return this;
+    ScoreSnapshot joiningNextBarIfPossible(final TrialResultType resultType){
+        if(resultType.isProgress()){
+            snapshot.add(NEXT);
         }
-        
-        snapshot.add(NEXT);
+
         return this;
     }
 
-    public void removeEmptySnapshotIfExist(){
+    void removeEmptySnapshotIfExist(){
         if(String.format(SCORE_EMPTY_FORMAT, StringUtils.EMPTY).equals(snapshot.get(0))){
             snapshot.remove(0);
         }

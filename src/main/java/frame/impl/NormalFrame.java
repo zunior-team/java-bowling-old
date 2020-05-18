@@ -7,8 +7,6 @@ import trial.TrialOrder;
 import trial.TrialResult;
 import trial.TrialResultType;
 
-import java.util.List;
-
 public class NormalFrame implements BowlingFrame {
 
     private final BowlingPins bowlingPins;
@@ -21,19 +19,9 @@ public class NormalFrame implements BowlingFrame {
     @SuppressWarnings("Duplicates")
     @Override
     public TrialResult decreasePinsAndGetResult(final OverturnScore overturnScore){
-
-        final List<TrialResultType> resultTypes = bowlingPins.getTrialResultTypesAfterOverturnPins(overturnScore, trialOrder);
-
-        if(overturnScore.isOverturnZero()) {
-            final TrialResult trialResult = new TrialResult(TrialResultType.GUTTER, trialOrder);
-            this.trialOrder = trialResult.nextStatusAndGet();
-            return trialResult;
-        }
-
         final int alivePins = bowlingPins.getAlivePinsAfterDecreasePins(overturnScore);
-
-
-        final TrialResult trialResult = new TrialResult(TrialOrder.getTrialResultType(trialOrder, alivePins), trialOrder);
+        final TrialResultType trialResultType = TrialOrder.getTrialResultType(trialOrder, alivePins);
+        final TrialResult trialResult = new TrialResult(trialResultType, trialOrder);
         this.trialOrder = trialResult.nextStatusAndGet();
 
         return trialResult;

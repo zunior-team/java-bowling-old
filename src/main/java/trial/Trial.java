@@ -2,71 +2,61 @@ package trial;
 
 import java.util.Objects;
 
-import static bowling.BowlingPinConstant.*;
-
 public class Trial {
 
-    private final int overturnPinCount;
-    private final int alivePinCount;
-
-    private final boolean isAllOverturn;
-    private final boolean isAllAlive;
     private final TrialOrder trialOrder;
+    private final int alivePins;
 
-    private Trial(final int overturnPinCount,
-                  final int alivePinCount,
-                  final TrialOrder trialOrder) {
-        this.overturnPinCount = overturnPinCount;
-        this.alivePinCount = alivePinCount;
+    private Trial(final TrialOrder trialOrder, final int alivePins){
         this.trialOrder = trialOrder;
+        this.alivePins = alivePins;
     }
 
-    private Trial(final boolean isAllOverturn, final boolean isAllAlive, TrialOrder trialOrder){
-        this.isAllOverturn = isAllOverturn;
-        this.isAllAlive = isAllAlive;
-        this.trialOrder = trialOrder;
+    static Trial create(final TrialOrder trialOrder, final int alivePins){
+        return new Trial(trialOrder, alivePins);
     }
 
-    private Trial(final int alivePinCount, final TrialOrder trialOrder){
-        this(0, alivePinCount, trialOrder);
+    static Trial createByFirst(final int alivePins){
+        return new Trial(TrialOrder.FIRST, alivePins);
     }
 
-    public static Trial create(final int overturnPinCount, final int alivePinCount, final TrialOrder trialOrder){
-        return new Trial(overturnPinCount, alivePinCount, trialOrder);
+    static Trial createBySecond(final int alivePins){
+        return new Trial(TrialOrder.SECOND, alivePins);
     }
 
-    static Trial createStrike(){
-        return new Trial(Boolean.TRUE, Boolean.FALSE, TrialOrder.FIRST);
+    static Trial createByThird(final int alivePins) {
+        return new Trial(TrialOrder.THIRD, alivePins);
     }
 
-    static Trial createGutterInProgress(){
-        return new Trial(Boolean.FALSE, Boolean.TRUE, TrialOrder.FIRST);
-    }
+    public TrialResultType getResultType(){
+        if(trialOrder == TrialOrder.FIRST){
+            return (alivePins == 0)
+                    ? TrialResultType.STRIKE
+                    : TrialResultType.PROGRESS;
+        }
 
-    static Trial createGutterInFinish(){
-        return new Trial(ZERO_PIN_COUNT, ALIVE_OF_PIN_COUNT, TrialOrder.SECOND);
-    }
+        if(trialOrder == TrialOrder.SECOND) {
+            return (alivePins == 0)
+                    ? TrialResultType.SPARE
+                    : TrialResultType.MISS;
+        }
 
-    static Trial createSpare(final int overturnPinCount){
-        return new Trial(overturnPinCount, ZERO_PIN_COUNT, TrialOrder.SECOND);
-    }
-
-    public Trial createNormalInProgress(){
-        return new Trial()
+        return (alivePins == 0)
+                ? TrialResultType.STRIKE
+                : TrialResultType.MISS;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Trial trial = (Trial) o;
-        return overturnPinCount == trial.overturnPinCount &&
-                alivePinCount == trial.alivePinCount &&
+        trial.Trial trial = (trial.Trial) o;
+        return alivePins == trial.alivePins &&
                 trialOrder == trial.trialOrder;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(overturnPinCount, alivePinCount, trialOrder);
+        return Objects.hash(trialOrder, alivePins);
     }
 }

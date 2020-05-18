@@ -1,31 +1,41 @@
 package trial;
 
-import overturn.OverturnScore;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public enum TrialOrder {
     FIRST, SECOND, THIRD;
 
     private static final Map<TrialOrder, TrialOrder> nextTrial = new HashMap<>();
-    private static final int ZERO = 0;
+    private static final Map<Trial, TrialResultType> resultTypeSet = new HashMap<>();
 
     static {
-        nextTrial.put(FIRST, SECOND);
-        nextTrial.put(SECOND, THIRD);
-
+        initResultTypeSet();
+        initNextTrial();
     }
 
-    public static TrialResultType getTrialResultType(TrialOrder currentStatus, final int alivePins) {
-        if (currentStatus == FIRST) {
-            return (alivePins == ZERO) ? TrialResultType.STRIKE : TrialResultType.PROGRESS;
-        }
+    static void initResultTypeSet(){
+        IntStream.rangeClosed(0, 10)
+                .mapToObj(Trial::createByFirst)
+                .forEach(trial -> resultTypeSet.put(trial, trial.getResultType()));
 
-        return (alivePins == ZERO)
-                ? TrialResultType.SPARE
-                : TrialResultType.MISS;
+        IntStream.rangeClosed(0, 10)
+                .mapToObj(Trial::createBySecond)
+                .forEach(trial -> resultTypeSet.put(trial, trial.getResultType()));
+
+        IntStream.rangeClosed(0, 10)
+                .mapToObj(Trial::createByThird)
+                .forEach(trial -> resultTypeSet.put(trial, trial.getResultType()));
+    }
+
+    static void initNextTrial(){
+        nextTrial.put(FIRST, SECOND);
+        nextTrial.put(SECOND, THIRD);
+    }
+
+    public static TrialResultType getTrialResultType(final TrialOrder order, final int alivePins) {
+        return resultTypeSet.get(Trial.create(order, alivePins));
     }
 
     public TrialOrder next() {

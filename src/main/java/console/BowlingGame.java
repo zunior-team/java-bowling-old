@@ -3,6 +3,7 @@ package console;
 import monitor.Monitor;
 import overturn.OverturnScore;
 import player.Player;
+import trial.TrialResult;
 import trial.TrialResultType;
 
 import java.util.stream.IntStream;
@@ -30,6 +31,15 @@ public class BowlingGame {
 
         final OverturnScore secondOverTurnScore = Monitor.enterSecondOverturnPinsForRound(round);
         final TrialResultType secondTrialResultType = player.playBowlingForRound(secondOverTurnScore);
+        Monitor.printBowlingStatusByPlayer(player.getBowlingBoard());
+
+        if(!(round == LAST_ROUND_NUMBER
+                && (secondTrialResultType.isStrikeOrSpare()))){
+            return;
+        }
+
+        final OverturnScore lastOverturnScore = Monitor.enterThirdOverturnPinsForRound(round);
+        final TrialResultType lastTrialResultType = player.playBowlingForRound(lastOverturnScore);
         Monitor.printBowlingStatusByPlayer(player.getBowlingBoard());
     }
 }

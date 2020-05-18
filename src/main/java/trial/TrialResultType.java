@@ -30,6 +30,10 @@ public enum TrialResultType {
         return PROGRESS == this;
     }
 
+    public boolean isStrikeOrSpare(){
+        return STRIKE == this || SPARE == this;
+    }
+
     public String getExpression(){
         return expression;
     }

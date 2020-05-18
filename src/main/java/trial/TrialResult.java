@@ -13,10 +13,6 @@ public class TrialResult {
         return trialOrder.next();
     }
 
-    public TrialOrder getCurrentStatus(){
-        return trialOrder;
-    }
-
     public TrialResultType getTrialResultType(){
         return trialResultType;
     }

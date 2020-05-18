@@ -24,7 +24,7 @@ public class Monitor {
         return new OverturnScore(InputView.askSecondPinsCountForRound(round));
     }
 
-    public static OverturnScore enterLastOverturnPinsForRound(final int round) {
+    public static OverturnScore enterThirdOverturnPinsForRound(final int round) {
         return new OverturnScore(InputView.askThirdPinsCountForRound(round));
     }
 

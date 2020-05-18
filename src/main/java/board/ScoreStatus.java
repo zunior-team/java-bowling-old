@@ -64,10 +64,6 @@ public class ScoreStatus {
                             .add(bowlingContent)
                             .addNextBarIfPossible(resultType);
 
-//                    snapshot.add(bowlingContent)
-//                            .addNextBarIfPossible(resultType)
-//                            .removeEmptySnapshotIfExist();
-
                     return resultType;
                 })
                 .findFirst()

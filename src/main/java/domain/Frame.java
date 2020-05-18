@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.stream.Collectors.joining;
@@ -15,9 +16,7 @@ public class Frame {
 
     private List<Integer> turns = new ArrayList<>();
 
-
     private Frame() {
-
     }
 
     public static Frame newInstanceByFirstThrow(int fallenPins) {
@@ -49,9 +48,8 @@ public class Frame {
                 .sum();
     }
 
-    @Override
-    public String toString() {
-        return this.turns.stream().map(String::valueOf).collect(joining("|"));
+    public List<Integer> getThrowResult() {
+        return Collections.unmodifiableList(new ArrayList<>(this.turns));
     }
 
     public void throwBowlingBall(int fallenPins) {

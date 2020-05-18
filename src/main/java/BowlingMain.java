@@ -25,10 +25,10 @@ public class BowlingMain {
         while (!bowling.isEnd()) {
             outputView.printInputFallenPinsMessageOf(bowling.nextFrame());
             bowling.throwBowlingBall(inputView.inputFallenPins());
+            outputView.printBowling(new BowlingPrintDto(bowling));
         }
 
 
-        new BowlingPrintDto(bowling);
 
 
 

@@ -2,6 +2,7 @@ package domain;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Frames {
@@ -39,7 +40,9 @@ public class Frames {
         }
 
         this.frames.get(frames.size() - 1).throwBowlingBall(inputFallenPins);
+    }
 
-        frames.forEach(System.out::println);
+    public List<Frame> getFrames() {
+        return Collections.unmodifiableList(new ArrayList<>(this.frames));
     }
 }

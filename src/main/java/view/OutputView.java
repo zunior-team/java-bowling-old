@@ -5,7 +5,6 @@ import domain.Player;
 import view.dto.BowlingPrintDto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static domain.Player.NAME_LENGTH;
 import static java.util.stream.Collectors.*;
@@ -44,7 +43,7 @@ public class OutputView {
 
     private void printResult(Player player, List<Frame> frames) {
         final List<String> parsedFrames = frames.stream()
-                .map(FrameParser::parse)
+                .map(FrameResultFormatParser::parse)
                 .collect(toList());
 
         while (parsedFrames.size() != 10) {

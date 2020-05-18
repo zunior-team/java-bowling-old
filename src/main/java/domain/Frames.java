@@ -35,7 +35,9 @@ public class Frames {
 
     public void throwBowlingBall(int inputFallenPins) {
         if (frames.isEmpty() || frames.get(frames.size() - 1).isDone()) {
-            this.frames.add(Frame.newInstanceByFirstThrow(inputFallenPins));
+            final Frame frame = Frame.newInstance();
+            frame.throwBowlingBall(inputFallenPins);
+            this.frames.add(frame);
             return;
         }
 

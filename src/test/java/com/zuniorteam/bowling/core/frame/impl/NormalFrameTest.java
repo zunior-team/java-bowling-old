@@ -68,7 +68,7 @@ class NormalFrameTest {
         final FrameResultDto frameResultDto = new NormalFrame(FIRST_FRAME).play(stepPlayer);
 
         //then
-        assertThat(frameResultDto.getStepResultDtos()).containsExactly(stepResultDto, stepResultDto);
+        assertThat(frameResultDto.getStepResults()).containsExactly(stepResultDto, stepResultDto);
     }
 
 

@@ -47,6 +47,6 @@ class LastFrameTest {
         final FrameResultDto frameResultDto = new LastFrame().play(stepPlayer);
 
         //then
-        assertThat(frameResultDto.getStepResultDtos()).containsExactly(firstStepResultDto, secondStepResultDto, bonusStepResultDto);
+        assertThat(frameResultDto.getStepResults()).containsExactly(firstStepResultDto, secondStepResultDto, bonusStepResultDto);
     }
 }

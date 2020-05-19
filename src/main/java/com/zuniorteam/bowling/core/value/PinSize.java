@@ -3,6 +3,8 @@ package com.zuniorteam.bowling.core.value;
 
 import java.util.Objects;
 
+import static com.zuniorteam.bowling.core.value.Compared.*;
+
 public class PinSize {
 
     public static final int MIN_PIN_SIZE = Number.ZERO;
@@ -58,11 +60,11 @@ public class PinSize {
         return PinSize.of(this.value + pinSize.value());
     }
 
-    public int compareTo(PinSize pinSize){
+    public Compared compareTo(PinSize pinSize){
         if(this.value == pinSize.value()){
-            return  0;
+            return SAME;
         }
 
-        return this.value > pinSize.value ? 1 : -1;
+        return this.value > pinSize.value ? MORE : LESS;
     }
 }

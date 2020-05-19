@@ -4,13 +4,13 @@ import java.util.List;
 
 public class FrameResultDto {
 
-    private final List<StepResultDto> stepResultDtos;
+    private final List<StepResultDto> stepResults;
 
-    public FrameResultDto(List<StepResultDto> stepResultDtos) {
-        this.stepResultDtos = stepResultDtos;
+    public FrameResultDto(List<StepResultDto> stepResults) {
+        this.stepResults = stepResults;
     }
 
-    public List<StepResultDto> getStepResultDtos() {
-        return stepResultDtos;
+    public List<StepResultDto> getStepResults() {
+        return stepResults;
     }
 }

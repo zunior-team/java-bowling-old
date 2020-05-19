@@ -16,8 +16,7 @@ public class NormalFrame extends AbstractFrame {
     }
 
     private void validate(int frameNumber) {
-        if (frameNumber < FIRST_FRAME
-                || frameNumber > LAST_FRAME) {
+        if (frameNumber < FIRST_FRAME || frameNumber > LAST_FRAME) {
             throw new IllegalArgumentException("적절하지 않은 프레임 번호 입니다 : " + frameNumber);
         }
     }

@@ -2,6 +2,7 @@ package com.zuniorteam.bowling.core.frame;
 
 import com.zuniorteam.bowling.core.dto.StepResultDto;
 import com.zuniorteam.bowling.core.step.player.StepPlayer;
+import com.zuniorteam.bowling.core.value.Compared;
 import com.zuniorteam.bowling.core.value.PinSize;
 import com.zuniorteam.bowling.core.value.StepType;
 
@@ -22,7 +23,7 @@ public abstract class AbstractFrame implements Frame{
 
         final PinSize remainPinSize = PinSize.MAX.subtract(firstStepResultDto.getFallenPinSize());
 
-        if (remainPinSize.compareTo(PinSize.ZERO) > 0) {
+        if (remainPinSize.compareTo(PinSize.ZERO) == Compared.MORE) {
             stepResults.add(stepPlayer.play(StepType.SECOND, remainPinSize));
         }
 

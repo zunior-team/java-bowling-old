@@ -54,7 +54,7 @@ public enum StepResultType {
             throw new IllegalArgumentException("남아있는 핀의 크기를 입력해주세요");
         }
 
-        if (fallenPinSize.add(remainPinSize).compareTo(PinSize.MAX) > 0) {
+        if (fallenPinSize.add(remainPinSize).compareTo(PinSize.MAX) == Compared.MORE) {
             throw new IllegalArgumentException(
                     "쓰리진 핀의 갯수와, 남아있는 핀의 개수의 합이 "
                             + PinSize.MAX + " 보다 클 수 없습니다." +

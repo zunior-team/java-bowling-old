@@ -30,7 +30,7 @@ public class OutputConsole {
         StringBuilder draw = new StringBuilder();
 
         final FrameResultDto frameResultDto = frameResultDtos.get(frameIndex);
-        final List<StepResultDto> stepResultDtos = frameResultDto.getStepResultDtos();
+        final List<StepResultDto> stepResultDtos = frameResultDto.getStepResults();
 
         for (int i = 0; i < stepResultDtos.size(); i++) {
 
@@ -90,7 +90,7 @@ public class OutputConsole {
         for (int i = 0; i < frameIndex; i++) {
             final FrameResultDto frameResultDto = frameResultDtos.get(i);
 
-            final String drawSteps = frameResultDto.getStepResultDtos().stream()
+            final String drawSteps = frameResultDto.getStepResults().stream()
                     .map(StepResultRender::rend)
                     .collect(Collectors.joining(BORDER));
 

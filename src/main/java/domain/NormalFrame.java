@@ -1,7 +1,7 @@
 package domain;
 
 public class NormalFrame extends Frame {
-    private final int maxThrowCount = 2;
+    private static final int MAX_THROW_COUNT = 2;
 
     private NormalFrame() {
         super();
@@ -17,13 +17,13 @@ public class NormalFrame extends Frame {
         if (this.pins.isAllDown()) {
             return true;
         }
-        return this.frameHistories.size() == maxThrowCount;
+        return this.frameHistories.size() == MAX_THROW_COUNT;
     }
 
     @Override
     public void throwBowlingBall(int fallenPins) {
-        if (this.frameHistories.size() + 1 > maxThrowCount) {
-            throw new IllegalArgumentException("you can only throw " + maxThrowCount + " times in one frame");
+        if (this.frameHistories.size() + 1 > MAX_THROW_COUNT) {
+            throw new IllegalArgumentException("you can only throw " + MAX_THROW_COUNT + " times in one frame");
         }
 
         this.pins.throwBall(fallenPins);

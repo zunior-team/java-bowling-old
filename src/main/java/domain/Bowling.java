@@ -10,7 +10,7 @@ public class Bowling {
     private Bowling(Player player) {
         Objects.requireNonNull(player);
         this.player = player;
-        this.frames = Frames.empty();
+        this.frames = Frames.newInstance();
     }
 
     public static Bowling newInstance(Player player) {

@@ -2,7 +2,7 @@ package domain;
 
 public class FinalFrame extends Frame {
 
-    private final int maxThrowCount = 3;
+    private static final int MAX_THROW_COUNT = 3;
 
     private FinalFrame() {
         super();
@@ -18,7 +18,7 @@ public class FinalFrame extends Frame {
         if (this.frameHistories.size() <= 1) {
             return false;
         }
-        if (this.maxThrowCount == this.frameHistories.size()) {
+        if (MAX_THROW_COUNT == this.frameHistories.size()) {
             return true;
         }
 

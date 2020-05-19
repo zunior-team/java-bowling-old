@@ -14,8 +14,6 @@ import static com.zuniorteam.bowling.core.frame.Frame.FIRST_FRAME;
 
 public class BowlingGame {
 
-    public static final int NUMBER_OF_PIN = 10;
-
     private final StepPlayer stepPlayer;
 
     public BowlingGame(StepPlayer stepPlayer){

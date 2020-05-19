@@ -5,6 +5,7 @@ import com.zuniorteam.bowling.core.dto.StepResultDto;
 import com.zuniorteam.bowling.core.frame.Frame;
 import com.zuniorteam.bowling.core.step.player.StepPlayer;
 import com.zuniorteam.bowling.core.step.player.impl.RandomStepPlayer;
+import com.zuniorteam.bowling.core.value.PinSize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -62,6 +63,7 @@ class NormalFrameTest {
         final StepResultDto stepResultDto = Mockito.mock(StepResultDto.class);
 
         given(stepPlayer.play(any(), any())).willReturn(stepResultDto);
+        given(stepResultDto.getFallenPinSize()).willReturn(PinSize.of(3));
 
         //when
         final FrameResultDto frameResultDto = new NormalFrame(FIRST_FRAME).play(stepPlayer);

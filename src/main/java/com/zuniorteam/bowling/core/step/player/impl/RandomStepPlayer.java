@@ -1,9 +1,8 @@
 package com.zuniorteam.bowling.core.step.player.impl;
 
-import com.zuniorteam.bowling.core.BowlingGame;
 import com.zuniorteam.bowling.core.dto.StepResultDto;
 import com.zuniorteam.bowling.core.step.player.StepPlayer;
-import com.zuniorteam.bowling.core.value.Number;
+import com.zuniorteam.bowling.core.value.PinSize;
 import com.zuniorteam.bowling.core.value.StepResultType;
 import com.zuniorteam.bowling.core.value.StepType;
 
@@ -20,23 +19,23 @@ public class RandomStepPlayer implements StepPlayer {
         this.threadLocalRandom = threadLocalRandom;
     }
 
-    public StepResultDto play(StepType stepType, int numberOfCurrentPin) {
-        validatePlay(stepType, numberOfCurrentPin);
+    public StepResultDto play(StepType stepType, PinSize currentPinSize) {
+        validatePlay(stepType, currentPinSize);
 
-        final int numberOfFallenPin = threadLocalRandom.nextInt(numberOfCurrentPin + 1);
-        final int numberOfRemainPin = numberOfCurrentPin - numberOfFallenPin;
-        return new StepResultDto(StepResultType.of(stepType, numberOfFallenPin, numberOfRemainPin), numberOfFallenPin);
+        final PinSize fallenPinSize = PinSize.of(threadLocalRandom.nextInt(currentPinSize.value() + 1));
+        final PinSize remainPinSize = currentPinSize.subtract(fallenPinSize);
+        return new StepResultDto(StepResultType.of(stepType, fallenPinSize, remainPinSize), fallenPinSize);
     }
 
-    private void validatePlay(StepType stepType, int numberOfCurrentPin) {
+    private void validatePlay(StepType stepType, PinSize currentPinSize) {
         if(Objects.isNull(stepType)){
             throw new IllegalArgumentException("스텝 type을 입력해주세요");
         }
 
-        if(numberOfCurrentPin > BowlingGame.NUMBER_OF_PIN
-                || numberOfCurrentPin < Number.ZERO){
-            throw new IllegalArgumentException("적절하지 않은 PIN 개수 입니다 : " + numberOfCurrentPin);
+        if(Objects.isNull(currentPinSize)){
+            throw new IllegalArgumentException("핀 사이즈를 입력해주세요");
         }
+
     }
 
 }

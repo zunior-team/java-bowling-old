@@ -24,7 +24,7 @@ public class StepResultRender {
         final StepResultType resultType = stepResultDto.getStepResultType();
 
         return TOKEN.containsKey(resultType) ?
-                TOKEN.get(resultType) : String.valueOf(stepResultDto.getNumberOfFallenPin());
+                TOKEN.get(resultType) : String.valueOf(stepResultDto.getFallenPinSize());
     }
 
 }

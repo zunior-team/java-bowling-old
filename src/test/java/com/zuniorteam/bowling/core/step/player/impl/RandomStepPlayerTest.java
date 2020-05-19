@@ -1,6 +1,7 @@
 package com.zuniorteam.bowling.core.step.player.impl;
 
 import com.zuniorteam.bowling.core.dto.StepResultDto;
+import com.zuniorteam.bowling.core.value.PinSize;
 import com.zuniorteam.bowling.core.value.StepType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,6 @@ import org.mockito.Mockito;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static com.zuniorteam.bowling.core.BowlingGame.NUMBER_OF_PIN;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -30,16 +30,16 @@ class RandomStepPlayerTest {
     void testPlayIfStepTypeIsNull() {
         final RandomStepPlayer randomStepPlayer = new RandomStepPlayer(ThreadLocalRandom.current());
 
-        assertThrows(IllegalArgumentException.class, () -> randomStepPlayer.play(null, NUMBER_OF_PIN));
+        assertThrows(IllegalArgumentException.class, () -> randomStepPlayer.play(null, PinSize.MAX));
     }
 
     @DisplayName("스텝 play, 현재 pin 개수가 범위를 벗어 났을때")
     @ParameterizedTest
-    @ValueSource(ints = {-1, NUMBER_OF_PIN + 1})
+    @ValueSource(ints = {-1, Integer.MAX_VALUE})
     void testPlayIfInvalidCurrentPin(int numberOfCurrentPin) {
         final RandomStepPlayer randomStepPlayer = new RandomStepPlayer(ThreadLocalRandom.current());
 
-        assertThrows(IllegalArgumentException.class, () -> randomStepPlayer.play(StepType.FIRST, numberOfCurrentPin));
+        assertThrows(IllegalArgumentException.class, () -> randomStepPlayer.play(StepType.FIRST, PinSize.of(numberOfCurrentPin)));
     }
 
     @DisplayName("스텝 play")
@@ -51,9 +51,10 @@ class RandomStepPlayerTest {
 
         final RandomStepPlayer randomStepPlayer = new RandomStepPlayer(threadLocalRandom);
 
-        final StepResultDto stepResultDto = randomStepPlayer.play(StepType.FIRST, NUMBER_OF_PIN);
+        final StepResultDto stepResultDto = randomStepPlayer.play(StepType.FIRST, PinSize.MAX);
+
         //then
-        assertThat(stepResultDto.getNumberOfFallenPin()).isEqualTo(numberOfFallenPin);
+        assertThat(stepResultDto.getFallenPinSize()).isEqualTo(PinSize.of(numberOfFallenPin));
     }
 
 }

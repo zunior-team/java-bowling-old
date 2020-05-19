@@ -3,6 +3,7 @@ package com.zuniorteam.bowling.view;
 import com.zuniorteam.bowling.core.dto.FrameResultDto;
 import com.zuniorteam.bowling.core.dto.StepResultDto;
 import com.zuniorteam.bowling.core.user.User;
+import com.zuniorteam.bowling.core.value.PinSize;
 import com.zuniorteam.bowling.view.render.StepResultRender;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class OutputConsole {
 
             final StepResultDto stepResultDto = stepResultDtos.get(i);
 
-            draw.append(drawStepInfo(frameIndex, stepResultDto.getNumberOfFallenPin()));
+            draw.append(drawStepInfo(frameIndex, stepResultDto.getFallenPinSize()));
             draw.append(drawBaseShape(frameResultDtos.size()));
             draw.append(NEW_LINE);
 
@@ -52,11 +53,11 @@ public class OutputConsole {
     }
 
 
-    private String drawStepInfo(int frameIndex, int numberOfFallenPin) {
+    private String drawStepInfo(int frameIndex, PinSize fallenPinSize) {
         return new StringBuilder()
                 .append(frameIndex + 1)
                 .append(" 프레임 투구 : ")
-                .append(numberOfFallenPin)
+                .append(fallenPinSize)
                 .append(NEW_LINE)
                 .toString();
     }
@@ -100,8 +101,8 @@ public class OutputConsole {
         return drawer.toString();
     }
 
-    private String drawerStepsUntilIndex(List<StepResultDto> stepResultDtos, int stepIndex) {
-        return stepResultDtos.stream()
+    private String drawerStepsUntilIndex(List<StepResultDto> stepResults, int stepIndex) {
+        return stepResults.stream()
                 .limit(stepIndex + 1)
                 .map(StepResultRender::rend)
                 .collect(Collectors.joining(BORDER));

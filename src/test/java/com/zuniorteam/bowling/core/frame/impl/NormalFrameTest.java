@@ -3,7 +3,6 @@ package com.zuniorteam.bowling.core.frame.impl;
 import com.zuniorteam.bowling.core.dto.FrameResultDto;
 import com.zuniorteam.bowling.core.dto.StepResultDto;
 import com.zuniorteam.bowling.core.frame.Frame;
-import com.zuniorteam.bowling.core.step.player.StepPlayer;
 import com.zuniorteam.bowling.core.step.player.impl.RandomStepPlayer;
 import com.zuniorteam.bowling.core.value.PinSize;
 import org.junit.jupiter.api.DisplayName;
@@ -12,10 +11,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 
-import static com.zuniorteam.bowling.core.frame.Frame.FIRST_FRAME;
-import static com.zuniorteam.bowling.core.frame.Frame.LAST_FRAME;
+import static com.zuniorteam.bowling.core.frame.AbstractFrame.FIRST_FRAME;
+import static com.zuniorteam.bowling.core.frame.AbstractFrame.LAST_FRAME;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
@@ -63,7 +62,7 @@ class NormalFrameTest {
         final StepResultDto stepResultDto = Mockito.mock(StepResultDto.class);
 
         given(stepPlayer.play(any(), any())).willReturn(stepResultDto);
-        given(stepResultDto.getFallenPinSize()).willReturn(PinSize.of(3));
+        given(stepResultDto.getFallenPinSize()).willReturn(PinSize.ZERO);
 
         //when
         final FrameResultDto frameResultDto = new NormalFrame(FIRST_FRAME).play(stepPlayer);

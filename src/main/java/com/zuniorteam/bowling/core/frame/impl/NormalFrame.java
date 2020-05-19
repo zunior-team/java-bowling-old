@@ -2,21 +2,22 @@ package com.zuniorteam.bowling.core.frame.impl;
 
 
 import com.zuniorteam.bowling.core.dto.FrameResultDto;
+import com.zuniorteam.bowling.core.frame.AbstractFrame;
 import com.zuniorteam.bowling.core.frame.Frame;
 import com.zuniorteam.bowling.core.step.player.StepPlayer;
 
-public class NormalFrame extends Frame {
+public class NormalFrame extends AbstractFrame {
 
     private final int frameNumber;
 
-    public NormalFrame(int frameNumber) {
+    protected NormalFrame(int frameNumber) {
         validate(frameNumber);
         this.frameNumber = frameNumber;
     }
 
     private void validate(int frameNumber) {
-        if (frameNumber < Frame.FIRST_FRAME
-                || frameNumber > Frame.LAST_FRAME) {
+        if (frameNumber < FIRST_FRAME
+                || frameNumber > LAST_FRAME) {
             throw new IllegalArgumentException("적절하지 않은 프레임 번호 입니다 : " + frameNumber);
         }
     }

@@ -3,6 +3,7 @@ package com.zuniorteam.bowling.core.frame.impl;
 
 import com.zuniorteam.bowling.core.dto.FrameResultDto;
 import com.zuniorteam.bowling.core.dto.StepResultDto;
+import com.zuniorteam.bowling.core.frame.AbstractFrame;
 import com.zuniorteam.bowling.core.frame.Frame;
 import com.zuniorteam.bowling.core.step.player.StepPlayer;
 import com.zuniorteam.bowling.core.value.PinSize;
@@ -15,7 +16,7 @@ import static com.zuniorteam.bowling.core.value.StepResultType.SPARE;
 import static com.zuniorteam.bowling.core.value.StepResultType.STRIKE;
 import static com.zuniorteam.bowling.util.CollectionUtil.simpleMap;
 
-public class LastFrame extends Frame {
+public class LastFrame extends AbstractFrame {
 
     @Override
     public Frame createNext() {

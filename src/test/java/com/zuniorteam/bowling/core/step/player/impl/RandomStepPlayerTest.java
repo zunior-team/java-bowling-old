@@ -35,7 +35,7 @@ class RandomStepPlayerTest {
 
     @DisplayName("스텝 play, 현재 pin 개수가 범위를 벗어 났을때")
     @ParameterizedTest
-    @ValueSource(ints = {-1, Integer.MAX_VALUE})
+    @ValueSource(ints = {PinSize.MIN_PIN_SIZE - 1, PinSize.MAX_PIN_SIZE + 1})
     void testPlayIfInvalidCurrentPin(int numberOfCurrentPin) {
         final RandomStepPlayer randomStepPlayer = new RandomStepPlayer(ThreadLocalRandom.current());
 

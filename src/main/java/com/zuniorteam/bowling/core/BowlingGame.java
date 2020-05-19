@@ -3,14 +3,11 @@ package com.zuniorteam.bowling.core;
 import com.zuniorteam.bowling.core.dto.FrameResultDto;
 import com.zuniorteam.bowling.core.frame.Frame;
 import com.zuniorteam.bowling.core.frame.impl.FirstFrame;
-import com.zuniorteam.bowling.core.frame.impl.NormalFrame;
 import com.zuniorteam.bowling.core.step.player.StepPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static com.zuniorteam.bowling.core.frame.Frame.FIRST_FRAME;
 
 public class BowlingGame {
 

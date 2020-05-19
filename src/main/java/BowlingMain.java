@@ -22,8 +22,9 @@ public class BowlingMain {
 
         final Bowling bowling = Bowling.newInstance(player);
 
+        int frameCount = 1;
         while (!bowling.isEnd()) {
-            outputView.printInputFallenPinsMessageOf(bowling.nextFrame());
+            outputView.printInputFallenPinsMessageOf(frameCount++);
             bowling.throwBowlingBall(inputView.inputFallenPins());
             outputView.printBowling(new BowlingPrintDto(bowling));
         }

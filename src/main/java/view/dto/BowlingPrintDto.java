@@ -4,7 +4,6 @@ import domain.Bowling;
 import domain.Frame;
 import domain.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BowlingPrintDto {

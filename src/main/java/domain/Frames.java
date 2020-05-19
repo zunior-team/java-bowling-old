@@ -4,12 +4,20 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Frames {
     public static final int MAX_FRAME_COUNT = 10;
-    private List<Frame> frames = new ArrayList<>();
+    private List<Frame> frames;
+
 
     private Frames() {
+        final List<Frame> frames = IntStream.range(0, MAX_FRAME_COUNT - 1)
+                .mapToObj(num -> NormalFrame.newInstance())
+                .collect(Collectors.toList());
+        frames.add(FinalFrame.newInstance());
+        this.frames = Collections.unmodifiableList(frames);
     }
 
     public static Frames empty() {
@@ -17,32 +25,17 @@ public class Frames {
     }
 
     public boolean isEnd() {
-        if (this.frames.isEmpty()) {
-            return false;
-        }
-        return frames.size() == MAX_FRAME_COUNT && frames.get(frames.size() - 1).isDone();
-    }
-
-    public int nextFrame() {
-        if (frames.isEmpty()) {
-            return 1;
-        }
-        if (frames.get(frames.size() - 1).isDone()) {
-            return frames.size() + 1;
-        }
-        return frames.size();
+        return this.frames.stream()
+                .allMatch(Frame::isDone);
     }
 
 
     public void throwBowlingBall(int inputFallenPins) {
-        if (frames.isEmpty() || frames.get(frames.size() - 1).isDone()) {
-            final Frame frame = Frame.newInstance();
-            frame.throwBowlingBall(inputFallenPins);
-            this.frames.add(frame);
-            return;
-        }
-
-        this.frames.get(frames.size() - 1).throwBowlingBall(inputFallenPins);
+        final Frame proceedFrame = this.frames.stream()
+                .filter(frame -> !frame.isDone())
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("you can not throw more"));
+        proceedFrame.throwBowlingBall(inputFallenPins);
     }
 
     public List<Frame> getFrames() {

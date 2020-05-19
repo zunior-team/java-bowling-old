@@ -7,7 +7,7 @@ import view.dto.BowlingPrintDto;
 import java.util.List;
 
 import static domain.Player.NAME_LENGTH;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 public class OutputView {
     public static final String THREE_SPACE = "   ";
@@ -43,7 +43,8 @@ public class OutputView {
 
     private void printResult(Player player, List<Frame> frames) {
         final List<String> parsedFrames = frames.stream()
-                .map(FrameResultFormatParser::parse)
+                .map(Frame::getFrameHistories)
+                .map(FrameHistoryParser::parse)
                 .collect(toList());
 
         while (parsedFrames.size() != 10) {

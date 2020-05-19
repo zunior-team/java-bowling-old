@@ -29,10 +29,6 @@ public class Bowling {
         return frames.isEnd();
     }
 
-    public int nextFrame() {
-        return frames.nextFrame();
-    }
-
     public void throwBowlingBall(int inputFallenPins) {
         frames.throwBowlingBall(inputFallenPins);
     }

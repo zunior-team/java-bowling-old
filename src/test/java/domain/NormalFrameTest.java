@@ -8,24 +8,24 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class FrameTest {
+class NormalFrameTest {
 
     @Test
     @DisplayName("Frame 객체를 생성한다")
     void testNewInstance() {
-        final Frame frame = Frame.newInstance();
+        final NormalFrame normalFrame = NormalFrame.newInstance();
 
-        assertThat(frame).isNotNull();
+        assertThat(normalFrame).isNotNull();
     }
 
     @Test
     @DisplayName("Frame에서 공을 던지면 던진 공의 기록이 남는다")
     void testThrowBall() {
-        final Frame frame = Frame.newInstance();
+        final NormalFrame normalFrame = NormalFrame.newInstance();
 
-        frame.throwBowlingBall(4);
+        normalFrame.throwBowlingBall(4);
 
-        assertThat(frame.getFrameHistories())
+        assertThat(normalFrame.getFrameHistories())
                 .hasSize(1)
                 .element(0).isEqualTo(4);
     }
@@ -34,27 +34,27 @@ class FrameTest {
     @CsvSource({"1,false", "2,true"})
     @DisplayName("isDone 메소드로 공이 모두 던져졌는지 확인할 수 있다")
     void testIsDone(int throwCount, boolean isDone) {
-        final Frame frame = Frame.newInstance();
+        final NormalFrame normalFrame = NormalFrame.newInstance();
 
         for (int i = 0; i < throwCount; i++) {
-            frame.throwBowlingBall(3);
+            normalFrame.throwBowlingBall(3);
         }
 
-        assertThat(frame.isDone())
+        assertThat(normalFrame.isDone())
                 .isEqualTo(isDone);
     }
 
     @Test
-    @DisplayName("지정된 회수 이상으로 공을 던질 수 없다")
+    @DisplayName("지정된 2 이상회으로 공을 던질 수 없다")
     void testValidationOverThrow() {
-        final Frame frame = Frame.newInstance();
+        final NormalFrame normalFrame = NormalFrame.newInstance();
 
-        for (int i = 0; i < Frame.MAX_THROW_COUNT_IN_FRAMES; i++) {
-            frame.throwBowlingBall(2);
+        for (int i = 0; i < 2; i++) {
+            normalFrame.throwBowlingBall(2);
         }
 
         assertThrows(IllegalArgumentException.class, () ->
-                frame.throwBowlingBall(2));
+                normalFrame.throwBowlingBall(2));
 
     }
 }

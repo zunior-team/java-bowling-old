@@ -23,8 +23,11 @@ public class StepResultRender {
     public static String rend(StepResultDto stepResultDto) {
         final StepResultType resultType = stepResultDto.getStepResultType();
 
-        return TOKEN.containsKey(resultType) ?
-                TOKEN.get(resultType) : String.valueOf(stepResultDto.getFallenPinSize());
+        if (TOKEN.containsKey(resultType)) {
+            return TOKEN.get(resultType);
+        }
+
+        return String.valueOf(stepResultDto.getFallenPinSize());
     }
 
 }

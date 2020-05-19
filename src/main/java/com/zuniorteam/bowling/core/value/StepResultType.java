@@ -8,36 +8,22 @@ import static com.zuniorteam.bowling.core.value.StepType.*;
 
 public enum StepResultType {
 
-    GUTTER {
-        public boolean is(StepType stepType, PinSize fallenPinSize, PinSize remainPinSize) {
-            return fallenPinSize.equals(ZERO);
-        }
-    },
+    GUTTER((stepType, fallenPinSize, remainPinSize) -> fallenPinSize.equals(ZERO)),
+    MISS((stepType, fallenPinSize, remainPinSize) -> false),
+    SPARE((stepType, fallenPinSize, remainPinSize) -> remainPinSize.equals(ZERO) && SECOND.equals(stepType)),
+    STRIKE((stepType, fallenPinSize, remainPinSize) -> remainPinSize.equals(ZERO) && (FIRST.equals(stepType) || BONUS.equals(stepType)));
 
-    MISS {
-        public boolean is(StepType stepType, PinSize fallenPinSize, PinSize remainPinSize) {
-            return false;
-        }
-    },
+    private final StepResultType.EqualStrategy equalStrategy;
 
-    SPARE {
-        public boolean is(StepType stepType, PinSize fallenPinSize, PinSize remainPinSize) {
-            return remainPinSize.equals(ZERO) && SECOND.equals(stepType);
-        }
-    },
-
-    STRIKE {
-        public boolean is(StepType stepType, PinSize fallenPinSize, PinSize remainPinSize) {
-            return remainPinSize.equals(ZERO) && (FIRST.equals(stepType) || BONUS.equals(stepType));
-        }
-    };
-
-    public abstract boolean is(StepType stepType, PinSize fallenPinSize, PinSize remainPinSize);
+    StepResultType(EqualStrategy equalStrategy) {
+        this.equalStrategy = equalStrategy;
+    }
 
     public static StepResultType of(StepType stepType, PinSize fallenPinSize, PinSize remainPinSize) {
         validate(stepType, fallenPinSize, remainPinSize);
+
         return Arrays.stream(StepResultType.values())
-                .filter(stepResultType -> stepResultType.is(stepType, fallenPinSize, remainPinSize))
+                .filter(stepResultType -> stepResultType.equalStrategy.eq(stepType, fallenPinSize, remainPinSize))
                 .findFirst().orElse(MISS);
     }
 
@@ -60,8 +46,11 @@ public enum StepResultType {
                             + PinSize.MAX + " 보다 클 수 없습니다." +
                             "쓰러진 :" + fallenPinSize + " 남아있는 : " + remainPinSize);
         }
+    }
 
-
+    @FunctionalInterface
+    public interface EqualStrategy {
+        boolean eq(StepType stepType, PinSize fallenPinSize, PinSize remainPinSize);
     }
 
 }

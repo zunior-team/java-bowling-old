@@ -27,9 +27,10 @@ public class FinalFrame extends Frame {
 
     @Override
     public void throwBowlingBall(int fallenPins) {
-        if (this.frameHistories.size() + 1 > maxThrowCount) {
-            throw new IllegalArgumentException("you can only throw " + maxThrowCount + " times in one frame");
+        if (this.isDone()) {
+            throw new IllegalArgumentException("you can not throw more");
         }
+
         if (this.pins.isAllDown()) {
             this.pins = Pins.newInstance();
         }

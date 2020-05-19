@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 public enum TrialOrder {
-    FIRST, SECOND, THIRD;
+    FIRST, SECOND, THIRD, END;
 
     private static final Map<TrialOrder, TrialOrder> nextTrial = new HashMap<>();
     private static final Map<Trial, TrialResultType> resultTypeSet = new HashMap<>();

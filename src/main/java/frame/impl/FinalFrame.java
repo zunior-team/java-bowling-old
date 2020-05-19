@@ -25,8 +25,9 @@ public class FinalFrame implements BowlingFrame {
         final TrialResultType trialResultType = TrialOrder.getTrialResultType(trialOrder, alivePins);
 
         final TrialResult trialResult = new TrialResult(trialResultType, trialOrder);
-        this.trialOrder = trialResult.nextStatusAndGet();
+        final TrialResult newTrialResult = trialResult.givenOneMoreTrialIfPossible();
+        this.trialOrder = newTrialResult.nextStatusAndGet();
 
-        return trialResult.givenOneMoreTrialIfPossible();
+        return newTrialResult;
     }
 }

@@ -9,7 +9,8 @@ public enum TrialResultType {
     GUTTER("-"),
     PROGRESS(StringUtils.EMPTY),
     BONUS(StringUtils.EMPTY),
-    MISS(StringUtils.EMPTY);
+    MISS(StringUtils.EMPTY),
+    FINISH(StringUtils.EMPTY);
 
     private String expression;
 
@@ -43,6 +44,12 @@ public enum TrialResultType {
         final TrialResultType bonus = TrialResultType.BONUS;
         bonus.expression = this.getExpression();
         return bonus;
+    }
+
+    public TrialResultType getFinishType(){
+        final TrialResultType finish = TrialResultType.FINISH;
+        finish.expression = this.getExpression();
+        return finish;
     }
 
     public String getExpression(){

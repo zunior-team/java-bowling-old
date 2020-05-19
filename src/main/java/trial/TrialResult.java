@@ -22,10 +22,14 @@ public class TrialResult {
     }
 
     public TrialResult givenOneMoreTrialIfPossible(){
-        if(trialResultType.isStrikeOrSpare()){
-            return new TrialResult(trialResultType.getBonusType(), trialOrder);
+        if(!trialResultType.isStrikeOrSpare()){
+            return this;
         }
 
-        return this;
+        if(trialOrder == TrialOrder.THIRD){
+            return new TrialResult(trialResultType.getFinishType(), TrialOrder.END);
+        }
+
+        return new TrialResult(trialResultType.getBonusType(), trialOrder);
     }
 }

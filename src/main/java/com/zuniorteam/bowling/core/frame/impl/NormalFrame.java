@@ -9,9 +9,13 @@ import com.zuniorteam.bowling.core.value.FrameNumber;
 
 public class NormalFrame extends AbstractFrame {
 
+    public static final NormalFrame FIRST_FRAME = new NormalFrame(FrameNumber.FIRST);
+
     private final FrameNumber frameNumber;
 
-    protected NormalFrame(FrameNumber frameNumber) {
+    private NormalFrame(FrameNumber frameNumber) {
+        assert frameNumber != null;
+
         this.frameNumber = frameNumber;
     }
 

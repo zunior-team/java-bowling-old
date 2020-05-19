@@ -21,6 +21,12 @@ import static org.mockito.BDDMockito.given;
 @DisplayName("일반 프레임 테스트")
 class NormalFrameTest {
 
+    @DisplayName("생성, null 주입시")
+    @Test
+    void testNewInstance(){
+        assertThrows(AssertionError.class, () -> new NormalFrame(null));
+    }
+
     @DisplayName("NEXT 프레임 생성")
     @Test
     void testCreateNext(){

@@ -29,7 +29,7 @@ public class RandomStepPlayer implements StepPlayer {
 
     private void validatePlay(StepType stepType, PinSize currentPinSize) {
         if(Objects.isNull(stepType)){
-            throw new IllegalArgumentException("스텝 type을 입력해주세요");
+            throw new IllegalArgumentException("스텝 타입을 입력해주세요");
         }
 
         if(Objects.isNull(currentPinSize)){

@@ -18,18 +18,18 @@ public class OutputConsole {
     private static final String BORDER = "|";
     private static final String NEW_LINE = "\n";
 
-    public void writeResult(User user, List<FrameResultDto> frameResultDtos) {
+    public void writeResult(User user, List<FrameResultDto> frameResults) {
         final String username = user.getUsername();
 
-        for (int index = 0; index < frameResultDtos.size(); index++) {
-            System.out.println(writeEachFrameStep(index, frameResultDtos, username));
+        for (int index = 0; index < frameResults.size(); index++) {
+            System.out.println(writeEachFrameStep(index, frameResults, username));
         }
     }
 
-    private String writeEachFrameStep(int frameIndex, List<FrameResultDto> frameResultDtos, String username) {
+    private String writeEachFrameStep(int frameIndex, List<FrameResultDto> frameResults, String username) {
         StringBuilder draw = new StringBuilder();
 
-        final FrameResultDto frameResultDto = frameResultDtos.get(frameIndex);
+        final FrameResultDto frameResultDto = frameResults.get(frameIndex);
         final List<StepResultDto> stepResultDtos = frameResultDto.getStepResults();
 
         for (int i = 0; i < stepResultDtos.size(); i++) {
@@ -37,11 +37,11 @@ public class OutputConsole {
             final StepResultDto stepResultDto = stepResultDtos.get(i);
 
             draw.append(drawStepInfo(frameIndex, stepResultDto.getFallenPinSize()));
-            draw.append(drawBaseShape(frameResultDtos.size()));
+            draw.append(drawBaseShape(frameResults.size()));
             draw.append(NEW_LINE);
 
             draw.append(drawUsername(username));
-            draw.append(drawFrameUntilIndex(frameResultDtos, frameIndex));
+            draw.append(drawFrameUntilIndex(frameResults, frameIndex));
             draw.append(fillToCentered(drawerStepsUntilIndex(stepResultDtos, i), BLANK, EACH_SPACE_LENGTH));
             draw.append(BORDER);
 

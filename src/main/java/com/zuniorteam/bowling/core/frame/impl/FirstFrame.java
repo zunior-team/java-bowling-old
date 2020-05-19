@@ -1,10 +1,10 @@
 package com.zuniorteam.bowling.core.frame.impl;
 
-import com.zuniorteam.bowling.core.frame.AbstractFrame;
+import com.zuniorteam.bowling.core.value.FrameNumber;
 
 public class FirstFrame extends NormalFrame {
 
     public FirstFrame() {
-        super(AbstractFrame.FIRST_FRAME);
+        super(FrameNumber.FIRST);
     }
 }

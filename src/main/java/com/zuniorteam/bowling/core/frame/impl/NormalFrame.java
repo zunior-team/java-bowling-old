@@ -5,29 +5,25 @@ import com.zuniorteam.bowling.core.dto.FrameResultDto;
 import com.zuniorteam.bowling.core.frame.AbstractFrame;
 import com.zuniorteam.bowling.core.frame.Frame;
 import com.zuniorteam.bowling.core.step.player.StepPlayer;
+import com.zuniorteam.bowling.core.value.FrameNumber;
 
 public class NormalFrame extends AbstractFrame {
 
-    private final int frameNumber;
+    private final FrameNumber frameNumber;
 
-    protected NormalFrame(int frameNumber) {
-        validate(frameNumber);
+    protected NormalFrame(FrameNumber frameNumber) {
         this.frameNumber = frameNumber;
-    }
-
-    private void validate(int frameNumber) {
-        if (frameNumber < FIRST_FRAME || frameNumber > LAST_FRAME) {
-            throw new IllegalArgumentException("적절하지 않은 프레임 번호 입니다 : " + frameNumber);
-        }
     }
 
     @Override
     public Frame createNext() {
-        if (this.frameNumber == LAST_FRAME - 1) {
+        final FrameNumber nextFrameNumber = frameNumber.next();
+
+        if (nextFrameNumber.equals(FrameNumber.LAST)){
             return new LastFrame();
         }
 
-        return new NormalFrame(frameNumber + 1);
+        return new NormalFrame(nextFrameNumber);
     }
 
     @Override

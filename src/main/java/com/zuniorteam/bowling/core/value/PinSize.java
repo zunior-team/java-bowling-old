@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import static com.zuniorteam.bowling.core.value.Compared.*;
 
-public class PinSize {
+public class PinSize{
 
     public static final int MIN_PIN_SIZE = Number.ZERO;
     public static final int MAX_PIN_SIZE = 10;
@@ -30,24 +30,6 @@ public class PinSize {
         return new PinSize(value);
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(value);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PinSize pinSize = (PinSize) o;
-        return value == pinSize.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
     public int value(){
         return value;
     }
@@ -66,5 +48,23 @@ public class PinSize {
         }
 
         return this.value > pinSize.value ? MORE : LESS;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PinSize pinSize = (PinSize) o;
+        return value == pinSize.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

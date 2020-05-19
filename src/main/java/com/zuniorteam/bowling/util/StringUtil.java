@@ -14,17 +14,17 @@ public final class StringUtil {
 
     public static String fillToCentered(String base, Character token, int length) {
 
-        int lengthOfFill = length - base.length();
+        final int lengthOfFill = length - base.length();
 
-        final String fill = IntStream.range(0, lengthOfFill / 2)
+        final String filled = IntStream.range(0, lengthOfFill / 2)
                 .mapToObj(i -> token.toString())
                 .collect(Collectors.joining());
 
         if(lengthOfFill % 2 == 1){
-            return fill +  base + fill  + token;
+            return filled +  base + filled  + token;
         }
 
-        return fill + base + fill;
+        return filled + base + filled;
     }
 
 }

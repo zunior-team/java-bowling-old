@@ -1,5 +1,7 @@
 package trial;
 
+import bowling.BowlingPins;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
@@ -40,5 +42,17 @@ public enum TrialOrder {
 
     public TrialOrder next() {
         return nextTrial.get(this);
+    }
+
+    public BowlingPins getBonusBowlingPinsIfPossible(final BowlingPins bowlingPins){
+        if(this == THIRD){
+            return new BowlingPins();
+        }
+
+        if(this == SECOND && bowlingPins.isAllDeadPins()){
+            return new BowlingPins();
+        }
+
+        return bowlingPins;
     }
 }

@@ -43,7 +43,7 @@ final class ScoreSnapshot {
     }
 
     ScoreSnapshot addNextBarIfPossible(final TrialResultType resultType){
-        if(resultType.isProgress()){
+        if(resultType.isProgress() || resultType.isBonus()){
             snapshot.add(NEXT);
             snapshot.add(String.format(SPACE_EMPTY_FORMAT, StringUtils.EMPTY));
         }

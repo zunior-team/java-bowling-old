@@ -10,10 +10,22 @@ public class TrialResult {
     }
 
     public TrialOrder nextStatusAndGet(){
+        if(trialResultType.isBonus() && trialOrder == TrialOrder.FIRST){
+            return TrialOrder.THIRD;
+        }
+
         return trialOrder.next();
     }
 
     public TrialResultType getTrialResultType(){
         return trialResultType;
+    }
+
+    public TrialResult givenOneMoreTrialIfPossible(){
+        if(trialResultType.isStrikeOrSpare()){
+            return new TrialResult(trialResultType.getBonusType(), trialOrder);
+        }
+
+        return this;
     }
 }

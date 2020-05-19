@@ -8,6 +8,7 @@ public enum TrialResultType {
     SPARE("/"),
     GUTTER("-"),
     PROGRESS(StringUtils.EMPTY),
+    BONUS(StringUtils.EMPTY),
     MISS(StringUtils.EMPTY);
 
     private String expression;
@@ -32,6 +33,16 @@ public enum TrialResultType {
 
     public boolean isStrikeOrSpare(){
         return STRIKE == this || SPARE == this;
+    }
+
+    public boolean isBonus(){
+        return BONUS == this;
+    }
+
+    public TrialResultType getBonusType(){
+        final TrialResultType bonus = TrialResultType.BONUS;
+        bonus.expression = this.getExpression();
+        return bonus;
     }
 
     public String getExpression(){

@@ -19,12 +19,12 @@ public class InputView {
     }
 
     public static int askSecondPinsCountForRound(final int round){
-        System.out.print(round + " 프레임 투구 : -> :");
+        System.out.print(round + " 프레임 투구 : -> : ");
         return SCANNER.nextInt();
     }
 
     public static int askThirdPinsCountForRound(final int round) {
-        System.out.print(round + " 프레임 투구 : -> : -> :");
+        System.out.print(round + " 프레임 투구 : -> : -> : ");
         return SCANNER.nextInt();
     }
 }

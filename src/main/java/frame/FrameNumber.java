@@ -14,7 +14,7 @@ public final class FrameNumber {
     }
 
     void increaseByTrialType(final TrialResultType currentResultType){
-        frameIndex = (currentResultType.isProgress())
+        frameIndex = (currentResultType.isProgress() || currentResultType.isBonus())
                 ? frameIndex
                 : frameIndex + 1;
     }

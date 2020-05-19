@@ -12,6 +12,7 @@ import java.util.List;
 
 public abstract class AbstractFrame implements Frame{
 
+    public static final Frame END = null;
     public static final int FIRST_FRAME = 1;
     public static final int LAST_FRAME = 10;
 

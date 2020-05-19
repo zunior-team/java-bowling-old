@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.zuniorteam.bowling.core.frame.AbstractFrame.END;
+
 public class BowlingGame {
 
     private final StepPlayer stepPlayer;
@@ -26,7 +28,7 @@ public class BowlingGame {
         frameResults.add(firstFrame.play(stepPlayer));
 
         Frame nextFrame = firstFrame;
-        while (Objects.nonNull(nextFrame = nextFrame.createNext())) {
+        while ((nextFrame = nextFrame.createNext()) != END) {
             frameResults.add(nextFrame.play(stepPlayer));
         }
 

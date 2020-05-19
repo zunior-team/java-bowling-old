@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Frames {
     public static final int MAX_FRAME_COUNT = 10;
@@ -13,8 +14,8 @@ public class Frames {
 
 
     private Frames() {
-        final List<Frame> frames = IntStream.range(0, MAX_FRAME_COUNT - 1)
-                .mapToObj(num -> NormalFrame.newInstance())
+        final List<Frame> frames = Stream.generate(NormalFrame::newInstance)
+                .limit(MAX_FRAME_COUNT-1)
                 .collect(Collectors.toList());
         frames.add(FinalFrame.newInstance());
         this.frames = Collections.unmodifiableList(frames);

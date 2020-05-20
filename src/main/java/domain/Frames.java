@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class Frames {
     public static final int MAX_FRAME_COUNT = 10;
-    private List<Frame> frames;
+    private final List<Frame> frames;
 
     private Frames() {
         final List<Frame> frames = Stream.generate(NormalFrame::newInstance)

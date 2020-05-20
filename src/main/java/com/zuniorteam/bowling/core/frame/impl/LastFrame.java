@@ -20,7 +20,7 @@ public class LastFrame extends AbstractFrame {
 
     @Override
     public Frame createNext() {
-        return AbstractFrame.END;
+        return END;
     }
 
     @Override

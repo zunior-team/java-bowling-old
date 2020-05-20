@@ -1,7 +1,5 @@
 package com.zuniorteam.bowling.core.value;
 
-import com.zuniorteam.bowling.core.frame.Frame;
-
 import java.util.Objects;
 
 public class FrameNumber {
@@ -16,6 +14,7 @@ public class FrameNumber {
 
     private FrameNumber(int value) {
         validate(value);
+
         this.value = value;
     }
 

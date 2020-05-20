@@ -1,7 +1,9 @@
 package com.zuniorteam.bowling.core.value;
 
-public interface Number {
+public final class Number {
 
-    int ZERO = 0;
+    private Number(){}
+
+    public static final int ZERO = 0;
 
 }

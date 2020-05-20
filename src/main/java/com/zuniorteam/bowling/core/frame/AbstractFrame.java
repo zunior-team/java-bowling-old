@@ -1,5 +1,6 @@
 package com.zuniorteam.bowling.core.frame;
 
+import com.zuniorteam.bowling.core.dto.FrameResultDto;
 import com.zuniorteam.bowling.core.dto.StepResultDto;
 import com.zuniorteam.bowling.core.step.player.StepPlayer;
 import com.zuniorteam.bowling.core.value.Compared;
@@ -11,8 +12,6 @@ import java.util.List;
 
 
 public abstract class AbstractFrame implements Frame{
-
-    public static final Frame END = null;
 
     protected List<StepResultDto> playBase(StepPlayer stepPlayer){
         final List<StepResultDto> stepResults = new ArrayList<>();

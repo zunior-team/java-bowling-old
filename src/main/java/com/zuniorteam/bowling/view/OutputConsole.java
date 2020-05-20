@@ -27,29 +27,29 @@ public class OutputConsole {
     }
 
     private String writeEachFrameStep(int frameIndex, List<FrameResultDto> frameResults, String username) {
-        StringBuilder draw = new StringBuilder();
+        final StringBuilder drawer = new StringBuilder();
 
-        final FrameResultDto frameResultDto = frameResults.get(frameIndex);
-        final List<StepResultDto> stepResultDtos = frameResultDto.getStepResults();
+        final FrameResultDto frameResult = frameResults.get(frameIndex);
+        final List<StepResultDto> stepResults = frameResult.getStepResults();
 
-        for (int i = 0; i < stepResultDtos.size(); i++) {
+        for (int stepIndex = 0; stepIndex < stepResults.size(); stepIndex++) {
 
-            final StepResultDto stepResultDto = stepResultDtos.get(i);
+            final StepResultDto stepResultDto = stepResults.get(stepIndex);
 
-            draw.append(drawStepInfo(frameIndex, stepResultDto.getFallenPinSize()));
-            draw.append(drawBaseShape(frameResults.size()));
-            draw.append(NEW_LINE);
+            drawer.append(drawStepInfo(frameIndex, stepResultDto.getFallenPinSize()));
+            drawer.append(drawBaseShape(frameResults.size()));
+            drawer.append(NEW_LINE);
 
-            draw.append(drawUsername(username));
-            draw.append(drawFrameUntilIndex(frameResults, frameIndex));
-            draw.append(fillToCentered(drawerStepsUntilIndex(stepResultDtos, i), BLANK, EACH_SPACE_LENGTH));
-            draw.append(BORDER);
+            drawer.append(drawUsername(username));
+            drawer.append(drawFrameUntilIndex(frameResults, frameIndex));
+            drawer.append(fillToCentered(drawerStepsUntilIndex(stepResults, stepIndex), BLANK, EACH_SPACE_LENGTH));
+            drawer.append(BORDER);
 
-            draw.append(NEW_LINE);
-            draw.append(NEW_LINE);
+            drawer.append(NEW_LINE);
+            drawer.append(NEW_LINE);
         }
 
-        return draw.toString();
+        return drawer.toString();
     }
 
 
@@ -84,11 +84,11 @@ public class OutputConsole {
                 .toString();
     }
 
-    private String drawFrameUntilIndex(List<FrameResultDto> frameResultDtos, int frameIndex) {
+    private String drawFrameUntilIndex(List<FrameResultDto> frameResults, int frameIndex) {
         final StringBuilder drawer = new StringBuilder();
 
         for (int i = 0; i < frameIndex; i++) {
-            final FrameResultDto frameResultDto = frameResultDtos.get(i);
+            final FrameResultDto frameResultDto = frameResults.get(i);
 
             final String drawSteps = frameResultDto.getStepResults().stream()
                     .map(StepResultRender::rend)

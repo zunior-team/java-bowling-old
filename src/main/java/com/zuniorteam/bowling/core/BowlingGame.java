@@ -4,6 +4,7 @@ import com.zuniorteam.bowling.core.dto.FrameResultDto;
 import com.zuniorteam.bowling.core.frame.Frame;
 import com.zuniorteam.bowling.core.frame.impl.NormalFrame;
 import com.zuniorteam.bowling.core.step.player.StepPlayer;
+import com.zuniorteam.bowling.core.value.FrameNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class BowlingGame {
     public List<FrameResultDto> play() {
         final List<FrameResultDto> frameResults = new ArrayList<>();
 
-        final Frame firstFrame = NormalFrame.FIRST_FRAME;
+        final Frame firstFrame = new NormalFrame(FrameNumber.FIRST);
         frameResults.add(firstFrame.play(stepPlayer));
 
         Frame nextFrame = firstFrame;

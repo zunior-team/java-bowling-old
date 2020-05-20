@@ -7,16 +7,11 @@ import com.zuniorteam.bowling.core.frame.Frame;
 import com.zuniorteam.bowling.core.step.player.StepPlayer;
 import com.zuniorteam.bowling.core.value.FrameNumber;
 
-import static com.zuniorteam.bowling.core.value.FrameNumber.FIRST;
-import static com.zuniorteam.bowling.core.value.FrameNumber.LAST;
-
 public class NormalFrame extends AbstractFrame {
-
-    public static final NormalFrame FIRST_FRAME = new NormalFrame(FIRST);
 
     private final FrameNumber frameNumber;
 
-    private NormalFrame(FrameNumber frameNumber) {
+    public NormalFrame(FrameNumber frameNumber) {
         assert frameNumber != null;
 
         this.frameNumber = frameNumber;
@@ -26,7 +21,7 @@ public class NormalFrame extends AbstractFrame {
     public Frame createNext() {
         final FrameNumber nextFrameNumber = frameNumber.next();
 
-        if (nextFrameNumber.equals(LAST)){
+        if (nextFrameNumber.equals(FrameNumber.LAST)){
             return new LastFrame();
         }
 

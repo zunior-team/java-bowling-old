@@ -1,6 +1,5 @@
 package com.zuniorteam.bowling.core.frame;
 
-import com.zuniorteam.bowling.core.dto.FrameResultDto;
 import com.zuniorteam.bowling.core.dto.StepResultDto;
 import com.zuniorteam.bowling.core.step.player.StepPlayer;
 import com.zuniorteam.bowling.core.value.Compared;

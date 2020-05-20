@@ -22,6 +22,14 @@ public class FinalFrame extends Frame {
             return true;
         }
 
+        final int sumOfFallenPins = this.frameHistories.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+
+        if (sumOfFallenPins == Pins.NUMBER_OF_PINS * 2) {
+            return true;
+        }
+
         return !this.pins.isAllDown();
     }
 

@@ -18,6 +18,17 @@ class FinalFrameTest {
     }
 
     @Test
+    @DisplayName("스트라이크를 연속 두번 던지면 더이상 던질 수 없다.")
+    void testOnlyTwoStrikeAvailable() {
+        final FinalFrame finalFrame = FinalFrame.newInstance();
+
+        finalFrame.throwBowlingBall(10);
+        finalFrame.throwBowlingBall(10);
+
+        assertThat(finalFrame.isDone()).isTrue();
+    }
+
+    @Test
     @DisplayName("스페어면 한번 더 던질 수 있다")
     void testSpareOneMoreChance() {
         final FinalFrame finalFrame = FinalFrame.newInstance();

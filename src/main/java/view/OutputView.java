@@ -13,7 +13,6 @@ public class OutputView {
     public static final String THREE_SPACE = "   ";
     public static final String NAME = "NAME";
     private static final String FORMAT = "|  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |";
-    public static final String LINE_BREAK = "\n";
 
     public void printInputPlayerNameMessage() {
         System.out.println("플레이어 이름은(" + NAME_LENGTH + " english letters)?: ");

@@ -17,7 +17,7 @@ public abstract class Frame {
     protected Frame(final int frameNo) {
         this.frameNo = frameNo;
         this.pins = Pins.init();
-        this.state = new Ready();
+        this.state = Ready.getInstance();
     }
 
     void roll(final int countOfFallenPins) {

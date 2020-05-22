@@ -5,6 +5,8 @@ import bowling.state.Strike;
 import java.util.List;
 
 public class LastFrame extends Frame {
+    private ExtraFrame extraFrame;
+
     protected LastFrame(int frameNo) {
         super(frameNo);
     }

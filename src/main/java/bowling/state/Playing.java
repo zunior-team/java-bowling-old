@@ -2,7 +2,15 @@ package bowling.state;
 
 import bowling.pin.Pins;
 
-public class SecondTrial implements State {
+public class Playing implements State {
+    private static final Playing PLAYING = new Playing();
+
+    private Playing() {}
+
+    public static Playing getInstance() {
+        return PLAYING;
+    }
+
     @Override
     public Pins ball(Pins pins, int countOfFallenPins) {
         return pins.secondRoll(countOfFallenPins);
@@ -11,9 +19,9 @@ public class SecondTrial implements State {
     @Override
     public State updateState(Pins pins) {
         if(pins.isAllFallen()) {
-            return new Spare();
+            return Spare.getInstance();
         }
 
-        return new End();
+        return End.getInstance();
     }
 }

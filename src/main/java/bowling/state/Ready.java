@@ -3,6 +3,13 @@ package bowling.state;
 import bowling.pin.Pins;
 
 public class Ready implements State {
+    private static final Ready READY = new Ready();
+
+    private Ready() {}
+
+    public static Ready getInstance() {
+        return READY;
+    }
 
     @Override
     public Pins ball(final Pins pins, final int countOfFallenPins) {
@@ -12,9 +19,9 @@ public class Ready implements State {
     @Override
     public State updateState(final Pins pins) {
         if(pins.isAllFallen()) {
-            return new Strike();
+            return Strike.getInstance();
         }
 
-        return new SecondTrial();
+        return Playing.getInstance();
     }
 }

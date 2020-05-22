@@ -4,10 +4,8 @@ public enum StateEnum {
     READY,
     SECOND_TRY,
     MISS,
-    GUTTER,
-    SPAIR,
+    SPARE,
     STRIKE;
-
 
     public StateEnum updateState() {
         return READY;

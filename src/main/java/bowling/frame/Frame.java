@@ -5,6 +5,8 @@ import bowling.state.EndState;
 import bowling.state.Ready;
 import bowling.state.State;
 
+import java.util.List;
+
 public abstract class Frame {
     protected static final int BASE_FRAME_NO = 1;
 
@@ -30,4 +32,7 @@ public abstract class Frame {
     boolean isLastFrame() {
         return false;
     }
+
+    abstract void appendNextFrame(final List<Frame> frames);
+    abstract Frame nextFrame();
 }

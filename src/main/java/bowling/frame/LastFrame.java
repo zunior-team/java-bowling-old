@@ -2,6 +2,8 @@ package bowling.frame;
 
 import bowling.state.Strike;
 
+import java.util.List;
+
 public class LastFrame extends Frame {
     protected LastFrame(int frameNo) {
         super(frameNo);
@@ -10,5 +12,15 @@ public class LastFrame extends Frame {
     @Override
     boolean isLastFrame() {
         return !(state instanceof Strike);
+    }
+
+    @Override
+    void appendNextFrame(List<Frame> frames) {
+        frames.add(nextFrame());
+    }
+
+    @Override
+    Frame nextFrame() {
+        return new ExtraFrame();
     }
 }

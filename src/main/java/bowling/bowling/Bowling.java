@@ -1,5 +1,8 @@
 package bowling.bowling;
 
-public class Bowling {
+import bowling.frame.Frames;
 
+public class Bowling {
+    private int currentRound;
+    private Frames frames;
 }

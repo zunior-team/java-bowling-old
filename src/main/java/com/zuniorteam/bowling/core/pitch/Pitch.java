@@ -8,6 +8,9 @@ import com.zuniorteam.bowling.core.value.PitchType;
 
 public class Pitch {
 
+    // 좋은 방법일까요..?
+    // 멤버변수 final 의 강제성을 분실했습니다..
+    // 의견부탁드립니다..!
     public static final Pitch END = new Pitch();
 
     private Frame frame;

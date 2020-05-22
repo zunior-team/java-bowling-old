@@ -8,7 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.zuniorteam.bowling.core.value.FrameNumber.FIRST_FRAME_NUMBER_VALUE;
+import static com.zuniorteam.bowling.core.value.FrameNumber.LAST_FRAME_NUMBER_VALUE;
 import static com.zuniorteam.bowling.util.StringUtil.fillToCentered;
+import static java.lang.String.join;
 
 public class ScoreRender {
 
@@ -25,7 +28,7 @@ public class ScoreRender {
 
         drawer.append(NEW_LINE);
         drawer.append(drawUsername(username));
-        drawer.append(drawScoreTableData(pitchResults));
+        drawer.append(drawScores(pitchResults));
         drawer.append(NEW_LINE);
         drawer.append(NEW_LINE);
 
@@ -39,7 +42,7 @@ public class ScoreRender {
                 .append(fillToCentered("NAME", BLANK, EACH_SPACE_LENGTH))
                 .append(BORDER);
 
-        for (int i = FrameNumber.FIRST_FRAME_NUMBER_VALUE; i <= FrameNumber.LAST_FRAME_NUMBER_VALUE; i++) {
+        for (int i = FIRST_FRAME_NUMBER_VALUE; i <= LAST_FRAME_NUMBER_VALUE; i++) {
             drawer.append(fillToCentered(String.format("%02d", i), BLANK, EACH_SPACE_LENGTH)).append(BORDER);
         }
 
@@ -54,13 +57,13 @@ public class ScoreRender {
                 .toString();
     }
 
-    private static String drawScoreTableData(List<PitchResult> pitchResults) {
+    private static String drawScores(List<PitchResult> pitchResults) {
 
         final StringBuilder drawer = new StringBuilder();
 
-        Map<FrameNumber, List<String>> scores = new HashMap<>();
+        final Map<FrameNumber, List<String>> scores = new HashMap<>();
 
-        for (int i = FrameNumber.FIRST_FRAME_NUMBER_VALUE; i <= FrameNumber.LAST_FRAME_NUMBER_VALUE; i++) {
+        for (int i = FIRST_FRAME_NUMBER_VALUE; i <= LAST_FRAME_NUMBER_VALUE; i++) {
             scores.put(FrameNumber.of(i), new ArrayList<>());
         }
 
@@ -69,9 +72,8 @@ public class ScoreRender {
             scores.get(frameNumber).add(PitchResultRender.rend(pitchResult.getPitchResultType(), pitchResult.getFallenPinSize()));
         }
 
-
         for (FrameNumber frameNumber : scores.keySet()) {
-            final String score = String.join(BORDER, scores.get(frameNumber));
+            final String score = join(BORDER, scores.get(frameNumber));
 
             drawer.append(fillToCentered(score, BLANK, EACH_SPACE_LENGTH))
                     .append(BORDER);

@@ -25,12 +25,10 @@ public class GameBoard {
         final User user = InputRender.getUser(inputConsole.readUsername());
         final String username = user.getUsername();
 
-        final List<PitchResult> pitchResults = new ArrayList<>();
-
         final Frame firstFrame = new NormalFrame(FrameNumber.FIRST);
-        Pitch firstPitch = new Pitch(firstFrame, PitchType.FIRST);
+        final Pitch firstPitch = new Pitch(firstFrame, PitchType.FIRST);
 
-        playPitch(firstPitch, username, pitchResults);
+        playPitch(firstPitch, username, new ArrayList<>());
     }
 
     private void playPitch(Pitch pitch, String username, List<PitchResult> pitchResults) {
@@ -39,11 +37,12 @@ public class GameBoard {
         }
 
         final PinSize fallenPinSize = getFallenPin(inputConsole.readFallenPin(pitch.getFrameNumber()));
-        pitchResults.add(pitch.play(fallenPinSize));
+        final PitchResult playResult = pitch.play(fallenPinSize);
+        pitchResults.add(playResult);
 
         outputConsole.writeScore(username, pitchResults);
 
-        this.playPitch(pitch.next(), username, pitchResults);
+        playPitch(pitch.next(), username, pitchResults);
     }
 
 }

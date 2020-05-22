@@ -21,9 +21,9 @@ public class FrameNumber {
         return new FrameNumber(value);
     }
 
-    private void validate(int frameNumber) {
-        if (frameNumber < FIRST_FRAME_NUMBER_VALUE || frameNumber > LAST_FRAME_NUMBER_VALUE) {
-            throw new IllegalArgumentException("적절하지 않은 프레임 번호 입니다 : " + frameNumber);
+    private void validate(int value) {
+        if (value < FIRST_FRAME_NUMBER_VALUE || value > LAST_FRAME_NUMBER_VALUE) {
+            throw new IllegalArgumentException("적절하지 않은 프레임 번호 입니다 : " + value);
         }
     }
 

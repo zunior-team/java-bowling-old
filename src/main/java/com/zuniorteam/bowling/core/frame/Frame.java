@@ -4,8 +4,6 @@ import com.zuniorteam.bowling.core.dto.PitchResult;
 import com.zuniorteam.bowling.core.pitch.Pitch;
 import com.zuniorteam.bowling.core.value.*;
 
-import static com.zuniorteam.bowling.core.value.Compared.MORE;
-
 
 public abstract class Frame{
 
@@ -27,7 +25,7 @@ public abstract class Frame{
     }
 
     public PitchResult fallPin(PitchType pitchType, PinSize fallenPinSize) {
-        if (fallenPinSize.compareTo(remainPinSize) == MORE) {
+        if (fallenPinSize.compareTo(remainPinSize) > 0) {
             throw new IllegalArgumentException( "쓰리진 핀의 갯수가 남아있는 핀의 개수보다 많습니다 쓰러진 : " + fallenPinSize + " 남아있는 : " + remainPinSize);
         }
 

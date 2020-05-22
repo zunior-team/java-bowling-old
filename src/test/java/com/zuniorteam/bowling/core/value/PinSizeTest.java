@@ -36,8 +36,8 @@ class PinSizeTest {
 
     @DisplayName("비교")
     @ParameterizedTest
-    @CsvSource({"3,2,MORE", "4,3,MORE", "5,5,SAME", "1,2,LESS"})
-    void testCompareTo(int x, int y, Compared expected) {
+    @CsvSource({"3,2,1", "4,3,1", "5,5,0", "1,2,-1"})
+    void testCompareTo(int x, int y, int expected) {
         assertThat(of(x).compareTo(of(y))).isEqualTo(expected);
     }
 }

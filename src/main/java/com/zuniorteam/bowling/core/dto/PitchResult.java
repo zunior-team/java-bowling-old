@@ -11,6 +11,10 @@ public class PitchResult {
     private PinSize fallenPinSize;
 
     public PitchResult(FrameNumber frameNumber, PitchResultType pitchResultType, PinSize fallenPinSize) {
+        assert frameNumber != null;
+        assert pitchResultType != null;
+        assert fallenPinSize != null;
+
         this.frameNumber = frameNumber;
         this.pitchResultType = pitchResultType;
         this.fallenPinSize = fallenPinSize;

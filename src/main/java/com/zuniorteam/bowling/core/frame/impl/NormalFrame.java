@@ -1,36 +1,47 @@
 package com.zuniorteam.bowling.core.frame.impl;
 
 
-import com.zuniorteam.bowling.core.dto.FrameResultDto;
-import com.zuniorteam.bowling.core.frame.AbstractFrame;
 import com.zuniorteam.bowling.core.frame.Frame;
-import com.zuniorteam.bowling.core.step.player.StepPlayer;
+import com.zuniorteam.bowling.core.pitch.Pitch;
 import com.zuniorteam.bowling.core.value.FrameNumber;
+import com.zuniorteam.bowling.core.value.PinSize;
+import com.zuniorteam.bowling.core.value.PitchType;
 
-public class NormalFrame extends AbstractFrame {
+import static com.zuniorteam.bowling.core.value.PitchType.FIRST;
+import static com.zuniorteam.bowling.core.value.PitchType.SECOND;
 
-    private final FrameNumber frameNumber;
+public class NormalFrame extends Frame {
 
     public NormalFrame(FrameNumber frameNumber) {
-        assert frameNumber != null;
+        this(frameNumber, PinSize.MAX);
+    }
 
-        this.frameNumber = frameNumber;
+    public NormalFrame(FrameNumber frameNumber, PinSize pinSize) {
+        super(frameNumber, pinSize);
     }
 
     @Override
-    public Frame createNext() {
-        final FrameNumber nextFrameNumber = frameNumber.next();
+    public Pitch createNextPitch(PitchType pitchType) {
+
+        if (pitchType.equals(FIRST) && isAllFallen()) {
+            return new Pitch(nextFrame(), FIRST);
+        }
+
+        if (pitchType.equals(FIRST) && !isAllFallen()) {
+            return new Pitch( this, SECOND);
+        }
+
+        return new Pitch(nextFrame(), FIRST);
+    }
+
+    private Frame nextFrame() {
+        final FrameNumber nextFrameNumber = getFrameNumber().next();
 
         if (nextFrameNumber.equals(FrameNumber.LAST)){
             return new LastFrame();
         }
 
         return new NormalFrame(nextFrameNumber);
-    }
-
-    @Override
-    public FrameResultDto play(StepPlayer stepPlayer) {
-        return new FrameResultDto(this.playBase(stepPlayer));
     }
 
 }

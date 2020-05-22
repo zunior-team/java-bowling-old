@@ -1,6 +1,6 @@
 package com.zuniorteam.bowling.core.value;
 
-public enum StepType {
+public enum PitchType {
     FIRST,
     SECOND,
     BONUS

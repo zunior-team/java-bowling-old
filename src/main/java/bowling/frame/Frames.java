@@ -12,7 +12,7 @@ public class Frames {
     }
 
     public static Frames init() {
-        return null;
+        return new Frames();
     }
 
     public void rollTheBall(final int countOfFallenPins) {

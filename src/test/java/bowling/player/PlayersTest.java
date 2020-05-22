@@ -13,14 +13,14 @@ class PlayersTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"player1", "player1,player2", "player1,player2,player3"})
-    @DisplayName("초기화 테스트 : 사람 이름을 받아서 볼링 객체 초기화")
+    @DisplayName("초기화 테스트 : 플레이어 이름을 받아서 플레이어 일급 컬렉션 객체 초기화")
     void init(final String names) {
         assertThatCode(() -> Players.init(names)).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("초기화 실패 : 사람이름이 없거나 빈값일때")
+    @DisplayName("초기화 실패 : 플레이어 이름이 없거나 빈값일때")
     void initFail(final String names) {
         assertThatIllegalArgumentException().isThrownBy(() -> Players.init(names));
     }

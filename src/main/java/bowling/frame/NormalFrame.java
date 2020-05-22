@@ -1,9 +1,21 @@
 package bowling.frame;
 
+import java.util.List;
+
 public class NormalFrame extends Frame {
 
     private NormalFrame(final int frameNo) {
         super(frameNo);
+    }
+
+    @Override
+    void appendNextFrame(List<Frame> frames) {
+
+    }
+
+    @Override
+    Frame nextFrame() {
+        return null;
     }
 
     public static Frame init() {

@@ -17,6 +17,10 @@ public class Frames {
 
     public void rollTheBall(final int countOfFallenPins) {
         curFrame().roll(countOfFallenPins);
+
+        if(curFrame().isFrameEnd()) {
+            curFrame().appendNextFrame(frames);
+        }
     }
 
     private Frame curFrame() {

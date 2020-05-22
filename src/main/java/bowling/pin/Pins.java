@@ -5,7 +5,7 @@ public class Pins {
     private int firstFallPins;
     private int secondFallPins;
 
-    private Pins() {}
+    protected Pins() {}
 
     private Pins(final int firstFallPins, final int secondFallPins) {
         this.firstFallPins = firstFallPins;
@@ -30,5 +30,9 @@ public class Pins {
 
     public boolean isAllFallen() {
         return firstFallPins + secondFallPins == MAX_COUNT_OF_PINS;
+    }
+
+    public boolean isPinLeft() {
+        return firstFallPins + secondFallPins < MAX_COUNT_OF_PINS;
     }
 }

@@ -20,19 +20,41 @@ public abstract class Frame {
         this.state = Ready.getInstance();
     }
 
-    void roll(final int countOfFallenPins) {
-        pins = state.ball(pins, countOfFallenPins);
-        state = state.updateState(pins);
+    public void roll(final int countOfFallenPins) {
+        state.ball(this, countOfFallenPins);
     }
 
-    boolean isEnd() {
+    public boolean isPinLeft() {
+        return pins.isPinLeft();
+    }
+
+    public void updateState(final State state) {
+        validate(state);
+
+        this.state = state;
+    }
+
+    private void validate(State state) {
+        if (state == null) {
+            throw new IllegalArgumentException("State can't be a null");
+        }
+    }
+
+    public boolean isFrameEnd() {
         return state instanceof EndState;
     }
 
-    boolean isLastFrame() {
+    public boolean isGameEnd() {
         return false;
     }
 
-    abstract void appendNextFrame(final List<Frame> frames);
+    public boolean isLastFrame() {
+        return false;
+    }
+
+    public void appendNextFrame(final List<Frame> frames) {
+        frames.add(nextFrame());
+    }
+
     abstract Frame nextFrame();
 }

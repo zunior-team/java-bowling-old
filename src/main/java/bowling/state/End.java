@@ -1,8 +1,9 @@
 package bowling.state;
 
-import bowling.pin.Pins;
+import bowling.exception.IllegalTryException;
+import bowling.frame.Frame;
 
-public class End implements EndState {
+public class End extends State implements EndState {
     private static final End END = new End();
 
     private End() {}
@@ -12,12 +13,10 @@ public class End implements EndState {
     }
 
     @Override
-    public Pins ball(Pins pins, int countOfFallenPins) {
-        return null;
+    void internalProcess(Frame frame, int countOfFallenPins) {
+        throw new IllegalTryException();
     }
 
     @Override
-    public State updateState(Pins pins) {
-        return null;
-    }
+    void updateState(Frame frame) {}
 }

@@ -1,6 +1,6 @@
 package bowling.state;
 
-import bowling.pin.Pins;
+import bowling.frame.Frame;
 
 public class Spare implements EndState {
     private static final Spare SPARE = new Spare();
@@ -12,12 +12,8 @@ public class Spare implements EndState {
     }
 
     @Override
-    public Pins ball(Pins pins, int countOfFallenPins) {
-        return null;
-    }
+    public void ball(Frame frame, int countOfFallenPins) {
 
-    @Override
-    public State updateState(Pins pins) {
-        return null;
+
     }
 }

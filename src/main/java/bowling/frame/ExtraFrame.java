@@ -1,5 +1,7 @@
 package bowling.frame;
 
+import bowling.exception.IllegalTryException;
+
 import java.util.List;
 
 public class ExtraFrame extends Frame {
@@ -7,13 +9,17 @@ public class ExtraFrame extends Frame {
         super(11);
     }
 
-    @Override
-    void appendNextFrame(List<Frame> frames) {
+    public static ExtraFrame init() {
+        return new ExtraFrame();
+    }
 
+    @Override
+    public void appendNextFrame(List<Frame> frames) {
+        throw new IllegalTryException();
     }
 
     @Override
     Frame nextFrame() {
-        return null;
+        throw new IllegalTryException();
     }
 }

@@ -1,8 +1,8 @@
 package bowling.state;
 
-import bowling.pin.Pins;
+import bowling.frame.Frame;
 
-public class Ready implements State {
+public class Ready extends State {
     private static final Ready READY = new Ready();
 
     private Ready() {}
@@ -12,16 +12,17 @@ public class Ready implements State {
     }
 
     @Override
-    public Pins ball(final Pins pins, final int countOfFallenPins) {
-        return pins.firstRoll(countOfFallenPins);
+    void internalProcess(Frame frame, int countOfFallenPins) {
+
     }
 
     @Override
-    public State updateState(final Pins pins) {
-        if(pins.isAllFallen()) {
-            return Strike.getInstance();
+    public void updateState(Frame frame) {
+        if (frame.isPinLeft()) {
+            frame.updateState(Playing.getInstance());
+            return;
         }
 
-        return Playing.getInstance();
+        frame.updateState(Strike.getInstance());
     }
 }

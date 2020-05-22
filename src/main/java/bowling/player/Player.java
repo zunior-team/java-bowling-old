@@ -23,4 +23,8 @@ public class Player {
     public static Player init(final String name) {
         return new Player(name);
     }
+
+    public void bowl(final int count) {
+        frames.rollTheBall(count);
+    }
 }

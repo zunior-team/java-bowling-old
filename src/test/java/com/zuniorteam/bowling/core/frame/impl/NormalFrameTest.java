@@ -1,22 +1,15 @@
 package com.zuniorteam.bowling.core.frame.impl;
 
-import com.zuniorteam.bowling.core.dto.FrameResultDto;
-import com.zuniorteam.bowling.core.dto.StepResultDto;
 import com.zuniorteam.bowling.core.frame.Frame;
-import com.zuniorteam.bowling.core.step.player.impl.RandomStepPlayer;
+import com.zuniorteam.bowling.core.pitch.Pitch;
 import com.zuniorteam.bowling.core.value.FrameNumber;
 import com.zuniorteam.bowling.core.value.PinSize;
+import com.zuniorteam.bowling.core.value.PitchType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.Mockito;
 
-import static com.zuniorteam.bowling.core.value.FrameNumber.LAST_FRAME_NUMBER_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 
 @DisplayName("일반 프레임 테스트")
 class NormalFrameTest {
@@ -27,48 +20,56 @@ class NormalFrameTest {
         assertThrows(AssertionError.class, () -> new NormalFrame(null));
     }
 
-    @DisplayName("NEXT 프레임 생성")
+    @DisplayName("다음 pitch 생성, 첫번째 투구, 핀이 남았을때")
     @Test
-    void testCreateNext(){
+    void testCreateNextPitch01(){
         //given
-        final NormalFrame normalFrame = new NormalFrame(FrameNumber.FIRST);
+        final FrameNumber frameNumber = FrameNumber.FIRST;
+        final Frame normalFrame = new NormalFrame(frameNumber);
 
-        //then
-        final Frame nextFrame = normalFrame.createNext();
+        final Pitch nextPitch = normalFrame.createNextPitch(PitchType.FIRST);
 
-        //then
-        assertThat(nextFrame).extracting("frameNumber").isEqualTo(FrameNumber.FIRST.next());
+        assertThat(nextPitch.getFrameNumber()).isEqualTo(frameNumber);
+        assertThat(nextPitch.getPitchType()).isEqualTo(PitchType.SECOND);
     }
 
-    @DisplayName("NEXT 프레임 생성, 마지막 프레임 이전")
+    @DisplayName("다음 pitch 생성, 첫번째 투구, 모든 핀이 쓰러졌을때")
     @Test
-    void testCreateNextIfBeforeLastFrame(){
+    void testCreateNextPitch02(){
         //given
-        final NormalFrame normalFrame = new NormalFrame(FrameNumber.of(LAST_FRAME_NUMBER_VALUE - 1));
+        final FrameNumber frameNumber = FrameNumber.FIRST;
+        final Frame normalFrame = new NormalFrame(frameNumber, PinSize.ZERO);
 
-        //then
-        final Frame nextFrame = normalFrame.createNext();
+        final Pitch nextPitch = normalFrame.createNextPitch(PitchType.FIRST);
 
-        //then
-        assertThat(nextFrame.getClass()).isEqualTo(LastFrame.class);
+        assertThat(nextPitch.getFrameNumber()).isEqualTo(frameNumber.next());
+        assertThat(nextPitch.getPitchType()).isEqualTo(PitchType.FIRST);
     }
 
-    @DisplayName("play 테스트")
+    @DisplayName("다음 pitch 생성, 두번째 투구, 핀이 남았을때")
     @Test
-    void testPlay(){
+    void testCreateNextPitch03(){
         //given
-        final RandomStepPlayer stepPlayer = Mockito.mock(RandomStepPlayer.class);
-        final StepResultDto stepResultDto = Mockito.mock(StepResultDto.class);
+        final FrameNumber frameNumber = FrameNumber.FIRST;
+        final Frame normalFrame = new NormalFrame(frameNumber);
 
-        given(stepPlayer.play(any(), any())).willReturn(stepResultDto);
-        given(stepResultDto.getFallenPinSize()).willReturn(PinSize.ZERO);
+        final Pitch nextPitch = normalFrame.createNextPitch(PitchType.SECOND);
 
-        //when
-        final FrameResultDto frameResultDto = new NormalFrame(FrameNumber.of(2)).play(stepPlayer);
-
-        //then
-        assertThat(frameResultDto.getStepResults()).containsExactly(stepResultDto, stepResultDto);
+        assertThat(nextPitch.getFrameNumber()).isEqualTo(frameNumber.next());
+        assertThat(nextPitch.getPitchType()).isEqualTo(PitchType.FIRST);
     }
 
+    @DisplayName("다음 pitch 생성, 두번째 투구, 모든 핀이 쓰러졌을때")
+    @Test
+    void testCreateNextPitch04(){
+        //given
+        final FrameNumber frameNumber = FrameNumber.FIRST;
+        final Frame normalFrame = new NormalFrame(frameNumber, PinSize.ZERO);
+
+        final Pitch nextPitch = normalFrame.createNextPitch(PitchType.SECOND);
+
+        assertThat(nextPitch.getFrameNumber()).isEqualTo(frameNumber.next());
+        assertThat(nextPitch.getPitchType()).isEqualTo(PitchType.FIRST);
+    }
 
 }

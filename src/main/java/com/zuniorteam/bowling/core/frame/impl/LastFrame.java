@@ -1,42 +1,39 @@
 package com.zuniorteam.bowling.core.frame.impl;
 
 
-import com.zuniorteam.bowling.core.dto.FrameResultDto;
-import com.zuniorteam.bowling.core.dto.StepResultDto;
-import com.zuniorteam.bowling.core.frame.AbstractFrame;
 import com.zuniorteam.bowling.core.frame.Frame;
-import com.zuniorteam.bowling.core.step.player.StepPlayer;
+import com.zuniorteam.bowling.core.pitch.Pitch;
+import com.zuniorteam.bowling.core.value.FrameNumber;
 import com.zuniorteam.bowling.core.value.PinSize;
-import com.zuniorteam.bowling.core.value.StepResultType;
-import com.zuniorteam.bowling.core.value.StepType;
+import com.zuniorteam.bowling.core.value.PitchType;
 
-import java.util.List;
+import static com.zuniorteam.bowling.core.value.PitchType.*;
 
-import static com.zuniorteam.bowling.core.value.StepResultType.SPARE;
-import static com.zuniorteam.bowling.core.value.StepResultType.STRIKE;
-import static com.zuniorteam.bowling.util.CollectionUtil.simpleMap;
+public class LastFrame extends Frame {
 
-public class LastFrame extends AbstractFrame {
+    public LastFrame() {
+        this(PinSize.MAX);
+    }
 
-    @Override
-    public Frame createNext() {
-        return END;
+    public LastFrame(PinSize pinSize) {
+        super(FrameNumber.LAST, pinSize);
     }
 
     @Override
-    public FrameResultDto play(StepPlayer stepPlayer) {
-        final List<StepResultDto> stepResults = this.playBase(stepPlayer);
+    public Pitch createNextPitch(PitchType pitchType) {
 
-        if (isPlayBonusStep(stepResults)) {
-            stepResults.add(stepPlayer.play(StepType.BONUS, PinSize.MAX));
+        if(pitchType.equals(FIRST) && !isAllFallen()){
+            return new Pitch(this, SECOND);
         }
 
-        return new FrameResultDto(stepResults);
-    }
+        if(pitchType.equals(FIRST) && isAllFallen()){
+            return new Pitch(new LastFrame(), BONUS);
+        }
 
-    private boolean isPlayBonusStep(List<StepResultDto> stepResults) {
-        final List<StepResultType> stepResultTypes = simpleMap(stepResults, StepResultDto::getStepResultType);
-        return stepResultTypes.contains(STRIKE) || stepResultTypes.contains(SPARE);
-    }
+        if(pitchType.equals(SECOND) && isAllFallen()){
+            return new Pitch(new LastFrame(), BONUS);
+        }
 
+        return Pitch.END;
+    }
 }

@@ -1,23 +1,23 @@
 package bowling.state;
 
-import bowling.frame.Frame;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-public class Strike extends State implements EndState {
+import static bowling.pin.Pins.MAX_COUNT_OF_PINS;
+
+public class Strike extends EndState {
     private static final Strike STRIKE = new Strike();
 
     private Strike() {}
 
-    public static State getInstance() {
+    public static Strike getInstance() {
         return STRIKE;
     }
 
     @Override
-    public void downPins(Frame frame, int numOfDownPins) {
-
-    }
-
-    @Override
-    public void updateState(Frame frame) {
-
+    public List<Integer> getDownPins() {
+        return Collections.singletonList(MAX_COUNT_OF_PINS);
     }
 }

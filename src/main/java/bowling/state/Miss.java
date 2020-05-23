@@ -3,17 +3,24 @@ package bowling.state;
 import bowling.exception.IllegalTryException;
 import bowling.frame.Frame;
 
-public class Miss extends State implements EndState {
-    private static final Miss MISS = new Miss();
+import java.util.Arrays;
+import java.util.List;
 
-    private Miss() {}
+public class Miss extends EndState {
+    private final int firstDownPins;
+    private final int secondDownPins;
 
-    public static Miss getInstance() {
-        return MISS;
+    private Miss(final int firstDownPins, final int secondDownPins) {
+        this.firstDownPins = firstDownPins;
+        this.secondDownPins = secondDownPins;
+    }
+
+    public static Miss of(final int firstDownPins, final int secondDownPins) {
+        return new Miss(firstDownPins, secondDownPins);
     }
 
     @Override
-    public void downPins(Frame frame, int numOfDownPins) {
-        throw new IllegalTryException();
+    public List<Integer> getDownPins() {
+        return Arrays.asList(firstDownPins, secondDownPins);
     }
 }

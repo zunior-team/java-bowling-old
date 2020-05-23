@@ -1,7 +1,8 @@
 package bowling.pin;
 
 public class Pins {
-    private static final int MAX_COUNT_OF_PINS = 10;
+    public static final int MAX_COUNT_OF_PINS = 10;
+
     private int firstFallPins;
     private int secondFallPins;
 

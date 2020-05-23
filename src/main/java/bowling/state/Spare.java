@@ -2,26 +2,25 @@ package bowling.state;
 
 import bowling.frame.Frame;
 
-public class Spare extends State implements EndState {
-    private static final Spare SPARE = new Spare();
+import java.util.Arrays;
+import java.util.List;
 
-    private Spare() {}
+import static bowling.pin.Pins.MAX_COUNT_OF_PINS;
 
-    public static State getInstance() {
-        return SPARE;
+public class Spare extends EndState {
+
+    private final int firstDownPins;
+
+    private Spare(final int firstDownPins) {
+        this.firstDownPins = firstDownPins;
     }
 
-    public static boolean isSpare(final State state) {
-        return SPARE == state;
+    public static Spare of(final int firstDownPins) {
+        return new Spare(firstDownPins);
     }
 
     @Override
-    public void downPins(Frame frame, int numOfDownPins) {
-
-    }
-
-    @Override
-    void updateState(Frame frame) {
-
+    public List<Integer> getDownPins() {
+        return Arrays.asList(firstDownPins, MAX_COUNT_OF_PINS - firstDownPins);
     }
 }

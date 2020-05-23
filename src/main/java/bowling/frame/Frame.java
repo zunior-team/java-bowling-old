@@ -18,7 +18,7 @@ public abstract class Frame {
     }
 
     public void rollTheBall(final int countOfFallenPins) {
-        state.downPins(this, countOfFallenPins);
+        state.downPins(countOfFallenPins);
     }
 
     public void updateState(final State state) {

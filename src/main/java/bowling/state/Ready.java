@@ -1,7 +1,7 @@
 package bowling.state;
 
-import bowling.frame.Frame;
-import bowling.pin.Pins;
+import java.util.Collections;
+import java.util.List;
 
 public class Ready extends State {
     private static final Ready READY = new Ready();
@@ -13,19 +13,16 @@ public class Ready extends State {
     }
 
     @Override
-    public void downPins(Frame frame, int numOfDownPins) {
-        Pins pins = frame.getPins();
+    public State downPins(final int numOfDownPins) {
+        if (numOfDownPins == 10) {
+            return Strike.getInstance();
+        }
 
-        pins.downPins(numOfDownPins);
+        return Playing.of(numOfDownPins);
     }
 
     @Override
-    public void updateState(Frame frame) {
-        if (frame.isPinLeft()) {
-            frame.updateState(Playing.getInstance());
-            return;
-        }
-
-        frame.updateState(Strike.getInstance());
+    public List<Integer> getDownPins() {
+        return Collections.EMPTY_LIST;
     }
 }

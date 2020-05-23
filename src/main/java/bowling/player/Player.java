@@ -24,7 +24,11 @@ public class Player {
         return new Player(name);
     }
 
-    public void bowl(final int count) {
+    public void play(final int count) {
         frames.rollTheBall(count);
+    }
+
+    public boolean isGameEnd() {
+        return frames.isAllFrameEnd();
     }
 }

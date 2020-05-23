@@ -1,6 +1,7 @@
 package bowling.state;
 
 import bowling.frame.Frame;
+import bowling.pin.Pins;
 
 public class Playing extends State {
     private static final Playing PLAYING = new Playing();
@@ -12,17 +13,8 @@ public class Playing extends State {
     }
 
     @Override
-    void internalProcess(Frame frame, int countOfFallenPins) {
-
-    }
-
-    @Override
-    void updateState(Frame frame) {
-        if (frame.isPinLeft()) {
-            frame.updateState(End.getInstance());
-            return;
-        }
-
-        frame.updateState(Spare.getInstance());
+    public void downPins(Frame frame, int numOfDownPins) {
+        Pins pins = frame.getPins();
+        pins.downLeftPins(numOfDownPins);
     }
 }

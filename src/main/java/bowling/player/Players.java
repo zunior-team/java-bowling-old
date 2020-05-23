@@ -35,4 +35,13 @@ public class Players {
         curPlayerIdx++;
         curPlayerIdx %= players.size();
     }
+
+    public boolean isGameEnd() {
+        return players.stream()
+                .allMatch(Player::isGameEnd);
+    }
+
+    public Player curPlayer() {
+        return players.get(curPlayerIdx);
+    }
 }

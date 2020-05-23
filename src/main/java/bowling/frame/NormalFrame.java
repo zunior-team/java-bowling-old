@@ -1,6 +1,7 @@
 package bowling.frame;
 
 public class NormalFrame extends Frame {
+    private static final int LAST_FRAME_NO = 10;
 
     private NormalFrame(final int frameNo) {
         super(frameNo);
@@ -8,11 +9,13 @@ public class NormalFrame extends Frame {
 
     @Override
     Frame nextFrame() {
-        if(frameNo == 9) {
-            return new LastFrame(10);
+        int nextFrameNo = frameNo + 1;
+
+        if(nextFrameNo == LAST_FRAME_NO) {
+            return new LastFrame(LAST_FRAME_NO);
         }
 
-        return new NormalFrame(frameNo + 1);
+        return new NormalFrame(nextFrameNo);
     }
 
     public static Frame init() {

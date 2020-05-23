@@ -16,23 +16,27 @@ public class Pins {
         return new Pins();
     }
 
-    private Pins roll(final int firstFallPins, final int secondFallPins) {
+    private Pins down(final int firstFallPins, final int secondFallPins) {
         return new Pins(firstFallPins, secondFallPins);
     }
 
-    public Pins firstRoll(int countOfFallenPins) {
-        return roll(countOfFallenPins, 0);
-    }
-
     public Pins secondRoll(final int countOfFallenPins) {
-        return roll(this.firstFallPins, countOfFallenPins);
+        return down(this.firstFallPins, countOfFallenPins);
     }
 
-    public boolean isAllFallen() {
+    public boolean isAllDown() {
         return firstFallPins + secondFallPins == MAX_COUNT_OF_PINS;
     }
 
     public boolean isPinLeft() {
         return firstFallPins + secondFallPins < MAX_COUNT_OF_PINS;
+    }
+
+    public void downPins(int numOfDownPins) {
+        this.firstFallPins = numOfDownPins;
+    }
+
+    public void downLeftPins(int numOfDownPins) {
+        this.secondFallPins = numOfDownPins;
     }
 }

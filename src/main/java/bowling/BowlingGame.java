@@ -1,18 +1,21 @@
 package bowling;
 
+import bowling.player.Player;
+
 public class BowlingGame {
     public static void main(String[] args) {
-        /*
+        String names = "";
+
         Bowling bowling = Bowling.init(names);
+        // show score board
 
-        while(!bowling.isEnd()) {
+        while(!bowling.isGameEnd()) {
             Player curPlayer = bowling.curPlayer();
-            showState()
 
-            int countOfPins = InputView.inputCountOfPins();
+            int numOfDownPins = 10;
 
-            curPlayer.bowl(countOfPins); //내부에서 알아서 하도록
+            curPlayer.play(numOfDownPins);
+            // show score board
         }
-         */
     }
 }

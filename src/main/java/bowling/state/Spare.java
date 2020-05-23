@@ -2,7 +2,7 @@ package bowling.state;
 
 import bowling.frame.Frame;
 
-public class Spare implements EndState {
+public class Spare extends State implements EndState {
     private static final Spare SPARE = new Spare();
 
     private Spare() {}
@@ -11,9 +11,17 @@ public class Spare implements EndState {
         return SPARE;
     }
 
-    @Override
-    public void ball(Frame frame, int countOfFallenPins) {
+    public static boolean isSpare(final State state) {
+        return SPARE == state;
+    }
 
+    @Override
+    public void downPins(Frame frame, int numOfDownPins) {
+
+    }
+
+    @Override
+    void updateState(Frame frame) {
 
     }
 }

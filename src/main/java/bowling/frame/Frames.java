@@ -16,7 +16,7 @@ public class Frames {
     }
 
     public void rollTheBall(final int countOfFallenPins) {
-        curFrame().roll(countOfFallenPins);
+        curFrame().rollTheBall(countOfFallenPins);
 
         if(curFrame().isFrameEnd()) {
             curFrame().appendNextFrame(frames);
@@ -25,5 +25,9 @@ public class Frames {
 
     private Frame curFrame() {
         return frames.get(frames.size() - 1);
+    }
+
+    public boolean isAllFrameEnd() {
+        return curFrame().isGameEnd();
     }
 }

@@ -12,7 +12,7 @@ public class Strike extends State implements EndState {
     }
 
     @Override
-    void internalProcess(Frame frame, int countOfFallenPins) {
+    public void downPins(Frame frame, int numOfDownPins) {
 
     }
 

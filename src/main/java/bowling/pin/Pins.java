@@ -1,43 +1,38 @@
 package bowling.pin;
 
+import java.util.List;
+
 public class Pins {
     public static final int MAX_COUNT_OF_PINS = 10;
 
-    private int firstFallPins;
-    private int secondFallPins;
+    private int noOfDownPins;
+    private int noOfSecondDownPins;
 
-    protected Pins() {}
+    protected Pins() {
 
-    private Pins(final int firstFallPins, final int secondFallPins) {
-        this.firstFallPins = firstFallPins;
-        this.secondFallPins = secondFallPins;
     }
 
     public static Pins init() {
         return new Pins();
     }
 
-    private Pins down(final int firstFallPins, final int secondFallPins) {
-        return new Pins(firstFallPins, secondFallPins);
+    public Pins down(final int noOfDownPins) {
+        validate(noOfDownPins);
+        validate(this.noOfDownPins + noOfDownPins);
+        this.noOfSecondDownPins = noOfDownPins;
+
+        return this;
     }
 
-    public Pins secondRoll(final int countOfFallenPins) {
-        return down(this.firstFallPins, countOfFallenPins);
+    private void validate(int noOfDownPins) {
+        if (noOfDownPins > MAX_COUNT_OF_PINS) {
+            throw new IllegalArgumentException(
+                    "Number of down pin is invalid : " + noOfDownPins + " Max[" + MAX_COUNT_OF_PINS + "]"
+            );
+        }
     }
 
     public boolean isAllDown() {
-        return firstFallPins + secondFallPins == MAX_COUNT_OF_PINS;
-    }
-
-    public boolean isPinLeft() {
-        return firstFallPins + secondFallPins < MAX_COUNT_OF_PINS;
-    }
-
-    public void downPins(int numOfDownPins) {
-        this.firstFallPins = numOfDownPins;
-    }
-
-    public void downLeftPins(int numOfDownPins) {
-        this.secondFallPins = numOfDownPins;
+        return noOfDownPins + noOfSecondDownPins == MAX_COUNT_OF_PINS;
     }
 }

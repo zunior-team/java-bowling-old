@@ -7,7 +7,8 @@ import bowling.state.State;
 import java.util.List;
 
 public abstract class Frame {
-    protected static final int BASE_FRAME_NO = 1;
+    public static final int BASE_FRAME_NO = 1;
+    public static final int LAST_FRAME_NO = 10;
 
     protected int frameNo;
     protected State state;
@@ -18,19 +19,7 @@ public abstract class Frame {
     }
 
     public void rollTheBall(final int countOfFallenPins) {
-        state.downPins(countOfFallenPins);
-    }
-
-    public void updateState(final State state) {
-        validate(state);
-
-        this.state = state;
-    }
-
-    private void validate(State state) {
-        if (state == null) {
-            throw new IllegalArgumentException("State can't be a null");
-        }
+        state = state.downPins(countOfFallenPins);
     }
 
     public boolean isFrameEnd() {
@@ -46,4 +35,8 @@ public abstract class Frame {
     }
 
     abstract Frame nextFrame();
+
+    public State getState() {
+        return state;
+    }
 }

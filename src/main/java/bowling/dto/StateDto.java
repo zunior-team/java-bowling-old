@@ -8,6 +8,7 @@ public class StateDto {
     private static final int FIRST_INDEX = 0;
     private static final int SECOND_INDEX = 1;
     private static final int THIRD_INDEX = 2;
+    private static final int READY_STATE_VALUE = -1;
 
     private final Class<? extends State> stateType;
     private final List<Integer> downPins;
@@ -17,7 +18,7 @@ public class StateDto {
         this.downPins = state.getDownPins();
     }
 
-    public StateDto of(final State state) {
+    public static StateDto of(final State state) {
         return new StateDto(state);
     }
 
@@ -26,14 +27,22 @@ public class StateDto {
     }
 
     public int getNoOfFirstDownPins() {
-        return downPins.get(FIRST_INDEX);
+        return getDownPin(FIRST_INDEX);
     }
 
     public int getNoOfSecondDownPins() {
-        return downPins.get(SECOND_INDEX);
+        return getDownPin(SECOND_INDEX);
     }
 
     public int getNoOfExtraDownPins() {
-        return downPins.get(THIRD_INDEX);
+        return getDownPin(THIRD_INDEX);
+    }
+
+    public int getDownPin(final int idx) {
+        if (downPins.size() <= idx) {
+            return READY_STATE_VALUE;
+        }
+
+        return downPins.get(idx);
     }
 }

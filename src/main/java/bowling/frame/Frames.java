@@ -1,7 +1,10 @@
 package bowling.frame;
 
+import bowling.state.State;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Frames {
     private final List<Frame> frames;
@@ -29,5 +32,11 @@ public class Frames {
 
     public boolean isAllFrameEnd() {
         return curFrame().isGameEnd();
+    }
+
+    public List<State> getStates() {
+        return frames.stream()
+                .map(Frame::getState)
+                .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,6 @@
 package bowling.frame;
 
+import bowling.pin.Pin;
 import bowling.state.EndState;
 import bowling.state.Ready;
 import bowling.state.State;
@@ -19,7 +20,7 @@ public abstract class Frame {
     }
 
     public void rollTheBall(final int countOfFallenPins) {
-        state = state.downPins(countOfFallenPins);
+        state = state.downPins(Pin.of(countOfFallenPins));
     }
 
     public boolean isFrameEnd() {

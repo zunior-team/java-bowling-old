@@ -1,24 +1,27 @@
 package bowling.state;
 
+import bowling.pin.Pin;
+
 import java.util.Arrays;
 import java.util.List;
 
-import static bowling.pin.Pins.MAX_COUNT_OF_PINS;
+import static bowling.pin.Pin.MAX_COUNT_OF_PINS;
+
 
 public class Spare extends EndState {
 
-    private final int firstDownPins;
+    private final Pin firstDownPins;
 
-    private Spare(final int firstDownPins) {
+    private Spare(final Pin firstDownPins) {
         this.firstDownPins = firstDownPins;
     }
 
-    public static Spare of(final int firstDownPins) {
+    public static Spare of(final Pin firstDownPins) {
         return new Spare(firstDownPins);
     }
 
     @Override
     public List<Integer> getDownPins() {
-        return Arrays.asList(firstDownPins, MAX_COUNT_OF_PINS - firstDownPins);
+        return Arrays.asList(firstDownPins.getPins(), MAX_COUNT_OF_PINS - firstDownPins.getPins());
     }
 }

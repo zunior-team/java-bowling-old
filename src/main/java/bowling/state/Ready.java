@@ -1,5 +1,7 @@
 package bowling.state;
 
+import bowling.pin.Pin;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -13,12 +15,12 @@ public class Ready extends State {
     }
 
     @Override
-    public State downPins(final int numOfDownPins) {
-        if (numOfDownPins == 10) {
+    public State downPins(Pin downPins) {
+        if (downPins.isAllDown()) {
             return Strike.getInstance();
         }
 
-        return Playing.of(numOfDownPins);
+        return Playing.of(downPins);
     }
 
     @Override

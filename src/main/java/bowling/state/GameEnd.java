@@ -13,6 +13,7 @@ public class GameEnd extends EndState {
 
         this.states = states;
     }
+
     public static GameEnd init(final List<State> states) {
         return new GameEnd(states);
     }

@@ -1,5 +1,7 @@
 package bowling.state;
 
+import bowling.pin.Pin;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,7 +21,7 @@ public class LastPlaying extends State {
     }
 
     @Override
-    public State downPins(final int numOfDownPins) {
+    public State downPins(final Pin numOfDownPins) {
         tryCount++;
         State state = lastState().downPins(numOfDownPins);
         updateStates(state);

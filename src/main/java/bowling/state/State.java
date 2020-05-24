@@ -1,10 +1,12 @@
 package bowling.state;
 
+import bowling.pin.Pin;
+
 import java.util.List;
 
 public abstract class State {
 
-    public abstract State downPins(final int numOfDownPins);
+    public abstract State downPins(final Pin downPins);
 
     public abstract List<Integer> getDownPins();
 

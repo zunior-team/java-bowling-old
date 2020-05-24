@@ -13,8 +13,8 @@ public enum StateFormat {
     MISS(Miss.class, "%d|%s"),
     SPARE(Spare.class, "%d|/"),
     STRIKE(Strike.class, "X"),
-    LAST_FRAME_STATE(LastPlaying.class, "%s%s%s"),
-    LAST_FRAME_END(LastEnd.class, "%s%s%s");
+    LAST_PLAYING(LastPlaying.class, "%s%s%s"),
+    GAME_END(GameEnd.class, "%s%s%s");
 
     private static final Map<Class<? extends State>, StateFormat> STATE_FORMATS =
             Arrays.stream(StateFormat.values())

@@ -1,7 +1,5 @@
 package bowling.state;
 
-import bowling.frame.Frame;
-
 import java.util.Arrays;
 import java.util.List;
 

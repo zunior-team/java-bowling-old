@@ -3,18 +3,18 @@ package bowling.state;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LastEnd extends EndState {
+public class GameEnd extends EndState {
     private final List<State> states;
 
-    private LastEnd(final List<State> states) {
+    private GameEnd(final List<State> states) {
         if (states == null) {
             throw new IllegalArgumentException("Invalid states");
         }
 
         this.states = states;
     }
-    public static LastEnd init(final List<State> states) {
-        return new LastEnd(states);
+    public static GameEnd init(final List<State> states) {
+        return new GameEnd(states);
     }
 
     @Override

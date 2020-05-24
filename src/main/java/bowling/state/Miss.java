@@ -1,8 +1,5 @@
 package bowling.state;
 
-import bowling.exception.IllegalTryException;
-import bowling.frame.Frame;
-
 import java.util.Arrays;
 import java.util.List;
 

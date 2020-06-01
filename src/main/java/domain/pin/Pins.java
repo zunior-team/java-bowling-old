@@ -15,6 +15,12 @@ public class Pins {
 
 
     public void throwBall(int fallenPins) {
+        validateFallenPins(fallenPins);
+
+        this.countOfPins -= fallenPins;
+    }
+
+    private void validateFallenPins(int fallenPins) {
         if (fallenPins < ZERO) {
             throw new IllegalArgumentException("fallen pins min value is [" + ZERO + "]");
         }
@@ -24,8 +30,6 @@ public class Pins {
         if (this.countOfPins - fallenPins < ZERO) {
             throw new IllegalArgumentException("left pins must be positive or zero");
         }
-
-        this.countOfPins -= fallenPins;
     }
 
     public int leftPins() {

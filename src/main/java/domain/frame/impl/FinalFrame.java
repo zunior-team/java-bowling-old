@@ -1,4 +1,7 @@
-package domain;
+package domain.frame.impl;
+
+import domain.frame.Frame;
+import domain.pin.Pins;
 
 public class FinalFrame extends Frame {
 

@@ -1,5 +1,5 @@
-import domain.Bowling;
-import domain.Player;
+import domain.bowling.Bowling;
+import domain.player.Player;
 import view.InputView;
 import view.OutputView;
 import view.dto.BowlingPrintDto;

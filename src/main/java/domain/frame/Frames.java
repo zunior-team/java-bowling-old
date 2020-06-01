@@ -1,5 +1,8 @@
-package domain;
+package domain.frame;
 
+
+import domain.frame.impl.FinalFrame;
+import domain.frame.impl.NormalFrame;
 
 import java.util.ArrayList;
 import java.util.Collections;

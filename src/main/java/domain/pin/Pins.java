@@ -1,4 +1,4 @@
-package domain;
+package domain.pin;
 
 public class Pins {
     public static final int NUMBER_OF_PINS = 10;

@@ -1,5 +1,8 @@
 package domain;
 
+import domain.frame.Frame;
+import domain.frame.impl.FinalFrame;
+import domain.pin.Pins;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -54,23 +57,12 @@ class FinalFrameTest {
     @Test
     @DisplayName("공을 던지면 공을 던진 이력이 남는다")
     void testHistory() {
-        final FinalFrame finalFrame = FinalFrame.newInstance();
+        final Frame finalFrame = FinalFrame.newInstance();
 
         finalFrame.throwBowlingBall(3);
 
-        assertThat(finalFrame.frameHistories).hasSize(1)
+        assertThat(finalFrame.getFrameHistories()).hasSize(1)
                 .element(0).isEqualTo(3);
     }
 
-    @Test
-    @DisplayName("공을 던지면 핀의 갯수가 줄어든다")
-    void testPinsFall() {
-        final FinalFrame finalFrame = FinalFrame.newInstance();
-        final int beforeLeftPins = finalFrame.pins.leftPins();
-
-        finalFrame.throwBowlingBall(3);
-
-
-        assertThat(finalFrame.pins.leftPins()).isEqualTo(beforeLeftPins - 3);
-    }
 }

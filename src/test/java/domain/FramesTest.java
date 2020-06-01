@@ -1,5 +1,7 @@
 package domain;
 
+import domain.frame.Frames;
+import domain.pin.Pins;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,12 +1,11 @@
 package view;
 
-import domain.Pins;
+import domain.pin.Pins;
 import spark.utils.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FrameHistoryParser {

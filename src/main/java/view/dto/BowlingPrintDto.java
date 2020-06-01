@@ -1,8 +1,8 @@
 package view.dto;
 
-import domain.Bowling;
-import domain.Frame;
-import domain.Player;
+import domain.bowling.Bowling;
+import domain.frame.Frame;
+import domain.player.Player;
 
 import java.util.List;
 

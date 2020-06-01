@@ -1,4 +1,6 @@
-package domain;
+package domain.frame.impl;
+
+import domain.frame.Frame;
 
 public class NormalFrame extends Frame {
     private static final int MAX_THROW_COUNT = 2;

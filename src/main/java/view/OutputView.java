@@ -1,12 +1,12 @@
 package view;
 
-import domain.Frame;
-import domain.Player;
+import domain.frame.Frame;
+import domain.player.Player;
 import view.dto.BowlingPrintDto;
 
 import java.util.List;
 
-import static domain.Player.NAME_LENGTH;
+import static domain.player.Player.NAME_LENGTH;
 import static java.util.stream.Collectors.toList;
 
 public class OutputView {

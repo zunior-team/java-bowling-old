@@ -1,4 +1,6 @@
-package domain;
+package domain.frame;
+
+import domain.pin.Pins;
 
 import java.util.ArrayList;
 import java.util.List;

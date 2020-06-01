@@ -1,4 +1,7 @@
-package domain;
+package domain.bowling;
+
+import domain.frame.Frames;
+import domain.player.Player;
 
 import java.util.Objects;
 

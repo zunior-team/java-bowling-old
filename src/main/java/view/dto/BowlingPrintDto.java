@@ -23,4 +23,10 @@ public class BowlingPrintDto {
     public Player getPlayer() {
         return player;
     }
+
+    public int nextFrameCount() {
+        return (int) frames.stream()
+                .filter(Frame::isDone)
+                .count() + 1;
+    }
 }

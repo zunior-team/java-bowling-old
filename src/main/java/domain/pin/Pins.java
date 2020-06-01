@@ -16,7 +16,7 @@ public class Pins {
 
     public void throwBall(int fallenPins) {
         if (fallenPins < ZERO) {
-            throw new IllegalArgumentException("fallen pins min value is [" + 0 + "]");
+            throw new IllegalArgumentException("fallen pins min value is [" + ZERO + "]");
         }
         if (fallenPins > MAX_NUMBER_OF_PINS) {
             throw new IllegalArgumentException("fallen pins max value is [" + MAX_NUMBER_OF_PINS + "]");

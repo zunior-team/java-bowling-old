@@ -6,7 +6,6 @@ public class NormalFrame extends Frame {
     private static final int MAX_THROW_COUNT = 2;
 
     private NormalFrame() {
-        super();
     }
 
     public static NormalFrame newInstance() {

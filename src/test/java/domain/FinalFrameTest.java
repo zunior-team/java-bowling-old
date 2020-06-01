@@ -38,7 +38,7 @@ class FinalFrameTest {
 
         final int firstThrow = 3;
         finalFrame.throwBowlingBall(firstThrow);
-        finalFrame.throwBowlingBall(Pins.NUMBER_OF_PINS - firstThrow);
+        finalFrame.throwBowlingBall(Pins.MAX_NUMBER_OF_PINS - firstThrow);
 
         assertThat(finalFrame.isDone()).isFalse();
     }

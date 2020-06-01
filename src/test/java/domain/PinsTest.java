@@ -26,7 +26,7 @@ class PinsTest {
 
         assertThat(pins.isAllDown()).isFalse();
 
-        pins.throwBall(Pins.NUMBER_OF_PINS);
+        pins.throwBall(Pins.MAX_NUMBER_OF_PINS);
 
         assertThat(pins.isAllDown()).isTrue();
     }
@@ -39,7 +39,7 @@ class PinsTest {
 
         pins.throwBall(fallenPins);
 
-        assertThat(pins.leftPins()).isEqualTo(Pins.NUMBER_OF_PINS - fallenPins);
+        assertThat(pins.leftPins()).isEqualTo(Pins.MAX_NUMBER_OF_PINS - fallenPins);
     }
 
     @ParameterizedTest
@@ -68,6 +68,6 @@ class PinsTest {
     void testLeftPins() {
         final Pins pins = Pins.newInstance();
 
-        assertThat(pins.leftPins()).isEqualTo(Pins.NUMBER_OF_PINS);
+        assertThat(pins.leftPins()).isEqualTo(Pins.MAX_NUMBER_OF_PINS);
     }
 }

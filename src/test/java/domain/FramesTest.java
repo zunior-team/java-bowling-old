@@ -25,7 +25,7 @@ class FramesTest {
         final Frames frames = Frames.newInstance();
 
         for (int i = 0; i < numberOfThrows; i++) {
-            frames.throwBowlingBall(Pins.NUMBER_OF_PINS);
+            frames.throwBowlingBall(Pins.MAX_NUMBER_OF_PINS);
         }
 
         assertThat(frames.isEnd()).isFalse();
@@ -38,7 +38,7 @@ class FramesTest {
 
         // 마지막 프레임은 한번 더 던지므로 모든 프레임을 완료시키기 위해 +1 해준다.
         for (int i = 0; i < Frames.MAX_FRAME_COUNT + 1; i++) {
-            frames.throwBowlingBall(Pins.NUMBER_OF_PINS);
+            frames.throwBowlingBall(Pins.MAX_NUMBER_OF_PINS);
         }
 
         assertThat(frames.isEnd()).isTrue();

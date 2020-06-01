@@ -37,7 +37,7 @@ public class FrameHistoryParser {
                     .mapToInt(Integer::intValue)
                     .sum();
 
-            final String format = Pins.NUMBER_OF_PINS == sum ?
+            final String format = Pins.MAX_NUMBER_OF_PINS == sum ?
                     "%s|/" :
                     "%s|%s";
             return String.format(format, mappedHistories.get(0), mappedHistories.get(1));

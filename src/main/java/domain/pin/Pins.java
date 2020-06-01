@@ -1,10 +1,10 @@
 package domain.pin;
 
 public class Pins {
-    public static final int NUMBER_OF_PINS = 10;
+    public static final int MAX_NUMBER_OF_PINS = 10;
     public static final int ZERO = 0;
 
-    private int countOfPins = NUMBER_OF_PINS;
+    private int countOfPins = MAX_NUMBER_OF_PINS;
 
     private Pins() {
     }
@@ -18,8 +18,8 @@ public class Pins {
         if (fallenPins < ZERO) {
             throw new IllegalArgumentException("fallen pins min value is [" + 0 + "]");
         }
-        if (fallenPins > NUMBER_OF_PINS) {
-            throw new IllegalArgumentException("fallen pins max value is [" + NUMBER_OF_PINS + "]");
+        if (fallenPins > MAX_NUMBER_OF_PINS) {
+            throw new IllegalArgumentException("fallen pins max value is [" + MAX_NUMBER_OF_PINS + "]");
         }
         if (this.countOfPins - fallenPins < ZERO) {
             throw new IllegalArgumentException("left pins must be positive or zero");

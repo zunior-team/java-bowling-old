@@ -28,7 +28,7 @@ public class FinalFrame extends Frame {
                 .mapToInt(Integer::intValue)
                 .sum();
 
-        if (sumOfFallenPins == Pins.NUMBER_OF_PINS * 2) {
+        if (sumOfFallenPins == Pins.MAX_NUMBER_OF_PINS * 2) {
             return true;
         }
 

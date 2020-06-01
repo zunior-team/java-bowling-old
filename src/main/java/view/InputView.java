@@ -3,13 +3,11 @@ package view;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static domain.Player.NAME_LENGTH;
-
 public class InputView {
     private final Scanner scanner;
 
     public InputView(Scanner scanner) {
-        Objects.requireNonNull(scanner);
+        Objects.requireNonNull(scanner, "Scanner cannot be null");
         this.scanner = scanner;
     }
 

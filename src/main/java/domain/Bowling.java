@@ -8,7 +8,7 @@ public class Bowling {
     private final Frames frames;
 
     private Bowling(Player player) {
-        Objects.requireNonNull(player);
+        Objects.requireNonNull(player, "player cannot be null");
         this.player = player;
         this.frames = Frames.newInstance();
     }

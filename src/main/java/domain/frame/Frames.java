@@ -34,7 +34,7 @@ public class Frames {
 
     public void throwBowlingBall(int inputFallenPins) {
         final Frame proceedFrame = this.frames.stream()
-                .filter(frame -> !frame.isDone())
+                .filter(Frame::isThrowOpportunityLeft)
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("you can not throw more"));
         proceedFrame.throwBowlingBall(inputFallenPins);

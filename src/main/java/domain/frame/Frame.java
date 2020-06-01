@@ -15,6 +15,10 @@ public abstract class Frame {
 
     public abstract boolean isDone();
 
+    public boolean isThrowOpportunityLeft() {
+        return !this.isDone();
+    }
+
     public abstract void throwBowlingBall(int fallenPins);
 
     public List<Integer> getFrameHistories() {

@@ -21,11 +21,7 @@ public class PitchResultRender {
     }
 
     public static String rend(PitchResultType pitchResultType, PinSize fallenPinSize) {
-        if (TOKEN.containsKey(pitchResultType)) {
-            return TOKEN.get(pitchResultType);
-        }
-
-        return String.valueOf(fallenPinSize);
+        return TOKEN.getOrDefault(pitchResultType, String.valueOf(fallenPinSize));
     }
 
 }

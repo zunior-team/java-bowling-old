@@ -1,6 +1,7 @@
 package domain.frame.impl;
 
 import domain.frame.Frame;
+import domain.frame.Frames;
 import domain.pin.Pins;
 
 public class FinalFrame extends Frame {
@@ -8,7 +9,7 @@ public class FinalFrame extends Frame {
     private static final int MAX_THROW_COUNT = 3;
 
     private FinalFrame() {
-        this.frameNumber = MAX_THROW_COUNT;
+        this.frameNumber = Frames.MAX_FRAME_COUNT;
     }
 
     public static FinalFrame newInstance() {

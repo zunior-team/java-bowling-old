@@ -3,6 +3,7 @@ package domain;
 import domain.frame.Frame;
 import domain.frame.impl.FinalFrame;
 import domain.pin.Pins;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,14 +22,14 @@ class FinalFrameTest {
     }
 
     @Test
-    @DisplayName("스트라이크를 연속 두번 던지면 더이상 던질 수 없다.")
-    void testOnlyTwoStrikeAvailable() {
+    @DisplayName("스트라이크를 연속 세번 던질 수 있다.")
+    void testThreeStrikeAvailable() {
         final FinalFrame finalFrame = FinalFrame.newInstance();
 
         finalFrame.throwBowlingBall(10);
         finalFrame.throwBowlingBall(10);
 
-        assertThat(finalFrame.isDone()).isTrue();
+        assertThat(finalFrame.isDone()).isFalse();
     }
 
     @Test
@@ -41,6 +42,22 @@ class FinalFrameTest {
         finalFrame.throwBowlingBall(Pins.MAX_NUMBER_OF_PINS - firstThrow);
 
         assertThat(finalFrame.isDone()).isFalse();
+    }
+
+    @Test
+    @DisplayName("처음 스트라이크를 던진 후, 두번째 턴에는 거터, 이후 마지막턴에 스페어 처리가 가능하다")
+    void testFirstStrikeAndGutterAndSpare() {
+        final FinalFrame finalFrame = FinalFrame.newInstance();
+        final int secondThrow = 4;
+
+        finalFrame.throwBowlingBall(Pins.MAX_NUMBER_OF_PINS);
+        finalFrame.throwBowlingBall(secondThrow);
+
+        Assertions.assertDoesNotThrow(() ->
+                finalFrame.throwBowlingBall(Pins.MAX_NUMBER_OF_PINS - secondThrow)
+        );
+
+
     }
 
     @Test

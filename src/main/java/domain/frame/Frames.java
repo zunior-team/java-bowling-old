@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Frames {
@@ -15,8 +16,8 @@ public class Frames {
     private final List<Frame> frames;
 
     private Frames() {
-        final List<Frame> frames = Stream.generate(NormalFrame::newInstance)
-                .limit(MAX_FRAME_COUNT - 1)
+        final List<Frame> frames = IntStream.rangeClosed(1, MAX_FRAME_COUNT - 1)
+                .mapToObj(NormalFrame::newInstanceByFrameNumber)
                 .collect(Collectors.toList());
 
         frames.add(FinalFrame.newInstance());

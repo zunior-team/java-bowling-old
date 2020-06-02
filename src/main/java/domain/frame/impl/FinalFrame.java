@@ -8,6 +8,7 @@ public class FinalFrame extends Frame {
     private static final int MAX_THROW_COUNT = 3;
 
     private FinalFrame() {
+        this.frameNumber = MAX_THROW_COUNT;
     }
 
     public static FinalFrame newInstance() {

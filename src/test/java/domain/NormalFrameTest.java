@@ -13,8 +13,8 @@ class NormalFrameTest {
 
     @Test
     @DisplayName("Frame 객체를 생성한다")
-    void testNewInstance() {
-        final NormalFrame normalFrame = NormalFrame.newInstance();
+    void testnewInstanceByFrameNumber() {
+        final NormalFrame normalFrame = NormalFrame.newInstanceByFrameNumber(1);
 
         assertThat(normalFrame).isNotNull();
     }
@@ -22,7 +22,7 @@ class NormalFrameTest {
     @Test
     @DisplayName("Frame에서 공을 던지면 던진 공의 기록이 남는다")
     void testThrowBall() {
-        final NormalFrame normalFrame = NormalFrame.newInstance();
+        final NormalFrame normalFrame = NormalFrame.newInstanceByFrameNumber(1);
 
         normalFrame.throwBowlingBall(4);
 
@@ -35,7 +35,7 @@ class NormalFrameTest {
     @CsvSource({"1,false", "2,true"})
     @DisplayName("isDone 메소드로 공이 모두 던져졌는지 확인할 수 있다")
     void testIsDone(int throwCount, boolean isDone) {
-        final NormalFrame normalFrame = NormalFrame.newInstance();
+        final NormalFrame normalFrame = NormalFrame.newInstanceByFrameNumber(1);
 
         for (int i = 0; i < throwCount; i++) {
             normalFrame.throwBowlingBall(3);
@@ -48,7 +48,7 @@ class NormalFrameTest {
     @Test
     @DisplayName("지정된 2 이상회으로 공을 던질 수 없다")
     void testValidationOverThrow() {
-        final NormalFrame normalFrame = NormalFrame.newInstance();
+        final NormalFrame normalFrame = NormalFrame.newInstanceByFrameNumber(1);
 
         for (int i = 0; i < 2; i++) {
             normalFrame.throwBowlingBall(2);

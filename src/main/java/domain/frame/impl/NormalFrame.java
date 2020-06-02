@@ -1,17 +1,23 @@
 package domain.frame.impl;
 
 import domain.frame.Frame;
+import domain.frame.Frames;
+
+import static domain.pin.Pins.ZERO;
 
 public class NormalFrame extends Frame {
     private static final int MAX_THROW_COUNT = 2;
 
-    private NormalFrame() {
+    private NormalFrame(int frameNumber) {
+        if (frameNumber < ZERO || frameNumber > Frames.MAX_FRAME_COUNT) {
+            throw new IllegalArgumentException("생성된 프레임의 숫자가 유효하지 않습니다.");
+        }
+        this.frameNumber = frameNumber;
     }
 
-    public static NormalFrame newInstance() {
-        return new NormalFrame();
+    public static NormalFrame newInstanceByFrameNumber(int frameNumber) {
+        return new NormalFrame(frameNumber);
     }
-
 
     @Override
     public boolean isDone() {

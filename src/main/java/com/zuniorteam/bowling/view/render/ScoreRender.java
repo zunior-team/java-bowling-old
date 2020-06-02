@@ -58,27 +58,38 @@ public class ScoreRender {
     }
 
     private static String drawScores(List<PitchResult> pitchResults) {
-
         final StringBuilder drawer = new StringBuilder();
+        final Map<FrameNumber, List<String>> scores = initScores();
 
+        rendScores(pitchResults, scores);
+        drawScoreTo(drawer, scores);
+
+        return drawer.toString();
+    }
+
+    private static Map<FrameNumber, List<String>> initScores() {
         final Map<FrameNumber, List<String>> scores = new HashMap<>();
 
         for (int i = FIRST_FRAME_NUMBER_VALUE; i <= LAST_FRAME_NUMBER_VALUE; i++) {
             scores.put(FrameNumber.of(i), new ArrayList<>());
         }
+        return scores;
+    }
 
+    private static void rendScores(List<PitchResult> pitchResults, Map<FrameNumber, List<String>> scores) {
         for (PitchResult pitchResult : pitchResults) {
             final FrameNumber frameNumber = pitchResult.getFrameNumber();
             scores.get(frameNumber).add(PitchResultRender.rend(pitchResult.getPitchResultType(), pitchResult.getFallenPinSize()));
         }
+    }
 
+    private static void drawScoreTo(StringBuilder drawer, Map<FrameNumber, List<String>> scores) {
         for (FrameNumber frameNumber : scores.keySet()) {
             final String score = join(BORDER, scores.get(frameNumber));
 
             drawer.append(fillToCentered(score, BLANK, EACH_SPACE_LENGTH))
                     .append(BORDER);
         }
-
-        return drawer.toString();
     }
+
 }

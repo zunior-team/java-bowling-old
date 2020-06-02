@@ -1,10 +1,16 @@
 package domain.pin;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class Pins {
     public static final int MAX_NUMBER_OF_PINS = 10;
     public static final int ZERO = 0;
 
-    private int countOfPins = MAX_NUMBER_OF_PINS;
+    private final List<Pin> pins = Stream.generate(Pin::new)
+            .limit(MAX_NUMBER_OF_PINS)
+            .collect(Collectors.toList());
 
     private Pins() {
     }
@@ -13,11 +19,13 @@ public class Pins {
         return new Pins();
     }
 
-
     public void throwBall(int fallenPins) {
         validateFallenPins(fallenPins);
 
-        this.countOfPins -= fallenPins;
+        this.pins.stream()
+                .filter(Pin::isStanding)
+                .limit(fallenPins)
+                .forEach(Pin::fall);
     }
 
     private void validateFallenPins(int fallenPins) {
@@ -27,16 +35,19 @@ public class Pins {
         if (fallenPins > MAX_NUMBER_OF_PINS) {
             throw new IllegalArgumentException("fallen pins max value is [" + MAX_NUMBER_OF_PINS + "]");
         }
-        if (this.countOfPins - fallenPins < ZERO) {
+        if (leftPins() - fallenPins < ZERO) {
             throw new IllegalArgumentException("left pins must be positive or zero");
         }
     }
 
     public int leftPins() {
-        return this.countOfPins;
+        return (int) this.pins.stream()
+                .filter(Pin::isStanding)
+                .count();
     }
 
+
     public boolean isAllDown() {
-        return this.countOfPins == ZERO;
+        return leftPins() == ZERO;
     }
 }

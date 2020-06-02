@@ -48,6 +48,7 @@ public class FinalFrame extends Frame {
 
         this.pins.throwBall(fallenPins);
         this.frameHistories.add(fallenPins);
+
     }
 
 }

@@ -6,9 +6,9 @@ import com.zuniorteam.bowling.core.value.PitchResultType;
 
 public class PitchResult {
 
-    private FrameNumber frameNumber;
-    private PitchResultType pitchResultType;
-    private PinSize fallenPinSize;
+    private final FrameNumber frameNumber;
+    private final PitchResultType pitchResultType;
+    private final PinSize fallenPinSize;
 
     public PitchResult(FrameNumber frameNumber, PitchResultType pitchResultType, PinSize fallenPinSize) {
         assert frameNumber != null;

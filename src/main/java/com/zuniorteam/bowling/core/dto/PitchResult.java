@@ -4,6 +4,8 @@ import com.zuniorteam.bowling.core.value.FrameNumber;
 import com.zuniorteam.bowling.core.value.PinSize;
 import com.zuniorteam.bowling.core.value.PitchResultType;
 
+import java.util.Objects;
+
 public class PitchResult {
 
     private final FrameNumber frameNumber;
@@ -11,9 +13,9 @@ public class PitchResult {
     private final PinSize fallenPinSize;
 
     public PitchResult(FrameNumber frameNumber, PitchResultType pitchResultType, PinSize fallenPinSize) {
-        assert frameNumber != null;
-        assert pitchResultType != null;
-        assert fallenPinSize != null;
+        Objects.requireNonNull(frameNumber, "프레임 번호가 없습니다");
+        Objects.requireNonNull(pitchResultType, "프레임 결과 타입이 없습니다");
+        Objects.requireNonNull(fallenPinSize, "쓰러진 핀 개수가 없습니다");
 
         this.frameNumber = frameNumber;
         this.pitchResultType = pitchResultType;

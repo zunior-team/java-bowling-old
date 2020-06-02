@@ -15,9 +15,9 @@ class PitchTest {
     @Test
     public void testNewInstanceIfArgsIsNull(){
         assertAll(
-                () -> assertThrows(AssertionError.class, () -> new Pitch(null, null)),
-                () -> assertThrows(AssertionError.class, () -> new Pitch(new NormalFrame(FrameNumber.FIRST), null)),
-                () -> assertThrows(AssertionError.class, () -> new Pitch(null, PitchType.FIRST))
+                () -> assertThrows(NullPointerException.class, () -> new Pitch(null, null)),
+                () -> assertThrows(NullPointerException.class, () -> new Pitch(new NormalFrame(FrameNumber.FIRST), null)),
+                () -> assertThrows(NullPointerException.class, () -> new Pitch(null, PitchType.FIRST))
         );
     }
 

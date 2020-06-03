@@ -10,7 +10,7 @@ class PinTest {
     @Test
     @DisplayName("Pin의 isStanding 기본 값은 true로 생성된다.")
     void createTest() {
-        Pin pin = new Pin();
+        Pin pin = Pin.STANDING;
 
         assertThat(pin).isNotNull();
         assertThat(pin.isStanding()).isTrue();
@@ -19,7 +19,7 @@ class PinTest {
     @Test
     @DisplayName("Pin 을 넘어뜨릴 수 있다")
     void testFall() {
-        Pin pin = new Pin();
+        Pin pin = Pin.STANDING;
 
         assertThat(pin.isStanding()).isTrue();
 

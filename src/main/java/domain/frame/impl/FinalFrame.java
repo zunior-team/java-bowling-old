@@ -45,7 +45,7 @@ public class FinalFrame extends Frame {
             this.pins = Pins.newInstance();
         }
 
-        this.pins.throwBall(fallenPins);
+        this.pins.FellDown(fallenPins);
         this.frameHistories.add(fallenPins);
 
     }

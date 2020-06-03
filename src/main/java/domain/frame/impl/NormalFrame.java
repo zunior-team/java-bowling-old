@@ -33,7 +33,7 @@ public class NormalFrame extends Frame {
             throw new IllegalArgumentException("you can only throw " + MAX_THROW_COUNT + " times in one frame");
         }
 
-        this.pins.throwBall(fallenPins);
+        this.pins.FellDown(fallenPins);
 
         this.frameHistories.add(fallenPins);
     }

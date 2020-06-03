@@ -19,7 +19,7 @@ public class Pins {
         return new Pins();
     }
 
-    public void throwBall(int fallenPins) {
+    public void FellDown(int fallenPins) {
         validateFallenPins(fallenPins);
 
         this.pins.stream()

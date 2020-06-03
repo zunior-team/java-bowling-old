@@ -8,7 +8,7 @@ public class Pins {
     public static final int MAX_NUMBER_OF_PINS = 10;
     public static final int ZERO = 0;
 
-    private final List<Pin> pins = Stream.generate(() -> Pin.STANDING)
+    private final List<Pin> pins = Stream.generate(Pin::newStandingPin)
             .limit(MAX_NUMBER_OF_PINS)
             .collect(Collectors.toList());
 

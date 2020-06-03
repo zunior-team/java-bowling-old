@@ -14,6 +14,8 @@ public class OutputView {
     public static final String NAME = "NAME";
     private static final String FORMAT = "|  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |  %s   |";
 
+    private final FrameHistoryParser frameHistoryParser = new FrameHistoryParser();
+
     public void printInputPlayerNameMessage() {
         System.out.println("플레이어 이름은(" + NAME_LENGTH + " english letters)?: ");
     }
@@ -43,7 +45,7 @@ public class OutputView {
     private void printResult(Player player, List<Frame> frames) {
         final List<String> parsedFrames = frames.stream()
                 .map(Frame::getFrameHistories)
-                .map(FrameHistoryParser::parse)
+                .map(frameHistoryParser::parse)
                 .collect(toList());
 
         while (parsedFrames.size() != 10) {

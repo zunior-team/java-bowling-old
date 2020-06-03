@@ -2,11 +2,15 @@ package domain.pin;
 
 public class Pin {
 
-    public static final Pin STANDING = new Pin(true);
+
     private boolean isStanding;
 
     private Pin(boolean isStanding) {
         this.isStanding = isStanding;
+    }
+
+    public static Pin newStandingPin() {
+        return new Pin(true);
     }
 
 

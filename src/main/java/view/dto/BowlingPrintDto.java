@@ -4,6 +4,7 @@ import domain.bowling.Bowling;
 import domain.frame.Frame;
 import domain.player.Player;
 
+import java.util.Collections;
 import java.util.List;
 
 public class BowlingPrintDto {
@@ -17,7 +18,7 @@ public class BowlingPrintDto {
     }
 
     public List<Frame> getFrames() {
-        return frames;
+        return Collections.unmodifiableList(frames);
     }
 
     public Player getPlayer() {

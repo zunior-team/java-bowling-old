@@ -19,8 +19,8 @@ public class BowlingGame {
     public void play() {
         final String name = Monitor.enterPlayerName();
         final BowlingFrames bowlingFrames = BowlingFrames.create();
-        final BowlingBoard bowlingBoard = bowlingFrames.getBowlingStatusByName(name);
         final Player player = Player.create(name);
+        final BowlingBoard bowlingBoard = bowlingFrames.getBowlingStatusByName(player.getName());
 
         Monitor.printBowlingStatusByPlayer(bowlingBoard);
         final BowlingGameData bowlingGameData = new BowlingGameData(player, bowlingFrames, bowlingBoard);

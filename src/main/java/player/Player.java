@@ -37,6 +37,10 @@ public class Player {
         }
     }
 
+    public String getName(){
+        return name;
+    }
+
     public BowlingBoard getBowlingBoard(){
         return this.bowlingBoard;
     }

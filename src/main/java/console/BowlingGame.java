@@ -1,5 +1,9 @@
 package console;
 
+import board.BowlingBoard;
+import frame.BowlingFrames;
+import model.Round;
+import model.Trial;
 import monitor.Monitor;
 import overturn.OverturnScore;
 import player.Player;
@@ -12,16 +16,27 @@ import static console.BowlingGameConstant.LAST_ROUND_NUMBER;
 
 public class BowlingGame {
 
-    public static void play() {
-        final Player player = Player.create(Monitor.enterPlayerName());
-        Monitor.printBowlingStatusByPlayer(player.getBowlingBoard());
+    public void play() {
+        final String name = Monitor.enterPlayerName();
+        final BowlingFrames bowlingFrames = BowlingFrames.create();
+        final BowlingBoard bowlingBoard = bowlingFrames.getBowlingStatusByName(name);
+        final Player player = Player.create(name);
+
+        Monitor.printBowlingStatusByPlayer(bowlingBoard);
+        final BowlingGameData bowlingGameData = new BowlingGameData(player, bowlingFrames, bowlingBoard);
 
         IntStream.rangeClosed(FIRST_ROUND_NUMBER, LAST_ROUND_NUMBER)
-                .forEach(round -> playBowling(player, round));
+                .forEach(round -> playOneRound(bowlingGameData, new Round(round), new Trial(1)));
     }
 
-    private static void playBowling(final Player player, final int round){
-        final OverturnScore overTurnScore = Monitor.enterOverturnPinsForRound(round);
+    private void playOneRound(final BowlingGameData bowlingGameData, final Round round, final Trial trial){
+        final OverturnScore overturnScore = Monitor.enterOverturnPinsForRound(round.getRound(), trial.getTrial());
+
+    }
+
+    private void playOneRound(final Player player, final int round){
+        final OverturnScore overTurnScore = Monitor.enterOverturnPinsForRound(round, 0);
+
         final TrialResultType resultType = player.playBowlingForRound(overTurnScore);
         Monitor.printBowlingStatusByPlayer(player.getBowlingBoard());
 

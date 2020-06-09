@@ -9,7 +9,7 @@ public final class FrameNumber {
 
     private int frameIndex;
 
-    FrameNumber(final int number){
+    public FrameNumber(final int number){
         this.frameIndex = number;
     }
 
@@ -28,6 +28,10 @@ public final class FrameNumber {
     }
 
     public int get() {
+        return this.frameIndex;
+    }
+
+    public int number(){
         return this.frameIndex;
     }
 

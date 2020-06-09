@@ -23,7 +23,7 @@ public class ScoreStatus {
         verifyBowlingFrames(bowlingFrames);
 
         scoreStatus.add(ScoreSnapshot.createSnapShotByName(name));
-        scoreStatus.addAll(IntStream.rangeClosed(1, bowlingFrames.size() - 1)
+        scoreStatus.addAll(IntStream.rangeClosed(1, bowlingFrames.size())
                 .mapToObj(ScoreSnapshot::createSnapShotEmpty)
                 .collect(Collectors.toList()));
     }

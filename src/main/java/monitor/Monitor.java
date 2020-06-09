@@ -10,6 +10,8 @@ import static monitor.MonitorConstant.*;
 
 public class Monitor {
 
+    private static final String INTERVAL = "%6s";
+
     public static String enterPlayerName(){
         return InputView.askPlayerName()
                 .replaceAll(WHITE_SPACE, EMPTY)
@@ -32,6 +34,9 @@ public class Monitor {
     public static void printBowlingStatusByPlayer(final BowlingBoard bowlingBoard){
         final List<String> lines = bowlingBoard.getBowingStatus()
                 .stream()
+                .map(elements -> elements.stream()
+                        .map(element -> String.format(INTERVAL, element))
+                        .collect(Collectors.toList()))
                 .map(line -> BAR + String.join(BAR, line) + BAR)
                 .map(String::trim)
                 .collect(Collectors.toList());

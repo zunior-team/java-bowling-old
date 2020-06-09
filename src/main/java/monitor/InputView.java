@@ -17,9 +17,9 @@ public class InputView {
     public static int askPinsCountForRound(final int round, final int trial){
         builder.setLength(0); // 초기화
         builder.append(round).append("프레임 투구 : ");
-        for(int t = 0; t < trial; t++){
+        for(int t = 2; t <= trial; t++){
             builder.append("->")
-                    .append("\\s")
+                    .append(" ")
                     .append(":");
         }
         System.out.print(builder.toString());

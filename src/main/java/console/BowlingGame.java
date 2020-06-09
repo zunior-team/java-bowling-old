@@ -2,6 +2,8 @@ package console;
 
 import board.BowlingBoard;
 import frame.BowlingFrames;
+import frame.FrameNumber;
+import model.Result;
 import model.Round;
 import model.Trial;
 import monitor.Monitor;
@@ -30,7 +32,9 @@ public class BowlingGame {
     }
 
     private void playOneRound(final BowlingGameData bowlingGameData, final Round round, final Trial trial){
+        final FrameNumber frameNumber = round.toFrameNumber();
         final OverturnScore overturnScore = Monitor.enterOverturnPinsForRound(round.getRound(), trial.getTrial());
+        final Result result = bowlingGameData.getResultAfterRollTheBall(frameNumber, overturnScore, Trial);
 
     }
 

@@ -2,6 +2,9 @@ package frame.impl;
 
 import bowling.BowlingPins;
 import frame.BowlingFrame;
+import model.FrameResult;
+import model.Result;
+import model.Trial;
 import overturn.OverturnScore;
 import trial.TrialOrder;
 import trial.TrialResult;
@@ -25,5 +28,11 @@ public class NormalFrame implements BowlingFrame {
         this.trialOrder = trialResult.nextStatusAndGet();
 
         return trialResult;
+    }
+
+    @Override
+    public FrameResult subtractPinsByOverturnPins(final OverturnScore overturnScore, final Trial trial) {
+        Trial trial = bowlingPins.getAlivePinsAfterDecreasePins(overturnScore);
+        return null;
     }
 }

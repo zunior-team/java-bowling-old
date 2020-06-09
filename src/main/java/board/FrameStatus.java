@@ -9,14 +9,12 @@ import java.util.stream.IntStream;
 public class FrameStatus {
 
     private static final String NAME_STRING = "NAME";
-    private static final String FRAME_NUMBER_FORMAT = "%03d";
-
     private static final List<String> FRAME_STATUS = new ArrayList<>();
 
     static {
         FRAME_STATUS.add(NAME_STRING);
         FRAME_STATUS.addAll(IntStream.rangeClosed(1, 10)
-                .mapToObj(round -> String.format(FRAME_NUMBER_FORMAT, round))
+                .mapToObj(String::valueOf)
                 .collect(Collectors.toList()));
     }
 

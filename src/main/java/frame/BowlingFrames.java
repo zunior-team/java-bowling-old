@@ -3,6 +3,8 @@ package frame;
 import board.BowlingBoard;
 import frame.impl.FinalFrame;
 import frame.impl.NormalFrame;
+import model.FrameResult;
+import model.Trial;
 import overturn.OverturnScore;
 import trial.TrialResult;
 import trial.TrialResultType;
@@ -28,8 +30,8 @@ public class BowlingFrames {
     public static BowlingFrames create(){
         return new BowlingFrames(
                 Collections.unmodifiableList(
-                        IntStream.rangeClosed(1, LAST_NUMBER_OF_FRAME + 1)
-                                .mapToObj(i -> (i == LAST_NUMBER_OF_FRAME + 1)
+                        IntStream.rangeClosed(1, LAST_NUMBER_OF_FRAME)
+                                .mapToObj(i -> (i == LAST_NUMBER_OF_FRAME)
                                         ? new FinalFrame()
                                         : new NormalFrame())
                                 .collect(Collectors.toList())));
@@ -52,5 +54,12 @@ public class BowlingFrames {
         frameNumber.increaseByTrialType(trialResult.getTrialResultType());
 
         return results;
+    }
+
+    public void overturnByFrameNumber(final OverturnScore overturnScore, final FrameNumber frameNumber, final Trial trial){
+        final BowlingFrame bowlingFrame = bowlingFrames.get(frameNumber.number());
+        final FrameResult frameResult = bowlingFrame.subtractPinsByOverturnPins(overturnScore, trial);
+
+
     }
 }

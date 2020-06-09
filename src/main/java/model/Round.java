@@ -1,5 +1,7 @@
 package model;
 
+import frame.FrameNumber;
+
 public class Round {
     private final int round;
 
@@ -9,5 +11,9 @@ public class Round {
 
     public int getRound(){
         return round;
+    }
+
+    public FrameNumber toFrameNumber(){
+        return new FrameNumber(round);
     }
 }

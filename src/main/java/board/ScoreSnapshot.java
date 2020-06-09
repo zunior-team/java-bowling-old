@@ -20,11 +20,11 @@ final class ScoreSnapshot {
     }
 
     static ScoreSnapshot createSnapShotByName(final String name){
-        return new ScoreSnapshot(Collections.singletonList(String.format(NAME_FORMAT, name)));
+        return new ScoreSnapshot(Collections.singletonList(name));
     }
 
     static ScoreSnapshot createSnapShotEmpty(final int round){
-        return new ScoreSnapshot(new ArrayList(){{ add(String.format(SCORE_EMPTY_FORMAT, StringUtils.EMPTY)); }});
+        return new ScoreSnapshot(new ArrayList(){{ add(StringUtils.EMPTY); }});
     }
 
     Stream<String> toStream(){

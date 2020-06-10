@@ -1,15 +1,11 @@
 package board;
 
 import org.apache.commons.lang3.StringUtils;
-import trial.TrialResult;
-import trial.TrialResultType;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static board.ScoreSnapshot.SnapshotConstant.*;
 
 final class ScoreSnapshot {
 
@@ -31,42 +27,15 @@ final class ScoreSnapshot {
         return Stream.of(String.join(StringUtils.EMPTY, snapshot));
     }
 
-    private String preprocessString(final String element){
-        return element.equals(TrialResultType.STRIKE.getExpression())
-                ? String.format(SCORE_EMPTY_FORMAT, element)
-                : element;
+    public void add(final String score){
+        this.removeFirstEmptySnapshotIfExist();
+        snapshot.add(score);
     }
 
-    ScoreSnapshot add(final String element){
-        snapshot.add(preprocessString(element));
-        return this;
-    }
-
-    ScoreSnapshot addNextBarIfPossible(final TrialResultType resultType){
-        if(resultType.isProgress() || resultType.isBonus()){
-            snapshot.add(NEXT);
-            snapshot.add(String.format(SPACE_EMPTY_FORMAT, StringUtils.EMPTY));
-        }
-
-        return this;
-    }
-
-    ScoreSnapshot removeLastEmptySnapshotIfExist(){
-        final int lastIndex = snapshot.size() - 1;
-        if(lastIndex >= 0 &&
-                String.format(SPACE_EMPTY_FORMAT, StringUtils.EMPTY).equals(snapshot.get(snapshot.size() - 1))){
-            snapshot.remove(lastIndex);
-        }
-
-        return this;
-    }
-
-    ScoreSnapshot removeFirstEmptySnapshotIfExist(){
-        if(String.format(SCORE_EMPTY_FORMAT, StringUtils.EMPTY).equals(snapshot.get(0))){
+    private void removeFirstEmptySnapshotIfExist(){
+        if(StringUtils.EMPTY.equals(snapshot.get(0))){
             snapshot.remove(0);
         }
-
-        return this;
     }
 
     static class SnapshotConstant{

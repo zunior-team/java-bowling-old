@@ -26,8 +26,4 @@ public class OverturnScore {
     public int getOverturnPins() {
         return overturnPins;
     }
-
-    public boolean isOverturnZero(){
-        return overturnPins == 0;
-    }
 }

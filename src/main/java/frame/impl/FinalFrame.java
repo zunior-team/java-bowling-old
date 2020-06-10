@@ -2,32 +2,27 @@ package frame.impl;
 
 import bowling.BowlingPins;
 import frame.BowlingFrame;
+import model.FrameResult;
+import model.TrialOrder;
 import overturn.OverturnScore;
-import trial.TrialOrder;
-import trial.TrialResult;
-import trial.TrialResultType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FinalFrame implements BowlingFrame {
 
-    private final BowlingPins bowlingPins;
-    private TrialOrder trialOrder = TrialOrder.FIRST;
+    public static final String FINAL_FRAME = "FINAL_FRAME";
+    private final List<BowlingPins> bowlingPinsList = new ArrayList<>();
 
     public FinalFrame(){
-        bowlingPins = new BowlingPins();
+        bowlingPinsList.add(new BowlingPins());
+        bowlingPinsList.add(new BowlingPins());
+        bowlingPinsList.add(new BowlingPins());
     }
 
-    @SuppressWarnings("Duplicates")
     @Override
-    public TrialResult decreasePinsAndGetResult(OverturnScore overturnScore) {
+    public FrameResult subtractPinsByOverturnPins(OverturnScore overturnScore, TrialOrder trialOrder) {
 
-        final BowlingPins nowBowlingPins = trialOrder.getBonusBowlingPinsIfPossible(bowlingPins);
-        final int alivePins = nowBowlingPins.getAlivePinsAfterDecreasePins(overturnScore);
-        final TrialResultType trialResultType = TrialOrder.getTrialResultType(trialOrder, alivePins);
-
-        final TrialResult trialResult = new TrialResult(trialResultType, trialOrder);
-        final TrialResult newTrialResult = trialResult.givenOneMoreTrialIfPossible();
-        this.trialOrder = newTrialResult.nextStatusAndGet();
-
-        return newTrialResult;
+        return null;
     }
 }

@@ -1,13 +1,12 @@
 package board;
 
 import exception.board.ScoreStatusCreateException;
-import exception.overturnscore.OverturnFillScoreException;
 import frame.BowlingFrame;
-import frame.FrameNumber;
-import overturn.OverturnScore;
-import trial.TrialResultType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -51,22 +50,26 @@ public class ScoreStatus {
                 .collect(Collectors.toList()));
     }
 
-    public TrialResultType fillScoreByRound(final OverturnScore overturnScore, final Map<FrameNumber, TrialResultType> results){
-        return results.keySet()
-                .stream()
-                .map(frameNumber -> {
-                    final ScoreSnapshot snapshot = scoreStatus.get(frameNumber.get());
-                    final TrialResultType resultType = results.get(frameNumber);
-                    final String bowlingContent = resultType.getBowlingContentByType(overturnScore);
-
-                    snapshot.removeFirstEmptySnapshotIfExist()
-                            .removeLastEmptySnapshotIfExist()
-                            .add(bowlingContent)
-                            .addNextBarIfPossible(resultType);
-
-                    return resultType;
-                })
-                .findFirst()
-                .orElseThrow(() -> new OverturnFillScoreException("볼링핀을 넘어트린 시도결과가 존재하지 않기 때문에 점수현황판을 채울 수 없습니다."));
+    public ScoreSnapshot fillScoreByFrameNumber(final int frameNumber){
+        return scoreStatus.get(frameNumber);
     }
+
+//    public TrialResultType fillScoreByRound(final OverturnScore overturnScore, final Map<FrameNumber, TrialResultType> results){
+//        return results.keySet()
+//                .stream()
+//                .map(frameNumber -> {
+//                    final ScoreSnapshot snapshot = scoreStatus.get(frameNumber.get());
+//                    final TrialResultType resultType = results.get(frameNumber);
+//                    final String bowlingContent = resultType.getBowlingContentByType(overturnScore);
+//
+//                    snapshot.removeFirstEmptySnapshotIfExist()
+//                            .removeLastEmptySnapshotIfExist()
+//                            .add(bowlingContent)
+//                            .addNextBarIfPossible(resultType);
+//
+//                    return resultType;
+//                })
+//                .findFirst()
+//                .orElseThrow(() -> new OverturnFillScoreException("볼링핀을 넘어트린 시도결과가 존재하지 않기 때문에 점수현황판을 채울 수 없습니다."));
+//    }
 }

@@ -18,8 +18,8 @@ public class Monitor {
                 .trim();
     }
 
-    public static OverturnScore enterOverturnPinsForRound(final int round, final int trial){
-        return new OverturnScore(InputView.askPinsCountForRound(round, trial));
+    public static OverturnScore enterOverturnPinsForRound(final int round, final int order){
+        return new OverturnScore(InputView.askPinsCountForRound(round, order));
 //        return new OverturnScore(InputView.askPinsCountForRound(round));
     }
 

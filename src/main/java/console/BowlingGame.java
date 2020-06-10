@@ -5,11 +5,10 @@ import frame.BowlingFrames;
 import frame.FrameNumber;
 import model.Result;
 import model.Round;
-import model.Trial;
+import model.TrialOrder;
 import monitor.Monitor;
 import overturn.OverturnScore;
 import player.Player;
-import trial.TrialResultType;
 
 import java.util.stream.IntStream;
 
@@ -28,36 +27,20 @@ public class BowlingGame {
         final BowlingGameData bowlingGameData = new BowlingGameData(player, bowlingFrames, bowlingBoard);
 
         IntStream.rangeClosed(FIRST_ROUND_NUMBER, LAST_ROUND_NUMBER)
-                .forEach(round -> playOneRound(bowlingGameData, new Round(round), new Trial(1)));
+                .forEach(round -> playOneRound(bowlingGameData, new Round(round), new TrialOrder(1)));
     }
 
-    private void playOneRound(final BowlingGameData bowlingGameData, final Round round, final Trial trial){
+    private void playOneRound(final BowlingGameData bowlingGameData, final Round round, final TrialOrder trialOrder){
         final FrameNumber frameNumber = round.toFrameNumber();
-        final OverturnScore overturnScore = Monitor.enterOverturnPinsForRound(round.getRound(), trial.getTrial());
-        final Result result = bowlingGameData.getResultAfterRollTheBall(frameNumber, overturnScore, Trial);
+        final OverturnScore overturnScore = Monitor.enterOverturnPinsForRound(round.getRound(), trialOrder.getOrder());
+        final Result result = bowlingGameData.getResultAfterRollTheBall(frameNumber, overturnScore, trialOrder);
 
-    }
+        Monitor.printBowlingStatusByPlayer(result.getCurrentBowlingBoard());
 
-    private void playOneRound(final Player player, final int round){
-        final OverturnScore overTurnScore = Monitor.enterOverturnPinsForRound(round, 0);
-
-        final TrialResultType resultType = player.playBowlingForRound(overTurnScore);
-        Monitor.printBowlingStatusByPlayer(player.getBowlingBoard());
-
-        if(!resultType.isProgress() && round != LAST_ROUND_NUMBER){
+        if(result.isNextRound()){
             return;
         }
 
-        final OverturnScore secondOverTurnScore = Monitor.enterSecondOverturnPinsForRound(round);
-        final TrialResultType secondTrialResultType = player.playBowlingForRound(secondOverTurnScore);
-        Monitor.printBowlingStatusByPlayer(player.getBowlingBoard());
-
-        if(!secondTrialResultType.isBonus()){
-            return;
-        }
-
-        final OverturnScore lastOverturnScore = Monitor.enterThirdOverturnPinsForRound(round);
-        final TrialResultType lastTrialResultType = player.playBowlingForRound(lastOverturnScore);
-        Monitor.printBowlingStatusByPlayer(player.getBowlingBoard());
+        playOneRound(bowlingGameData, round, trialOrder.next());
     }
 }

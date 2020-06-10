@@ -25,10 +25,6 @@ public class BowlingPins {
         return getAlivePinsCount();
     }
 
-    public boolean isAllDeadPins(){
-        return getAlivePinsCount() == 0;
-    }
-
     private int getAlivePinsCount() {
         return bowlingPins.stream()
                 .filter(BowlingPin::isAlive)

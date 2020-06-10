@@ -3,8 +3,6 @@ package player;
 import board.BowlingBoard;
 import exception.player.PlayerCreateException;
 import frame.BowlingFrames;
-import overturn.OverturnScore;
-import trial.TrialResultType;
 
 import java.util.Objects;
 
@@ -43,9 +41,5 @@ public class Player {
 
     public BowlingBoard getBowlingBoard(){
         return this.bowlingBoard;
-    }
-
-    public TrialResultType playBowlingForRound(final OverturnScore overturnScore){
-        return bowlingBoard.fillScoreStatus(overturnScore, bowlingFrames.overturn(overturnScore));
     }
 }

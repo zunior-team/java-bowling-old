@@ -4,7 +4,7 @@ import board.BowlingBoard;
 import frame.BowlingFrames;
 import frame.FrameNumber;
 import model.Result;
-import model.Trial;
+import model.TrialOrder;
 import overturn.OverturnScore;
 import player.Player;
 
@@ -23,10 +23,8 @@ public class BowlingGameData {
 
     public Result getResultAfterRollTheBall(final FrameNumber frameNumber,
                                             final OverturnScore overturnScore,
-                                            final Trial trial){
+                                            final TrialOrder trialOrder){
 
-        bowlingFrames.overturnByFrameNumber(overturnScore, frameNumber, trial);
-
-        return null;
+        return bowlingBoard.fillScoreBoard(bowlingFrames.overturnByFrameNumber(overturnScore, frameNumber, trialOrder));
     }
 }

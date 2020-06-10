@@ -14,10 +14,10 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    public static int askPinsCountForRound(final int round, final int trial){
+    public static int askPinsCountForRound(final int round, final int order){
         builder.setLength(0); // 초기화
         builder.append(round).append("프레임 투구 : ");
-        for(int t = 2; t <= trial; t++){
+        for(int t = 2; t <= order; t++){
             builder.append("->")
                     .append(" ")
                     .append(":");

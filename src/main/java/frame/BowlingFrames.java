@@ -4,15 +4,12 @@ import board.BowlingBoard;
 import frame.impl.FinalFrame;
 import frame.impl.NormalFrame;
 import model.FrameResult;
-import model.Trial;
+import model.Result;
+import model.TrialOrder;
 import overturn.OverturnScore;
-import trial.TrialResult;
-import trial.TrialResultType;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -42,24 +39,9 @@ public class BowlingFrames {
         return new BowlingBoard(name, bowlingFrames);
     }
 
-    public Map<FrameNumber, TrialResultType> overturn(final OverturnScore overturnScore){
-        final BowlingFrame bowlingFrame = frameNumber.getCurrentBowlingFrame(bowlingFrames);
-        final TrialResult trialResult = bowlingFrame.decreasePinsAndGetResult(overturnScore);
-
-        @SuppressWarnings("unchecked")
-        final Map<FrameNumber, TrialResultType> results = Collections.unmodifiableMap(
-                new HashMap(){{put(frameNumber.newInstance(), trialResult.getTrialResultType());}}
-                );
-
-        frameNumber.increaseByTrialType(trialResult.getTrialResultType());
-
-        return results;
-    }
-
-    public void overturnByFrameNumber(final OverturnScore overturnScore, final FrameNumber frameNumber, final Trial trial){
+    public Result overturnByFrameNumber(final OverturnScore overturnScore, final FrameNumber frameNumber, final TrialOrder trialOrder){
         final BowlingFrame bowlingFrame = bowlingFrames.get(frameNumber.number());
-        final FrameResult frameResult = bowlingFrame.subtractPinsByOverturnPins(overturnScore, trial);
-
-
+        final FrameResult frameResult = bowlingFrame.subtractPinsByOverturnPins(overturnScore, trialOrder);
+        return new Result(frameNumber, overturnScore, frameResult, trialOrder);
     }
 }

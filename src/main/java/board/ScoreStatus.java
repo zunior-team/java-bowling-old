@@ -22,7 +22,7 @@ public class ScoreStatus {
         verifyBowlingFrames(bowlingFrames);
 
         scoreStatus.add(ScoreSnapshot.createSnapShotByName(name));
-        scoreStatus.addAll(IntStream.rangeClosed(1, bowlingFrames.size())
+        scoreStatus.addAll(IntStream.range(1, bowlingFrames.size())
                 .mapToObj(ScoreSnapshot::createSnapShotEmpty)
                 .collect(Collectors.toList()));
     }
@@ -53,23 +53,4 @@ public class ScoreStatus {
     public ScoreSnapshot fillScoreByFrameNumber(final int frameNumber){
         return scoreStatus.get(frameNumber);
     }
-
-//    public TrialResultType fillScoreByRound(final OverturnScore overturnScore, final Map<FrameNumber, TrialResultType> results){
-//        return results.keySet()
-//                .stream()
-//                .map(frameNumber -> {
-//                    final ScoreSnapshot snapshot = scoreStatus.get(frameNumber.get());
-//                    final TrialResultType resultType = results.get(frameNumber);
-//                    final String bowlingContent = resultType.getBowlingContentByType(overturnScore);
-//
-//                    snapshot.removeFirstEmptySnapshotIfExist()
-//                            .removeLastEmptySnapshotIfExist()
-//                            .add(bowlingContent)
-//                            .addNextBarIfPossible(resultType);
-//
-//                    return resultType;
-//                })
-//                .findFirst()
-//                .orElseThrow(() -> new OverturnFillScoreException("볼링핀을 넘어트린 시도결과가 존재하지 않기 때문에 점수현황판을 채울 수 없습니다."));
-//    }
 }

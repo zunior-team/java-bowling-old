@@ -27,7 +27,7 @@ public class BowlingFrames {
     public static BowlingFrames create(){
         return new BowlingFrames(
                 Collections.unmodifiableList(
-                        IntStream.rangeClosed(1, LAST_NUMBER_OF_FRAME)
+                        IntStream.rangeClosed(0, LAST_NUMBER_OF_FRAME)
                                 .mapToObj(i -> (i == LAST_NUMBER_OF_FRAME)
                                         ? new FinalFrame()
                                         : new NormalFrame())

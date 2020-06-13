@@ -7,24 +7,56 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static board.ScoreSnapshot.Snapshot.*;
+
 final class ScoreSnapshot {
 
     private final List<String> snapshot;
+    private final boolean isNameSnapShot;
 
-    private ScoreSnapshot(final List<String> snapshot){
+    private ScoreSnapshot(final List<String> snapshot, final boolean isNameSnapShot){
         this.snapshot = snapshot;
+        this.isNameSnapShot = isNameSnapShot;
     }
 
     static ScoreSnapshot createSnapShotByName(final String name){
-        return new ScoreSnapshot(Collections.singletonList(name));
+        return new ScoreSnapshot(Collections.singletonList(name), true);
     }
 
     static ScoreSnapshot createSnapShotEmpty(final int round){
-        return new ScoreSnapshot(new ArrayList(){{ add(StringUtils.EMPTY); }});
+        return new ScoreSnapshot(new ArrayList(){{ add(StringUtils.EMPTY); }}, false);
     }
 
     Stream<String> toStream(){
-        return Stream.of(String.join(StringUtils.EMPTY, snapshot));
+        if(isNameSnapShot){
+            return Stream.of(String.join(BAR, snapshot));
+        }
+
+        return normalFrameToStream();
+    }
+
+    private Stream<String> normalFrameToStream(){
+        final List<String> drawSnapshot = new ArrayList<>(snapshot);
+
+        if(sumEq(10)){
+            if(drawSnapshot.size() == 1){
+                drawSnapshot.remove(0);
+                drawSnapshot.add(X);
+            } else {
+                assert (drawSnapshot.size() == 2);
+                drawSnapshot.remove(drawSnapshot.size() - 1);
+                drawSnapshot.add(SLASH);
+            }
+        } else {
+            for(int i = 0; i < drawSnapshot.size(); i++){
+                String snapshot = drawSnapshot.get(i);
+                if("0".equals(snapshot)){
+                    drawSnapshot.set(i, DASH);
+                }
+            }
+        }
+
+        return Stream.of(String.join(BAR, drawSnapshot));
     }
 
     public void add(final String score){
@@ -33,16 +65,30 @@ final class ScoreSnapshot {
     }
 
     private void removeFirstEmptySnapshotIfExist(){
+        if(snapshot.size() == 0) {
+            return;
+        }
+
         if(StringUtils.EMPTY.equals(snapshot.get(0))){
             snapshot.remove(0);
         }
     }
 
-    static class SnapshotConstant{
-        static final String SPACE_EMPTY_FORMAT = "%1s";
-        static final String SCORE_EMPTY_FORMAT = "%3s";
-        static final String NAME_FORMAT = "%4s";
-        static final String NEXT = "|";
-        private SnapshotConstant(){}
+    private boolean sumEq(int sum){
+        return sum == snapshot.stream()
+                .filter(this::isNoneEmpty)
+                .mapToInt(Integer::parseInt)
+                .sum();
+    }
+
+    private boolean isNoneEmpty(final String element){
+        return !StringUtils.isEmpty(element);
+    }
+
+    class Snapshot{
+        static final String BAR = "|";
+        static final String X = "X";
+        static final String DASH = "-";
+        static final String SLASH = "/";
     }
 }

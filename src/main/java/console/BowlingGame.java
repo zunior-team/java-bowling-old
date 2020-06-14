@@ -41,6 +41,10 @@ public class BowlingGame {
             return;
         }
 
+        if(result.isEnd()){
+            return;
+        }
+
         playOneRound(bowlingGameData, round, trialOrder.next());
     }
 }

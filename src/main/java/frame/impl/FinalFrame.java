@@ -9,6 +9,7 @@ import overturn.OverturnScore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class FinalFrame implements BowlingFrame {
 
@@ -26,6 +27,16 @@ public class FinalFrame implements BowlingFrame {
     public FrameResult subtractPinsByOverturnPins(OverturnScore overturnScore, TrialOrder trialOrder) {
         final BowlingPins bowlingPins = bowlingPinsList.get(trialOrder.getOrder());
         final int alivePins = bowlingPins.getAlivePinsAfterDecreasePins(overturnScore);
+
+        if(trialOrder.isSecondTrial()){
+            final int twoFrameAlivePinsSum = IntStream.rangeClosed(1, 2)
+                    .mapToObj(bowlingPinsList::get)
+                    .mapToInt(BowlingPins::getCurrentAlivePins)
+                    .sum();
+
+            return FrameResult.getFrameResult(new TrialResult(twoFrameAlivePinsSum, FINAL_FRAME, trialOrder.getOrder()));
+        }
+
         return FrameResult.getFrameResult(new TrialResult(alivePins, FINAL_FRAME, trialOrder.getOrder()));
     }
 }

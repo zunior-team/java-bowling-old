@@ -53,7 +53,15 @@ public class Result {
                 || this.isNormalFrameLastTrial());
     }
 
+    public boolean isEnd(){
+        return (isFinalFrameLastTrial() && frameResult.isNormal());
+    }
+
     private boolean isNormalFrameLastTrial(){
         return (trialOrder.getOrder() == 2 && frameNumber.number() != 10);
+    }
+
+    private boolean isFinalFrameLastTrial(){
+        return (trialOrder.getOrder() == 2 && frameNumber.number() == 10);
     }
 }

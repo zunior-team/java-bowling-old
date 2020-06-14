@@ -15,5 +15,7 @@ public class TrialOrder {
         return new TrialOrder(order + 1);
     }
 
-
+    public boolean isSecondTrial(){
+        return order == 2;
+    }
 }

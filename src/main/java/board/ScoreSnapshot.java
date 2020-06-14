@@ -48,12 +48,23 @@ final class ScoreSnapshot {
                 drawSnapshot.add(SLASH);
             }
         } else {
+            // final frame 은 여기 들어옴.
             for(int i = 0; i < drawSnapshot.size(); i++){
                 String snapshot = drawSnapshot.get(i);
                 if("0".equals(snapshot)){
                     drawSnapshot.set(i, DASH);
+                    continue;
+                }
+
+                if("10".equals(snapshot)){
+                    drawSnapshot.set(i, X);
                 }
             }
+        }
+
+        if(drawSnapshot.size() == 3
+                && Integer.parseInt(drawSnapshot.get(0)) + Integer.parseInt(drawSnapshot.get(1)) == 10){
+            drawSnapshot.set(1, SLASH);
         }
 
         return Stream.of(String.join(BAR, drawSnapshot));

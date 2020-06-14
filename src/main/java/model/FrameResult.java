@@ -61,4 +61,8 @@ public enum FrameResult {
     public boolean isBonus(){
         return this == BONUS;
     }
+
+    public boolean isNormal() {
+        return this == NORMAL;
+    }
 }

@@ -8,43 +8,26 @@ import static com.zuniorteam.bowling.core.value.PitchType.*;
 
 public enum PitchResultType {
 
-    GUTTER{
-        @Override
-        public boolean eq(PitchType pitchType, PinSize fallenPinSize, PinSize remainPinSize) {
-            return fallenPinSize.equals(ZERO);
-        }
-    },
+    GUTTER((pitchType, fallenPinSize, remainPinSize) -> fallenPinSize.equals(ZERO)),
+    MISS((pitchType, fallenPinSize, remainPinSize) -> false),
+    SPARE ((pitchType, fallenPinSize, remainPinSize) -> remainPinSize.equals(ZERO) && SECOND.equals(pitchType)),
+    STRIKE ((pitchType, fallenPinSize, remainPinSize) -> remainPinSize.equals(ZERO) && (FIRST.equals(pitchType) || BONUS.equals(pitchType)));
 
-    MISS{
-        @Override
-        public boolean eq(PitchType pitchType, PinSize fallenPinSize, PinSize remainPinSize) {
-            return false;
-        }
-    },
-
-    SPARE{
-        @Override
-        public boolean eq(PitchType pitchType, PinSize fallenPinSize, PinSize remainPinSize) {
-            return remainPinSize.equals(ZERO) && SECOND.equals(pitchType);
-        }
-    },
-
-    STRIKE{
-        @Override
-        public boolean eq(PitchType pitchType, PinSize fallenPinSize, PinSize remainPinSize) {
-            return remainPinSize.equals(ZERO) && (FIRST.equals(pitchType) || BONUS.equals(pitchType));
-        }
-    };
-
-    public abstract boolean eq(PitchType pitchType, PinSize fallenPinSize, PinSize remainPinSize);
+    PitchResultType(Eq eq) {
+        this.eq = eq;
+    }
 
     public static PitchResultType of(PitchType pitchType, PinSize fallenPinSize, PinSize remainPinSize) {
         validate(pitchType, fallenPinSize, remainPinSize);
 
         return Arrays.stream(PitchResultType.values())
-                .filter(stepResultType -> stepResultType.eq(pitchType, fallenPinSize, remainPinSize))
+                .filter(stepResultType -> stepResultType.eq.eq(pitchType, fallenPinSize, remainPinSize))
                 .findFirst().orElse(MISS);
     }
+
+
+    private final Eq eq;
+
 
     private static void validate(PitchType pitchType, PinSize fallenPinSize, PinSize remainPinSize) {
         if (Objects.isNull(pitchType)) {
@@ -58,6 +41,11 @@ public enum PitchResultType {
         if (Objects.isNull(remainPinSize)) {
             throw new IllegalArgumentException("남아있는 핀의 크기를 입력해주세요");
         }
+    }
+
+    @FunctionalInterface
+    public interface Eq {
+        boolean eq(PitchType pitchType, PinSize fallenPinSize, PinSize remainPinSize);
     }
 
 }

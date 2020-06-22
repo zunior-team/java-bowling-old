@@ -23,11 +23,11 @@ public class NormalFrame extends Frame {
     @Override
     public Pitch createNextPitch(PitchType pitchType) {
 
-        if (pitchType.equals(FIRST) && isAllFallen()) {
+        if (FIRST.equals(pitchType) && isAllFallen()) {
             return new Pitch(nextFrame(), FIRST);
         }
 
-        if (pitchType.equals(FIRST) && !isAllFallen()) {
+        if (FIRST.equals(pitchType) && !isAllFallen()) {
             return new Pitch( this, SECOND);
         }
 

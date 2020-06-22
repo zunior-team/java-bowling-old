@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.zuniorteam.bowling.InputRender.getFallenPin;
+import static com.zuniorteam.bowling.core.pitch.Pitch.END;
 
 public class GameBoard {
 
@@ -32,7 +33,7 @@ public class GameBoard {
     }
 
     private void playPitch(Pitch pitch, String username, List<PitchResult> pitchResults) {
-        if(pitch.equals(Pitch.END)){
+        if(END.equals(pitch)){
             return;
         }
 

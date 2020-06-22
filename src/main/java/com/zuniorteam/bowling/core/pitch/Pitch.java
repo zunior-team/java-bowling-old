@@ -6,6 +6,8 @@ import com.zuniorteam.bowling.core.value.FrameNumber;
 import com.zuniorteam.bowling.core.value.PinSize;
 import com.zuniorteam.bowling.core.value.PitchType;
 
+import java.util.Objects;
+
 public class Pitch {
 
     // 좋은 방법일까요..?
@@ -16,11 +18,11 @@ public class Pitch {
     private Frame frame;
     private PitchType pitchType;
 
-    private Pitch(){};
+    private Pitch(){}
 
     public Pitch(Frame frame, PitchType pitchType) {
-        assert frame != null;
-        assert pitchType != null;
+        Objects.requireNonNull(frame, "프레임이 없습니다");
+        Objects.requireNonNull(pitchType, "투구타입이 없습니다");
 
         this.frame = frame;
         this.pitchType = pitchType;

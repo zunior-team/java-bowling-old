@@ -17,7 +17,7 @@ class NormalFrameTest {
     @DisplayName("생성, null 주입시")
     @Test
     void testNewInstance(){
-        assertThrows(AssertionError.class, () -> new NormalFrame(null));
+        assertThrows(NullPointerException.class, () -> new NormalFrame(null));
     }
 
     @DisplayName("다음 pitch 생성, 첫번째 투구, 핀이 남았을때")

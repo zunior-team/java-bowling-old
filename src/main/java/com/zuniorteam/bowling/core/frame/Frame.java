@@ -4,6 +4,8 @@ import com.zuniorteam.bowling.core.dto.PitchResult;
 import com.zuniorteam.bowling.core.pitch.Pitch;
 import com.zuniorteam.bowling.core.value.*;
 
+import java.util.Objects;
+
 
 public abstract class Frame{
 
@@ -11,8 +13,8 @@ public abstract class Frame{
     private PinSize remainPinSize;
 
     public Frame(FrameNumber frameNumber, PinSize pinSize) {
-        assert frameNumber != null;
-        assert pinSize != null;
+        Objects.requireNonNull(frameNumber, "프레임번호가 없습니다");
+        Objects.requireNonNull(pinSize, "핀 사이즈가 없습니다");
 
         this.frameNumber = frameNumber;
         this.remainPinSize = pinSize;

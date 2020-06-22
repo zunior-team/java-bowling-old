@@ -22,15 +22,15 @@ public class LastFrame extends Frame {
     @Override
     public Pitch createNextPitch(PitchType pitchType) {
 
-        if(pitchType.equals(FIRST) && !isAllFallen()){
+        if(FIRST.equals(pitchType) && !isAllFallen()){
             return new Pitch(this, SECOND);
         }
 
-        if(pitchType.equals(FIRST) && isAllFallen()){
+        if(FIRST.equals(pitchType) && isAllFallen()){
             return new Pitch(new LastFrame(), BONUS);
         }
 
-        if(pitchType.equals(SECOND) && isAllFallen()){
+        if(SECOND.equals(pitchType) && isAllFallen()){
             return new Pitch(new LastFrame(), BONUS);
         }
 
